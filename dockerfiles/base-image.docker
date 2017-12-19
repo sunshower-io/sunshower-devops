@@ -27,6 +27,7 @@ RUN wget http://www-eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apa
 RUN unzip -d /opt/build/tools/maven /opt/build/tools/maven.zip
 ENV MAVEN_HOME=/opt/build/tools/maven/apache-maven-$MAVEN_VERSION/bin
 COPY ./scripts/run-bash.sh /run-bash.sh
+COPY ./scripts /scripts
 RUN chmod +x /run-bash.sh
 
 COPY sunshower-env/settings/settings.xml /root/.m2/settings.xml
