@@ -5,5 +5,6 @@ RUN mkdir -p /home/sunshower/$PROJECT_NAME
 COPY . /home/sunshower/$PROJECT_NAME
 WORKDIR /home/sunshower/$PROJECT_NAME
 RUN chmod +x ./scripts/publish-env.sh 
+#ENTRYPOINT /bin/bash
 ENTRYPOINT ./scripts/publish-env.sh  $BRANCH_SPEC
 
