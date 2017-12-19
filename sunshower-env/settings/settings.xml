@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <servers>
+    <server>
+      <id>sunshower-repo</id>
+      <username>${env.MVN_REPO_USERNAME}</username>
+      <password>${env.MVN_REPO_PASSWORD}</password>
+    </server>
+
+    <server>
+      <id>github.com</id>
+      <username>git</username>
+    </server>
+  </servers>
+
+  <profiles>
+
+    <profile>
+      <id>sunshower</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>sunshower-repo</id>
+          <url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+
+        <repository>
+          <id>spring-snapshot</id>
+          <url>https://repo.spring.io/libs-snapshot</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>spring-release</id>
+          <url>https://repo.spring.io/libs-release</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+</settings>
