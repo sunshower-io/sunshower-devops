@@ -22,9 +22,9 @@
   </scm>
 
   <properties>
-    <JUNIT>M4</JUNIT>
-    <junit-platform.version>1.0.0-${JUNIT}</junit-platform.version>
-    <junit.version>5.0.0-${JUNIT}</junit.version>
+    <junit-platform.version>1.0.2</junit-platform.version>
+    <junit.version>5.0.2</junit.version>
+    <junit.vintage.version>4.12.2</junit.vintage.version>
     <hamcrest-core.version>1.3</hamcrest-core.version>
   </properties>
 
@@ -71,6 +71,12 @@
         <scope>test</scope>
       </dependency>
 
+      <dependency>
+        <groupId>org.junit.vintage</groupId>
+        <artifactId>junit-vintage-engine</artifactId>
+        <version>${junit.vintage.version}</version>
+        <scope>test</scope>
+      </dependency>
 
       <dependency>
         <groupId>org.junit.jupiter</groupId>
