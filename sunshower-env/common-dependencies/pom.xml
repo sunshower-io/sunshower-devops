@@ -26,7 +26,7 @@
   <properties>
     <spring.version>5.0.2.RELEASE</spring.version>
     <yaml.version>1.18</yaml.version>
-    <moxy.version>2.7.0-RC1</moxy.version>
+    <moxy.version>2.7.1</moxy.version>
     <jersey.version>2.26</jersey.version>
     <jaxrs-api.version>2.1</jaxrs-api.version>
     <javax-inject.version>1</javax-inject.version>
@@ -128,6 +128,18 @@
         <version>${jersey.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.persistence</groupId>
+        <artifactId>org.eclipse.persistence.core</artifactId>
+        <version>${moxy.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.eclipse.persistence</groupId>
