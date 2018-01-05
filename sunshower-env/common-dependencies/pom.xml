@@ -27,15 +27,35 @@
     <spring.version>5.0.2.RELEASE</spring.version>
     <yaml.version>1.18</yaml.version>
     <moxy.version>2.7.1</moxy.version>
-    <jersey.version>2.26</jersey.version>
     <jaxrs-api.version>2.1</jaxrs-api.version>
     <javax-inject.version>1</javax-inject.version>
     <spring-boot.version>2.0.0.M7</spring-boot.version>
+    <paypal-resteasy.version>2.3.4-RELEASE</paypal-resteasy.version>
+    <resteasy.version>3.0.24.Final</resteasy.version>
   </properties>
 
 
   <dependencyManagement>
     <dependencies>
+
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-bom</artifactId>
+        <version>${resteasy.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+
+      <dependency>
+        <groupId>com.paypal.springboot</groupId>
+        <artifactId>resteasy-spring-boot-starter</artifactId>
+        <version>${paypal-resteasy.version}</version>
+        <scope>runtime</scope>
+      </dependency>
+      
+      
+      
       <dependency>
         <groupId>org.jasypt</groupId>
         <artifactId>jasypt</artifactId>
@@ -76,44 +96,6 @@
       </dependency>
 
 
-      <dependency>
-        <groupId>org.glassfish.jersey.core</groupId>
-        <artifactId>jersey-client</artifactId>
-        <version>${jersey.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.glassfish.jersey.core</groupId>
-        <artifactId>jersey-server</artifactId>
-        <version>${jersey.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.glassfish.jersey.core</groupId>
-        <artifactId>jersey-common</artifactId>
-        <version>${jersey.version}</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>org.glassfish.jersey.media</groupId>
-        <artifactId>jersey-media-moxy</artifactId>
-        <version>${jersey.version}</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>org.glassfish.jersey.media</groupId>
-        <artifactId>jersey-media-multipart</artifactId>
-        <version>${jersey.version}</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>org.glassfish.jersey.media</groupId>
-        <artifactId>jersey-media-jaxb</artifactId>
-        <version>${jersey.version}</version>
-      </dependency>
 
       <dependency>
         <groupId>org.springframework</groupId>
@@ -122,13 +104,8 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <dependency>
-        <groupId>org.glassfish.jersey</groupId>
-        <artifactId>jersey-bom</artifactId>
-        <version>${jersey.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+      
+      
 
       <dependency>
         <groupId>org.eclipse.persistence</groupId>
