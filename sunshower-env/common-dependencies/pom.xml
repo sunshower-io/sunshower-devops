@@ -24,19 +24,62 @@
 
 
   <properties>
+    <flyway.version>5.0.5</flyway.version>
     <spring.version>5.0.2.RELEASE</spring.version>
     <yaml.version>1.18</yaml.version>
     <moxy.version>2.7.1</moxy.version>
     <jaxrs-api.version>2.1</jaxrs-api.version>
     <javax-inject.version>1</javax-inject.version>
-    <spring-boot.version>2.0.0.M7</spring-boot.version>
     <paypal-resteasy.version>2.3.4-RELEASE</paypal-resteasy.version>
+    <byte-buddy.version>1.6.14</byte-buddy.version>
     <resteasy.version>3.0.24.Final</resteasy.version>
+    <spring-security.version>5.0.0.RELEASE</spring-security.version>
+    <aspectj.version>1.8.9</aspectj.version>
+    <cfg4j.version>4.4.0</cfg4j.version>
   </properties>
 
 
   <dependencyManagement>
     <dependencies>
+
+
+      <dependency>
+        <groupId>org.cfg4j</groupId>
+        <artifactId>cfg4j-core</artifactId>
+        <version>${cfg4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.cfg4j</groupId>
+        <artifactId>cfg4j-git</artifactId>
+        <version>${cfg4j.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.cfg4j</groupId>
+        <artifactId>cfg4j-consul</artifactId>
+        <version>${cfg4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>${aspectj.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>${aspectj.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-core</artifactId>
+        <version>${flyway.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>org.jboss.resteasy</groupId>
@@ -46,16 +89,23 @@
         <scope>import</scope>
       </dependency>
 
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-bom</artifactId>
+        <version>${spring-security.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
 
       <dependency>
-        <groupId>com.paypal.springboot</groupId>
-        <artifactId>resteasy-spring-boot-starter</artifactId>
-        <version>${paypal-resteasy.version}</version>
-        <scope>runtime</scope>
+        <groupId>io.reactivex.rxjava2</groupId>
+        <artifactId>rxjava</artifactId>
+        <version>2.1.8</version>
       </dependency>
-      
-      
-      
+
+
+
       <dependency>
         <groupId>org.jasypt</groupId>
         <artifactId>jasypt</artifactId>
@@ -81,13 +131,6 @@
         <version>${javax-inject.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring-boot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
 
       <dependency>
         <groupId>javax.ws.rs</groupId>
@@ -103,6 +146,12 @@
         <version>${spring.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${byte-buddy.version}</version>
       </dependency>
       
       
