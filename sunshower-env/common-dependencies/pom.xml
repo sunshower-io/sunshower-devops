@@ -32,16 +32,55 @@
     <javax-inject.version>1</javax-inject.version>
     <paypal-resteasy.version>2.3.4-RELEASE</paypal-resteasy.version>
     <byte-buddy.version>1.6.14</byte-buddy.version>
-    <resteasy.version>3.0.24.Final</resteasy.version>
+    <resteasy.version>4.0.0.Beta1</resteasy.version>
     <spring-security.version>5.0.0.RELEASE</spring-security.version>
     <aspectj.version>1.8.9</aspectj.version>
     <cfg4j.version>4.4.0</cfg4j.version>
+    <log4j-core.version>2.10.0</log4j-core.version>
+    <slf4j-log4j12.version>1.7.25</slf4j-log4j12.version>
   </properties>
 
 
   <dependencyManagement>
     <dependencies>
 
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>2.0.1.Final</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j-log4j12.version}</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>${slf4j-log4j12.version}</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j-impl</artifactId>
+        <version>${log4j-core.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j-core.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j-core.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>org.cfg4j</groupId>
