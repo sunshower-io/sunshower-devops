@@ -3,9 +3,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <properties>
-    <gremlin-core.version>3.3.0</gremlin-core.version>
-  </properties>
   <parent>
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
@@ -18,6 +15,11 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <properties>
+    <gremlin-core.version>3.3.0</gremlin-core.version>
+    <jboss-jaxrs-api.version>1.0.0.Final</jboss-jaxrs-api.version>
+    <commons-fileupload.version>1.3.3</commons-fileupload.version>
+  </properties>
   <name>Sunshower Service Dependencies</name>
 
   <scm>
@@ -36,6 +38,18 @@
         <artifactId>tinkergraph-gremlin</artifactId>
         <version>${gremlin-core.version}</version>
         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.spec.javax.ws.rs</groupId>
+        <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+        <version>${jboss-jaxrs-api.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>${commons-fileupload.version}</version>
       </dependency>
 
 
