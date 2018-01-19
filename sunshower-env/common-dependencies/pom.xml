@@ -38,18 +38,63 @@
     <cfg4j.version>4.4.0</cfg4j.version>
     <log4j-core.version>2.10.0</log4j-core.version>
     <slf4j-log4j12.version>1.7.25</slf4j-log4j12.version>
+    <validation-api.version>2.0.1.Final</validation-api.version>
+    <aopalliance.version>1.0</aopalliance.version>
+    <spring.version>5.0.2.RELEASE</spring.version>
+    <mapstruct.version>1.2.0.Final</mapstruct.version>
+    <lombok.version>1.16.20</lombok.version>
+    <jasypt.version>1.9.2</jasypt.version>
+    <mail.version>1.4.7</mail.version>
+    <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+    <rxjava.version>2.1.8</rxjava.version>
   </properties>
 
 
   <dependencyManagement>
     <dependencies>
 
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-framework-bom</artifactId>
+        <version>${spring.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      
+      
+
+      <dependency>
+        <groupId>aopalliance</groupId>
+        <artifactId>aopalliance</artifactId>
+        <version>${aopalliance.version}</version>
+      </dependency>
+      
+      
+
       <dependency>
         <groupId>javax.validation</groupId>
         <artifactId>validation-api</artifactId>
-        <version>2.0.1.Final</version>
+        <version>${validation-api.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct-processor</artifactId>
+        <version>${mapstruct.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct-jdk8</artifactId>
+        <version>${mapstruct.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -135,12 +180,12 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      
-      
+
+
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
-        <version>3.1.0</version>
+        <version>${javax.servlet-api.version}</version>
         <scope>provided</scope>
       </dependency>
 
@@ -148,23 +193,24 @@
       <dependency>
         <groupId>io.reactivex.rxjava2</groupId>
         <artifactId>rxjava</artifactId>
-        <version>2.1.8</version>
+        <version>${rxjava.version}</version>
       </dependency>
-
 
 
       <dependency>
         <groupId>org.jasypt</groupId>
         <artifactId>jasypt</artifactId>
-        <version>1.9.2</version>
+        <version>${jasypt.version}</version>
       </dependency>
 
 
       <dependency>
         <groupId>javax.mail</groupId>
         <artifactId>mail</artifactId>
-        <version>1.4.7</version>
+        <version>${mail.version}</version>
       </dependency>
+      
+      
       <dependency>
         <groupId>org.yaml</groupId>
         <artifactId>snakeyaml</artifactId>
@@ -186,7 +232,6 @@
       </dependency>
 
 
-
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-framework-bom</artifactId>
@@ -200,8 +245,7 @@
         <artifactId>byte-buddy</artifactId>
         <version>${byte-buddy.version}</version>
       </dependency>
-      
-      
+
 
       <dependency>
         <groupId>org.eclipse.persistence</groupId>

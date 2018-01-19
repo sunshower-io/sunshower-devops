@@ -32,7 +32,11 @@
     <hibernate-search-orm.version>5.8.2.Final</hibernate-search-orm.version>
     <hibernate-validator.version>6.0.6.Final</hibernate-validator.version>
     <ignite.version>2.3.1</ignite.version>
+    <postgres.version>42.1.4</postgres.version>
     <ignite-hibernate.version>2.3.1</ignite-hibernate.version>
+    <lucene-codecs.version>5.3.2</lucene-codecs.version>
+    <lucene-backward-codecs.version>5.5.3</lucene-backward-codecs.version>
+    <h2.version>1.4.193</h2.version>
   </properties>
 
 
@@ -45,23 +49,28 @@
         <version>5.0.0.RELEASE</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>${postgres.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>org.apache.lucene</groupId>
         <artifactId>lucene-codecs</artifactId>
-        <version>5.3.2</version>
+        <version>${lucene-codecs.version}</version>
       </dependency>
       
       <dependency>
         <groupId>org.apache.lucene</groupId>
         <artifactId>lucene-backward-codecs</artifactId>
-        <version>5.5.3</version>
+        <version>${lucene-backward-codecs.version}</version>
       </dependency>
       
       <dependency>
         <groupId>org.apache.lucene</groupId>
         <artifactId>lucene-core</artifactId>
-        <version>5.5.3</version>
+        <version>${lucene-backward-codecs.version}</version>
       </dependency>
 
       <dependency>
@@ -126,18 +135,10 @@
         <version>${hikari-cp.version}</version>
       </dependency>
       
-      
-      <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>42.1.4</version>
-      </dependency>
-
-
       <dependency>
         <groupId>com.h2database</groupId>
         <artifactId>h2</artifactId>
-        <version>1.4.193</version>
+        <version>${h2.version}</version>
         <scope>test</scope>
       </dependency>
 

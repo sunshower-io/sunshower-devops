@@ -3,6 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <properties>
+    <gremlin-core.version>3.3.0</gremlin-core.version>
+  </properties>
   <parent>
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
@@ -25,13 +28,13 @@
       <dependency>
         <groupId>org.apache.tinkerpop</groupId>
         <artifactId>gremlin-core</artifactId>
-        <version>3.3.0</version>
+        <version>${gremlin-core.version}</version>
       </dependency>
       
       <dependency>
         <groupId>org.apache.tinkerpop</groupId>
         <artifactId>tinkergraph-gremlin</artifactId>
-        <version>3.3.0</version>
+        <version>${gremlin-core.version}</version>
         <scope>test</scope>
       </dependency>
 
