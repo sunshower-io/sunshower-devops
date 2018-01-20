@@ -25,7 +25,7 @@
   <properties>
     <ignite-hibernate-51.version>2.3.1</ignite-hibernate-51.version>
     <javax-el-api.version>3.0.0</javax-el-api.version>
-    <hikari-cp.version>2.6.2</hikari-cp.version>
+    <hikari-cp.version>2.7.6</hikari-cp.version>
     <jpa-api.version>1.0.0.Final</jpa-api.version>
     <hibernate.version>5.2.11.Final</hibernate.version>
     <validation-api.version>2.0.0.Final</validation-api.version>
@@ -38,11 +38,32 @@
     <lucene-codecs.version>5.3.2</lucene-codecs.version>
     <lucene-backward-codecs.version>5.5.3</lucene-backward-codecs.version>
     <h2.version>1.4.193</h2.version>
+    <hibernate-commons-annotations.version>5.0.1.Final</hibernate-commons-annotations.version>
+    <javassist.version>3.22.0-GA</javassist.version>
+    <jipijapa-hibernate5.version>11.0.0.Final</jipijapa-hibernate5.version>
   </properties>
 
 
   <dependencyManagement>
     <dependencies>
+      
+      <dependency>
+        <groupId>org.javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>${javassist.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.wildfly</groupId>
+        <artifactId>jipijapa-hibernate5</artifactId>
+        <version>${jipijapa-hibernate5.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate.common</groupId>
+        <artifactId>hibernate-commons-annotations</artifactId>
+        <version>${hibernate-commons-annotations.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>org.springframework.security</groupId>
