@@ -1,9 +1,13 @@
 #!/bin/bash -eu
-
+BASE_64_PGP=$(echo "$GPG_PK" | base64 -w10000000000000)
 docker build -t "sunshower-base" -f dockerfiles/base-image.docker .
 docker tag sunshower-base sunshower/sunshower-base:1.0.0
 docker push sunshower/sunshower-base:1.0.0
 docker build -t sunshower-env -f dockerfiles/build-env.docker .
-docker run -e MVN_REPO_USERNAME=myMavenRepo -e MVN_REPO_PASSWORD=lid-DOG-bin-123 -it --rm --name "sunshower-env" sunshower-env
+docker run -e GPG_PASSPHRASE=p1llar5-0f-autumn \
+    -e MVN_REPO_USERNAME=haswellj \
+    -e MVN_REPO_PASSWORD=P!llar5-0f-autumn \
+    -e GPG_ASC=$BASE_64_PGP \
+    -it --rm --name "sunshower-env" sunshower-env
 
 

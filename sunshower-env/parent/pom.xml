@@ -19,18 +19,28 @@
     <env.version>1.0.0-SNAPSHOT</env.version>
   </properties>
 
+  <!--<distributionManagement>-->
+    <!--<repository>-->
+      <!--<id>sunshower-repo</id>-->
+      <!--<url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ</url>-->
+    <!--</repository>-->
+  <!--</distributionManagement>-->
+
   <distributionManagement>
     <repository>
-      <id>sunshower-repo</id>
-      <url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ</url>
+      <id>sunshower-oss-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
+    <snapshotRepository>
+      <id>sunshower-oss-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
-
 
   <repositories>
     <repository>
-      <id>sunshower-repo</id>
-      <url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ</url>
+      <id>sunshower-oss-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
     <repository>
       <id>spring-release</id>

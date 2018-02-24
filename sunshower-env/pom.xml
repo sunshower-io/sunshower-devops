@@ -10,22 +10,32 @@
   <packaging>pom</packaging>
 
   <name>Sunshower Environment Aggregator</name>
+  
+  <properties>
+    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+  </properties>
 
   <scm>
     <url>https://github.com/sunshower-io/sunshower.io</url>
   </scm>
   <distributionManagement>
-    <repository>
-      <id>sunshower-repo</id>
-      <url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ</url>
-    </repository>
+    <snapshotRepository>
+      <id>sunshower-oss-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
+  <!--<distributionManagement>-->
+  <!--<repository>-->
+  <!--<id>sunshower-repo</id>-->
+  <!--<url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ</url>-->
+  <!--</repository>-->
+  <!--</distributionManagement>-->
 
-  
+
   <repositories>
     <repository>
-      <id>sunshower-repo</id>
-      <url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ</url>
+      <id>sunshower-oss-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
     <repository>
       <id>spring-milestones</id>
@@ -66,5 +76,31 @@
     <module>service-dependencies</module>
     <module>persist-dependencies</module>
   </modules>
+
+  <build>
+    <plugins>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.8</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>sunshower-oss-repo</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 
 </project>

@@ -5,7 +5,7 @@
 
   <servers>
     <server>
-      <id>sunshower-repo</id>
+      <id>sunshower-oss-repo</id>
       <username>${env.MVN_REPO_USERNAME}</username>
       <password>${env.MVN_REPO_PASSWORD}</password>
     </server>
@@ -25,8 +25,8 @@
       </activation>
       <repositories>
         <repository>
-          <id>sunshower-repo</id>
-          <url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ/</url>
+          <id>sunshower-oss-repo</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
           <releases>
             <enabled>true</enabled>
           </releases>
