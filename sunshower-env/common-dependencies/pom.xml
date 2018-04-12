@@ -32,7 +32,7 @@
     <javax-inject.version>1</javax-inject.version>
     <paypal-resteasy.version>2.3.4-RELEASE</paypal-resteasy.version>
     <byte-buddy.version>1.6.14</byte-buddy.version>
-    <resteasy.version>4.0.0.Beta1</resteasy.version>
+    <resteasy.version>4.0.0.Beta2</resteasy.version>
     <aspectj.version>1.8.9</aspectj.version>
     <cfg4j.version>4.4.0</cfg4j.version>
     <log4j-core.version>2.10.0</log4j-core.version>
