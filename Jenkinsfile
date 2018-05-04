@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('build-docker') {
             steps {
-                sh "echo ${DOCKER_CREDENTIALS_USR}"
+                sh "echo ${DOCKER_CREDENTIALS_PSW} | docker login --username=${DOCKER_CREDENTIALS_USR} --password-stdin"
                 sh "docker build -t 'sunshower-base' -f dockerfiles/base-image.docker ."
                 sh "docker tag sunshower-base sunshower/sunshower-base:${VERSION_BASE}-SNAPSHOT"
                 sh "docker push sunshower/sunshower-base:${VERSION_BASE}-SNAPSHOT"
