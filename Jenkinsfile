@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh "docker build -t 'sunshower-base' -f dockerfiles/base-image.docker ."
                 sh "docker tag sunshower-base sunshower/sunshower-base:${VERSION_BASE}-SNAPSHOT"
-                sh "docker push sunshower/sunshower-base/${VERSION_BASE}-SNAPSHOT"
+                sh "docker push sunshower/sunshower-base:${VERSION_BASE}-SNAPSHOT"
             }
         }
     }
