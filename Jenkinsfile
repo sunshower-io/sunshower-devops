@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('build-docker') {
             steps {
-                sh "docker build -t 'sunshower-base' -f dockerfiles/base-image.docker ."
+//                sh "docker build -t 'sunshower-base' -f dockerfiles/base-image.docker ."
                 sh "echo ${BUILD_VERSION}"
 //                sh "docker tag sunshower-base sunshower/sunshower-base:$"
             }
