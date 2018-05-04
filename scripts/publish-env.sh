@@ -4,13 +4,12 @@
 source ./scripts/set-version.sh
 
 parse_version $1
-export GPG_TTY=$(tty)
+#export GPG_TTY=$(tty)
 
-echo "$GPG_ASC" | base64 -d | gpg --batch --passphrase=$GPG_PASSPHRASE --allow-secret-key-import --import 
+#echo "$GPG_ASC" | base64 -d | gpg --batch --passphrase=$GPG_PASSPHRASE --allow-secret-key-import --import
 
-#mvn clean install -f sunshower-env/pom.xml -Denv.version=${VERSION}
-#mvn versions:set -DnewVersion=${VERSION} -f sunshower-env/pom.xml -Denv.version=${VERSION}
-mvn clean install -f sunshower-env/parent/pom.xml 
-#mvn versions:set -DnewVersion=${VERSION} -f sunshower-env/parent/pom.xml 
-mvn clean install deploy  -Dgpg.passphrase=$GPG_PASSPHRASE -f sunshower-env/pom.xml 
-mvn clean install deploy  -Dgpg.passphrase=$GPG_PASSPHRASE -f sunshower-env/parent/pom.xml 
+#POM_VERSION=echo '${project.version}\n0\n' | mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate | grep '^VERSION'
+#echo "Using Project Version:${POM_VERSION}"
+mvn clean install -f sunshower-env/parent/pom.xml
+mvn clean install deploy  -f sunshower-env/pom.xml
+mvn clean install deploy  -f sunshower-env/parent/pom.xml
