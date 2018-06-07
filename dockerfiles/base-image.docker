@@ -8,7 +8,7 @@ RUN apt-get install -y git-core wget
 # Environment Variables
 ENV PROJECT_NAME workspace
 ENV GRADLE_VERSION 4.3.1
-ENV MAVEN_VERSION 3.5.2
+ENV MAVEN_VERSION 3.5.3
 ENV BASE_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Install Gradle
@@ -18,11 +18,19 @@ RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zi
 RUN unzip -d /opt/build/tools/gradle /opt/build/tools/gradle.zip
 ENV GRADLE_HOME=/opt/build/tools/gradle/gradle-$GRADLE_VERSION/bin
 
+RUN cd /tmp/ && \
+    curl -LO "http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip" -H 'Cookie: oraclelicense=accept-securebackup-cookie' && \
+    unzip jce_policy-8.zip && \
+    rm jce_policy-8.zip && \
+    yes | cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security
+
+#yes |cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/java/default/jre/lib/security/
+
 
 # Install Maven
 
 RUN mkdir -p /opt/build/tools/maven
-RUN wget http://www-eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.zip \
+RUN wget http://www-us.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.zip \
 -O /opt/build/tools/maven.zip
 RUN unzip -d /opt/build/tools/maven /opt/build/tools/maven.zip
 ENV MAVEN_HOME=/opt/build/tools/maven/apache-maven-$MAVEN_VERSION/bin
@@ -36,6 +44,8 @@ COPY sunshower-env/settings/settings.xml /root/.m2/settings.xml
 
 # Configure path
 ENV PATH=$BASE_PATH:$GRADLE_HOME:$MAVEN_HOME
+
+ENTRYPOINT /bin/bash
 
 
 
