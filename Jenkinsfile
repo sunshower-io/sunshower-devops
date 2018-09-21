@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         VERSION_BASE = "1.0.0"
-        MVN_REPO = credentials('ARTIFACTS_CREDENTIALS')
+        MVN_REPO = credentials('artifacts')
         DOCKER_CREDENTIALS = credentials("dockerhub")
         MAVEN_PROFILE="sunshower"
 //        MAVEN_REPOSITORY_URL = "https://oss.sonatype.org/content/repositories/snapshots"
