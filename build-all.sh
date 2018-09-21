@@ -5,8 +5,6 @@ docker tag sunshower-base sunshower/sunshower-base:1.0.0
 docker push sunshower/sunshower-base:1.0.0
 docker build -t sunshower-env -f dockerfiles/build-env.docker .
 docker run -e GPG_PASSPHRASE=p1llar5-0f-autumn \
-    -e MVN_REPO_USERNAME=haswellj \
-    -e MVN_REPO_PASSWORD=P!llar5-0f-autumn \
     -e MVN_REPO_USERNAME=admin \
     -e MVN_REPO_PASSWORD=p1llar5-0f-autumn \
     -e GPG_ASC=$BASE_64_PGP \
