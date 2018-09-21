@@ -35,6 +35,7 @@ if [ "$IS_RELEASE" = "true" ]; then
     git config user.name "${GITHUB_USERNAME}"
     git config user.password "${GITHUB_PASSWORD}"
     git checkout -b master
-    git commit -am "Releasing new version"
-    git push -u origin master
+    git commit -am "Releasing new version ${VERSION}"
+    git tag -a v$VERSION -m "Released version ${VERSION}"
+    git push origin --tags
 fi;
