@@ -32,6 +32,7 @@ if [ "$IS_RELEASE" = "true" ]; then
     git config user.email "${GITHUB_USERNAME}@sunshower.io"
     git config user.name "${GITHUB_USERNAME}"
     git config user.password "${GITHUB_PASSWORD}"
+    git checkout -b master
     git commit -am "Releasing new version"
-    git push origin master
+    git push -u origin master
 fi;
