@@ -14,8 +14,6 @@ pipeline {
     stages {
         stage('build-docker') {
             steps {
-                println("PASSWORD: $MVN_REPO_PSW")
-                println("USER: $MVN_REPO_USR")
                 sh """
                         #!/bin/bash -eu
                         docker build -t "sunshower-base-${BN}" -f dockerfiles/base-image.docker .
@@ -25,12 +23,11 @@ pipeline {
                         docker run -e GPG_PASSPHRASE=p1llar5-0f-autumn \
                             -e MVN_REPO_USERNAME=${MVN_REPO_USR} \
                             -e MVN_REPO_PASSWORD=${MVN_REPO_PSW} \
+                            -e GITHUB_USERNAME=${GITHUB_CREDENTIALS_USR} \
+                            -e GITHUB_PASSWORD=${GITHUB_CREDENTIALS_PSW} \
                             -e BUILD_ID=$BN \
                             -e MAVEN_PROFILE="sunshower" \
                             --rm --name "sunshower-env-$BN" sunshower-env-$BN
-                        git config user.name ${GITHUB_CREDENTIALS_USR}
-                        git config user.password ${GITHUB_CREDENTIALS_PSW}
-                        git commit -am "Releasing new version"
 """
             }
         }
