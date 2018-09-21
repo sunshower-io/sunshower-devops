@@ -17,7 +17,6 @@ pipeline {
                 println("PASSWORD: $MVN_REPO_PSW")
                 println("USER: $MVN_REPO_USR")
                 sh """
-
                         #!/bin/bash -eu
                         docker build -t "sunshower-base-${BN}" -f dockerfiles/base-image.docker .
                         docker tag sunshower-base-${BN} sunshower/sunshower-base:1.0.0
