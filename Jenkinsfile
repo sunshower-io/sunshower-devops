@@ -22,7 +22,7 @@ pipeline {
                         "-e MVN_REPO_USERNAME=${MVN_REPO_USR} " +
                         "-e MVN_REPO_PASSWORD=${MVN_REPO_PSW} " +
                         "-e MAVEN_PROFILE=${MAVEN_PROFILE} " +
-                        "-it --rm --name 'sunshower-env' 'sunshower-env'"
+                        "--rm --name 'sunshower-env' 'sunshower-env'"
             }
         }
     }
