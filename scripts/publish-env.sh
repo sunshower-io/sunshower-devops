@@ -18,7 +18,7 @@ mvn clean install deploy -f sunshower-env/parent/pom.xml -P ${MAVEN_PROFILE}
 echo "Next version: $NEXT_VERSION"
 if [ "$IS_RELEASE" = "true" ]; then
     mvn versions:set -DnewVersion=$VERSION;
-    mvn clean install deploy -f sunshower-env/pom.xml ${MAVEN_PROFILE};
+    mvn clean install deploy -f sunshower-env/pom.xml -P ${MAVEN_PROFILE};
     mvn versions:set -DnewVersion=$NEXT_VERSION;
     git commit -am "Releasing";
     git push origin master;
