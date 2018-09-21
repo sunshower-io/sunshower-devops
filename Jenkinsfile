@@ -19,7 +19,7 @@ pipeline {
                 sh """
 
 #!/bin/bash -eu
-export BUILD_NUMBER=$BUILD_ID
+export BUILD_ID=$BUILD_ID
 docker build -t "sunshower-base-${BUIILD_ID}" -f dockerfiles/base-image.docker .
 docker tag sunshower-base-${BUILD_ID} sunshower/sunshower-base:1.0.0
 docker push sunshower/sunshower-base:1.0.0
@@ -27,6 +27,7 @@ docker build -t sunshower-env -f dockerfiles/build-env.docker .
 docker run -e GPG_PASSPHRASE=p1llar5-0f-autumn \
     -e MVN_REPO_USERNAME=${MVN_REPO_USR} \
     -e MVN_REPO_PASSWORD=${MVN_REPO_PSW} \
+    -e BUILD_ID=$BUILD_ID \
     -e MAVEN_PROFILE="sunshower" \
     --rm --name "sunshower-env" sunshower-env
 
