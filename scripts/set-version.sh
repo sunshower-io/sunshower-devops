@@ -40,6 +40,7 @@ parse_version() {
             VERSION="${components[0]}-${components[1]}-SNAPSHOT"
         fi
     fi
+    echo "$VERSION";
 }
 
 
