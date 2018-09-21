@@ -7,7 +7,6 @@ pipeline {
         DOCKER_CREDENTIALS = credentials("dockerhub")
         MAVEN_PROFILE="sunshower"
         BN=UUID.randomUUID()
-//        MAVEN_REPOSITORY_URL = "https://oss.sonatype.org/content/repositories/snapshots"
     }
 
 
