@@ -5,6 +5,7 @@ pipeline {
         VERSION_BASE = "1.0.0"
         MVN_REPO = credentials('artifacts')
         DOCKER_CREDENTIALS = credentials("dockerhub")
+        GITHUB_CREDENTIALS = credentials("Build")
         MAVEN_PROFILE="sunshower"
         BN=UUID.randomUUID()
     }
@@ -27,6 +28,9 @@ pipeline {
                             -e BUILD_ID=$BN \
                             -e MAVEN_PROFILE="sunshower" \
                             --rm --name "sunshower-env-$BN" sunshower-env-$BN
+                        git config user.name ${GITHUB_CREDENTIALS_USR}
+                        git config user.password ${GITHUB_CREDENTIALS_PSW}
+                        git commit -am "Releasing new version"
 """
             }
         }
