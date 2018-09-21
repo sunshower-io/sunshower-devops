@@ -19,7 +19,7 @@ pipeline {
                 sh """
 
 #!/bin/bash -eu
-echo "Running build: $BUIILD_ID"
+export BUILD_NUMBER=$BUILD_ID
 docker build -t "sunshower-base-${BUIILD_ID}" -f dockerfiles/base-image.docker .
 docker tag sunshower-base-${BUILD_ID} sunshower/sunshower-base:1.0.0
 docker push sunshower/sunshower-base:1.0.0
