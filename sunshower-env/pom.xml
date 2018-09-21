@@ -19,9 +19,6 @@
     <profiles>
         <profile>
             <id>open-source</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <distributionManagement>
                 <repository>
                     <id>sunshower-oss-repo</id>
@@ -35,6 +32,9 @@
         </profile>
         <profile>
             <id>sunshower</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <distributionManagement>
                 <repository>
                     <id>sunshower-releases</id>
