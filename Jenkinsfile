@@ -6,6 +6,7 @@ pipeline {
         MVN_REPO = credentials('artifacts')
         DOCKER_CREDENTIALS = credentials("dockerhub")
         MAVEN_PROFILE="sunshower"
+        BUIILD_ID=UUID.randomUUID()
 //        MAVEN_REPOSITORY_URL = "https://oss.sonatype.org/content/repositories/snapshots"
     }
 
@@ -18,8 +19,8 @@ pipeline {
                 sh """
 
 #!/bin/bash -eu
-docker build -t "sunshower-base" -f dockerfiles/base-image.docker .
-docker tag sunshower-base sunshower/sunshower-base:1.0.0
+docker build -t "sunshower-base-${BUIILD_ID}" -f dockerfiles/base-image.docker .
+docker tag sunshower-base-${BUILD_ID} sunshower/sunshower-base:1.0.0
 docker push sunshower/sunshower-base:1.0.0
 docker build -t sunshower-env -f dockerfiles/build-env.docker .
 docker run -e GPG_PASSPHRASE=p1llar5-0f-autumn \
