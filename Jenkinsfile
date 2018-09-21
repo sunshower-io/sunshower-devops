@@ -18,7 +18,6 @@ pipeline {
                 sh """
 
 #!/bin/bash -eu
-//BASE_64_PGP=\$(echo "$GPG_PK" | base64 -w10000000000000)
 docker build -t "sunshower-base" -f dockerfiles/base-image.docker .
 docker tag sunshower-base sunshower/sunshower-base:1.0.0
 docker push sunshower/sunshower-base:1.0.0
