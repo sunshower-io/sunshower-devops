@@ -1,5 +1,6 @@
 #!/bin/bash -eu
 
+git remote -v
 
 source ./scripts/set-version.sh
 
