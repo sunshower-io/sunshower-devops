@@ -27,8 +27,8 @@ pipeline {
                             -e BUILD_ID=$BN \
                             -e MAVEN_PROFILE="sunshower" \
                             --rm --name "sunshower-env-$BN" sunshower-env-$BN
-                git commit -am "Releasing";
-                git push origin master;
+//                git commit -am "Releasing";
+//                git push origin master;
 """
             }
         }
