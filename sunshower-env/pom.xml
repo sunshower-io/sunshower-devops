@@ -18,12 +18,38 @@
     <scm>
         <url>https://github.com/sunshower-io/sunshower.io</url>
     </scm>
-    <distributionManagement>
-        <snapshotRepository>
-            <id>sunshower-oss-repo</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>open-source</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>sunshower-oss-repo</id>
+                    <url>https://oss.sonatype.org/content/repositories/releases</url>
+                </repository>
+                <snapshotRepository>
+                    <id>sunshower-oss-repo</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>sunshower</id>
+            <distributionManagement>
+                <repository>
+                    <id>sunshower-releases</id>
+                    <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>sunshower-snapshots</id>
+                    <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
 
     <repositories>

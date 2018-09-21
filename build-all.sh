@@ -7,7 +7,10 @@ docker build -t sunshower-env -f dockerfiles/build-env.docker .
 docker run -e GPG_PASSPHRASE=p1llar5-0f-autumn \
     -e MVN_REPO_USERNAME=haswellj \
     -e MVN_REPO_PASSWORD=P!llar5-0f-autumn \
+    -e MVN_REPO_SNAPSHOTS_USERNAME=admin \
+    -e MVN_REPO_SNAPSHOTS_PASSWORD=p1llar5-0f-autumn \
     -e GPG_ASC=$BASE_64_PGP \
+    -e MAVEN_PROFILE="sunshower" \
     -it --rm --name "sunshower-env" sunshower-env
 
 
