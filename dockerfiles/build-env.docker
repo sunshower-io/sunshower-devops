@@ -7,7 +7,6 @@ ENV MVN_REPO_PASSWORD=""
 
 RUN mkdir -p /home/sunshower/$PROJECT_NAME
 COPY . /home/sunshower/$PROJECT_NAME
-COPY .git /home/sunshower/$PROJECT_NAME
 WORKDIR /home/sunshower/$PROJECT_NAME
 RUN ls -la
 RUN chmod +x ./scripts/publish-env.sh
