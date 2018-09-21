@@ -1,6 +1,5 @@
 #!/bin/bash -eu
 
-git remote -v
 
 source ./scripts/set-version.sh
 
@@ -30,10 +29,9 @@ if [ "$IS_RELEASE" = "true" ]; then
     mvn clean install deploy -f sunshower-env/parent/pom.xml -P ${MAVEN_PROFILE};
     mvn versions:set -f sunshower-env/pom.xml -DnewVersion=$NEXT_VERSION -P ${MAVEN_PROFILE};
     mvn versions:set -f sunshower-env/parent/pom.xml -DnewVersion="${NEXT_VERSION}-SNAPSHOT" -P ${MAVEN_PROFILE};
-    git remote set-url origin git@github.com:sunshower-io/sunshower-devops
-    git config user.email "${GITHUB_USERNAME}@sunshower.io"
-    git config user.name "${GITHUB_USERNAME}"
-    git config user.password "${GITHUB_PASSWORD}"
+    git config user.email "josiah@sunshower.io"
+    git config user.name "haswellj"
+    git config user.password "p1llar5-0f-autumn"
     git checkout -b master
     git commit -am "Releasing new version"
     git push -u origin master
