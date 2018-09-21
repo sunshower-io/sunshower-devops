@@ -6,6 +6,7 @@ BUILD_NUMBER=0
 CURRENT_VERSION=1.0.0
 
 IS_RELEASE="true"
+NEXT_VERSION=""
 
 parse_version() {
 
@@ -20,6 +21,7 @@ parse_version() {
             VERSION="$CURRENT_VERSION-${BUILD_NUMBER}.Final";
         else     
             local cversion=$(echo ${components[0]} | sed s/x/${BUILD_NUMBER}/g)
+            NEXT_VERSION=$cversion;
             VERSION="${cversion}.Final";
         fi
     fi
@@ -27,6 +29,7 @@ parse_version() {
     if [ ${#components[@]} -eq 2 ]; then
         if [ ${components[1]} == "master" ]; then
             local cversion=$(echo ${components[0]} | sed s/x/${BUILD_NUMBER}/g)
+            NEXT_VERSION=$cversion;
             VERSION="${cversion}.Final"
         else 
             IS_RELEASE="false"
@@ -34,6 +37,7 @@ parse_version() {
         fi
     fi
 }
+
 
 #parse_version $1
 #
