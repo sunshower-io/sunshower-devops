@@ -3,7 +3,7 @@
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.7</version>
     <packaging>pom</packaging>
 
     <name>Sunshower Environment Aggregator</name>
@@ -15,12 +15,19 @@
         <url>https://github.com/sunshower-io/sunshower.io</url>
     </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>sunshower-releases</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>sunshower-snapshots</id>
+            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
     <profiles>
         <profile>
             <id>open-source</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <distributionManagement>
                 <repository>
                     <id>sunshower-oss-repo</id>
@@ -34,6 +41,9 @@
         </profile>
         <profile>
             <id>sunshower</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <distributionManagement>
                 <repository>
                     <id>sunshower-releases</id>
@@ -104,17 +114,17 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>sunshower-oss-repo</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.sonatype.plugins</groupId>-->
+                <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
+                <!--<version>1.6.8</version>-->
+                <!--<extensions>true</extensions>-->
+                <!--<configuration>-->
+                    <!--<serverId>sunshower-oss-repo</serverId>-->
+                    <!--<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+                    <!--<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 
