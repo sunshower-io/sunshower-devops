@@ -23,7 +23,7 @@
   </scm>
 
   <properties>
-    <ignite-hibernate-51.version>2.3.2</ignite-hibernate-51.version>
+    <ignite-hibernate-51.version>2.6.0</ignite-hibernate-51.version>
     <javax-el-api.version>3.0.0</javax-el-api.version>
     <hikari-cp.version>2.7.6</hikari-cp.version>
     <jpa-api.version>1.0.0.Final</jpa-api.version>

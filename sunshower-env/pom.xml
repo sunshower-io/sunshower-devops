@@ -2,105 +2,99 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.sunshower.env</groupId>
-  <artifactId>env-aggregator</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <groupId>io.sunshower.env</groupId>
+    <artifactId>env-aggregator</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <name>Sunshower Environment Aggregator</name>
-  
-  <properties>
-    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-  </properties>
+    <name>Sunshower Environment Aggregator</name>
 
-  <scm>
-    <url>https://github.com/sunshower-io/sunshower.io</url>
-  </scm>
-  <distributionManagement>
-    <snapshotRepository>
-      <id>sunshower-oss-repo</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
-  <!--<distributionManagement>-->
-  <!--<repository>-->
-  <!--<id>sunshower-repo</id>-->
-  <!--<url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ</url>-->
-  <!--</repository>-->
-  <!--</distributionManagement>-->
+    <properties>
+        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+    </properties>
+
+    <scm>
+        <url>https://github.com/sunshower-io/sunshower.io</url>
+    </scm>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sunshower-oss-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 
-  <repositories>
-    <repository>
-      <id>sunshower-oss-repo</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-    <repository>
-      <id>spring-milestones</id>
-      <name>spring-milestones</name>
-      <url>https://repo.spring.io/libs-milestone-local</url>
-    </repository>
-    <repository>
-      <id>spring-release</id>
-      <url>https://repo.spring.io/libs-release</url>
-      <layout>default</layout>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
+    <repositories>
+        <repository>
+            <id>sunshower-oss-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>spring-milestones</name>
+            <url>https://repo.spring.io/libs-milestone-local</url>
+        </repository>
+        <repository>
+            <id>spring-release</id>
+            <url>https://repo.spring.io/libs-release</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
 
-    <repository>
-      <layout>default</layout>
-      <id>spring-snapshots</id>
-      <url>https://repo.spring.io/libs-snapshot</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
+        <repository>
+            <layout>default</layout>
+            <id>spring-snapshots</id>
+            <url>https://repo.spring.io/libs-snapshot</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 
-  <modules>
-    <module>parent</module>
-    <module>hal-dependencies</module>
-    <module>test-dependencies</module>
-    <module>common-dependencies</module>
-    <module>service-dependencies</module>
-    <module>persist-dependencies</module>
-  </modules>
+    <modules>
+        <module>parent</module>
+        <module>hal-dependencies</module>
+        <module>test-dependencies</module>
+        <module>common-dependencies</module>
+        <module>service-dependencies</module>
+        <module>persist-dependencies</module>
+    </modules>
 
-  <build>
-    <plugins>
-      
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-      
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.8</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>sunshower-oss-repo</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>true</autoReleaseAfterClose>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>sunshower-oss-repo</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
