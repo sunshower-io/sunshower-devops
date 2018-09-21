@@ -19,16 +19,16 @@
     <env.version>1.0.0-SNAPSHOT</env.version>
   </properties>
 
-  <distributionManagement>
-    <repository>
-      <id>sunshower-oss-repo</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-    <snapshotRepository>
-      <id>sunshower-oss-repo</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
+  <!--<distributionManagement>-->
+    <!--<repository>-->
+      <!--<id>sunshower-oss-repo</id>-->
+      <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+    <!--</repository>-->
+    <!--<snapshotRepository>-->
+      <!--<id>sunshower-oss-repo</id>-->
+      <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+    <!--</snapshotRepository>-->
+  <!--</distributionManagement>-->
 
   <repositories>
     <repository>
