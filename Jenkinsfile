@@ -25,6 +25,7 @@ pipeline {
                             -e MVN_REPO_PASSWORD=${MVN_REPO_PSW} \
                             -e GITHUB_USERNAME=${GITHUB_CREDENTIALS_USR} \
                             -e GITHUB_PASSWORD=${GITHUB_CREDENTIALS_PSW} \
+                            -e BRANCH_NAME=${env.BRANCH_NAME} \
                             -e BUILD_ID=$BN \
                             -e MAVEN_PROFILE="sunshower" \
                             --rm --name "sunshower-env-$BN" sunshower-env-$BN
