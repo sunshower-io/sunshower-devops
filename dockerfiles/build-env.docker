@@ -2,6 +2,8 @@ FROM sunshower/sunshower-base:1.0.0
 ENV BRANCH_SPEC "1.0.0/master"
 ENV GPG_ASC ""
 ENV GPG_PASSPHRASE ""
+ENV MVN_REPO_USERNAME=""
+ENV MVN_REPO_PASSWORD=""
 
 RUN mkdir -p /home/sunshower/$PROJECT_NAME
 COPY . /home/sunshower/$PROJECT_NAME

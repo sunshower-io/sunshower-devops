@@ -23,7 +23,7 @@
   </scm>
 
   <properties>
-    <ignite-hibernate-51.version>2.3.2</ignite-hibernate-51.version>
+    <ignite-hibernate-51.version>2.6.0</ignite-hibernate-51.version>
     <javax-el-api.version>3.0.0</javax-el-api.version>
     <hikari-cp.version>2.7.6</hikari-cp.version>
     <jpa-api.version>1.0.0.Final</jpa-api.version>
@@ -33,9 +33,9 @@
     <javax-el-glassfish.version>3.0.0</javax-el-glassfish.version>
     <hibernate-search-orm.version>5.5.8.Final</hibernate-search-orm.version>
     <hibernate-validator.version>6.0.6.Final</hibernate-validator.version>
-    <ignite.version>2.3.2</ignite.version>
+    <ignite.version>2.6.0</ignite.version>
     <postgres.version>42.1.4</postgres.version>
-    <ignite-hibernate.version>2.3.2</ignite-hibernate.version>
+    <ignite-hibernate.version>2.6.0</ignite-hibernate.version>
     <lucene-codecs.version>5.3.2</lucene-codecs.version>
     <!--<lucene-codecs.version>4.10.4</lucene-codecs.version>-->
     <lucene-backward-codecs.version>5.5.2</lucene-backward-codecs.version>

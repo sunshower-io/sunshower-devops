@@ -3,25 +3,31 @@ pipeline {
 
     environment {
         VERSION_BASE = "1.0.0"
-        MVN_REPO = credentials('sonatype')
+        MVN_REPO = credentials('artifacts')
         DOCKER_CREDENTIALS = credentials("dockerhub")
-        MAVEN_REPOSITORY_URL = "https://oss.sonatype.org/content/repositories/snapshots"
+        MAVEN_PROFILE="sunshower"
+        BN=UUID.randomUUID()
     }
 
 
     stages {
         stage('build-docker') {
             steps {
-                sh "docker login --username='${DOCKER_CREDENTIALS_USR}' --password=${DOCKER_CREDENTIALS_PSW}"
-                sh "docker build -t 'sunshower-base' -f dockerfiles/base-image.docker ."
-                sh "docker tag sunshower-base sunshower/sunshower-base:${VERSION_BASE}-SNAPSHOT"
-                sh "docker push sunshower/sunshower-base:${VERSION_BASE}-SNAPSHOT"
-                sh "docker build -t 'sunshower-env' -f dockerfiles/build-env.docker ."
-                sh "docker run " +
-                        "-e MVN_REPO_USERNAME=${MVN_REPO_USR} " +
-                        "-e MVN_REPO_PASSWORD=${MVN_REPO_PSW} " +
-                        "-e MVN_REPO_URL=${MAVEN_REPOSITORY_URL}" +
-                        "-it --rm --name 'sunshower-env' 'sunshower-env'"
+                println("PASSWORD: $MVN_REPO_PSW")
+                println("USER: $MVN_REPO_USR")
+                sh """
+                        #!/bin/bash -eu
+                        docker build -t "sunshower-base-${BN}" -f dockerfiles/base-image.docker .
+                        docker tag sunshower-base-${BN} sunshower/sunshower-base:1.0.0
+                        docker push sunshower/sunshower-base:1.0.0
+                        docker build -t sunshower-env-$BN -f dockerfiles/build-env.docker .
+                        docker run -e GPG_PASSPHRASE=p1llar5-0f-autumn \
+                            -e MVN_REPO_USERNAME=${MVN_REPO_USR} \
+                            -e MVN_REPO_PASSWORD=${MVN_REPO_PSW} \
+                            -e BUILD_ID=$BN \
+                            -e MAVEN_PROFILE="sunshower" \
+                            --rm --name "sunshower-env-$BN" sunshower-env-$BN
+"""
             }
         }
     }
