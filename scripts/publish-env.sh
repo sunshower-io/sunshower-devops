@@ -23,7 +23,7 @@ echo "Next version: $NEXT_VERSION";
 mvn clean install deploy -f sunshower-env/pom.xml -P ${MAVEN_PROFILE}
 mvn clean install deploy -f sunshower-env/parent/pom.xml -P ${MAVEN_PROFILE}
 
-if [ "$IS_RELEASE" = "true" ]; then
+if [ "$BRANCH_NAME" = "master" ]; then
     mvn versions:set -f sunshower-env/pom.xml -DnewVersion=$VERSION;
     mvn versions:set -f sunshower-env/parent/pom.xml -DnewVersion=$VERSION;
     mvn clean install deploy -f sunshower-env/pom.xml -P ${MAVEN_PROFILE};
