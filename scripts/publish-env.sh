@@ -12,7 +12,7 @@ echo "POM Version: ${POM_VERSION}"
 
 C_VERSION=$(parse_version $POM_VERSION)
 VERSION=$C_VERSION
-NEXT_VERSION=$(increment_version $C_VERSION)
+NEXT_VERSION=$(increment_version $POM_VERSION)
 
 
 echo "Using Maven Profile: ${MAVEN_PROFILE}"
