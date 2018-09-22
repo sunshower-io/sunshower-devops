@@ -46,7 +46,10 @@ parse_version() {
 }
 
 
-do_release() {
+release_env() {
+
+    local repo=$1;
+    local org=$2;
 
     if [ "$BRANCH_NAME" = "release" ]; then
         mvn versions:set -f sunshower-env/pom.xml -DnewVersion=$VERSION;
@@ -55,7 +58,7 @@ do_release() {
         mvn clean install deploy -f sunshower-env/parent/pom.xml -P ${MAVEN_PROFILE};
         mvn versions:set -f sunshower-env/pom.xml -DnewVersion=$NEXT_VERSION -P ${MAVEN_PROFILE};
         mvn versions:set -f sunshower-env/parent/pom.xml -DnewVersion="${NEXT_VERSION}-SNAPSHOT" -P ${MAVEN_PROFILE};
-        git remote set-url origin https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/sunshower-io/sunshower-devops
+        git remote set-url origin https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/$1/$2
         git config user.email "${GITHUB_USERNAME}@sunshower.io"
         git config user.name "${GITHUB_USERNAME}"
         git config user.password "${GITHUB_PASSWORD}"
@@ -66,12 +69,3 @@ do_release() {
     fi;
 }
 
-#parse_version $1
-#
-#if [ ${IS_RELEASE} == "true" ]; then
-#    mvn clean install -f bom
-#else 
-#fi
-#
-#
-#echo ${VERSION}

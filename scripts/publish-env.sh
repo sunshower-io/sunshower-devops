@@ -23,3 +23,5 @@ echo "Next version: $NEXT_VERSION";
 mvn clean install deploy -f sunshower-env/pom.xml -P ${MAVEN_PROFILE}
 mvn clean install deploy -f sunshower-env/parent/pom.xml -P ${MAVEN_PROFILE}
 
+release_env "sunshower-io" "sunshower-devops"
+
