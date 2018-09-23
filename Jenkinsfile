@@ -10,9 +10,11 @@ pipeline {
 
     stages {
         stage('Check Commit Message for Skip Condition') {
-            def message = sh (script: "git log -1 | grep \\[skip-build]\\", returnStatus: true)
-            sh "echo $message"
-            currentBuild.result = 'SUCCESS'
+            steps {
+                def message = sh (script: "git log -1 | grep \\[skip-build]\\", returnStatus: true)
+                sh "echo $message"
+                currentBuild.result = 'SUCCESS'
+            }
         }
         stage('Build And Deploy POMs') {
             steps {
