@@ -11,7 +11,13 @@ pipeline {
     stages {
         stage('Build And Deploy POMs') {
             steps {
-                sh "mvn clean install deploy -f sunshower-env"
+                sh """
+                    mvn clean install deploy \
+                    -f sunshower-env \
+                    -s sunshower-env/settings/settings.xml \
+                    -DMVN_REPO_USERNAME=mavenCredentials_USR \
+                    -DMVN_REPO_PASSWORD=mavenCredentials_PSW
+                """
             }
         }
     }
