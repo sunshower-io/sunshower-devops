@@ -26,6 +26,12 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            skipRelease action: 'postProcess'
+        }
+    }
 }
 
 //pipeline {
