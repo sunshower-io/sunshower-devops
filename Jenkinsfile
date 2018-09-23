@@ -1,8 +1,6 @@
 pipeline {
     environment {
         mavenCredentials = credentials('artifacts')
-        MVN_REPO_USERNAME = mavenCredentials_USR
-        MVN_REPO_PASSWORD = mavenCredentials_PSW
     }
     agent {
         docker {
