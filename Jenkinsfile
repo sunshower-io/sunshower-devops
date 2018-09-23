@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        mavenCredentials = credentials('artifacts')
+        MVN_REPO_USERNAME = mavenCredentials_USR
+        MVN_REPO_PASSWORD = mavenCredentials_PSW
+    }
     agent {
         docker {
             image 'sunshower/sunshower-base:1.0.0'
@@ -6,9 +11,9 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Build And Deploy POMs') {
             steps {
-                sh 'ls -la'
+                sh "mvn clean install deploy -f sunshower-env"
             }
         }
     }
