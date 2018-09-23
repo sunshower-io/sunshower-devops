@@ -11,9 +11,7 @@ pipeline {
     stages {
         stage('Check Commit Message for Skip Condition') {
             steps {
-                def message = sh (script: "git log -1 | grep \\[skip-build]\\", returnStatus: true)
-                sh "echo $message"
-                currentBuild.result = 'SUCCESS'
+                skipRelease action: 'check'
             }
         }
         stage('Build And Deploy POMs') {
