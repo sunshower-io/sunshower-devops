@@ -1,14 +1,14 @@
 pipeline {
     agent {
         docker {
-            image 'node:7-alpine'
+            image 'sunshower/sunshower-base:1.0.0'
         }
     }
 
     stages {
         stage('Build') {
             steps {
-                sh 'node --version'
+                sh 'ls -la'
             }
         }
     }
