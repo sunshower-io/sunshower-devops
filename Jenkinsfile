@@ -41,25 +41,78 @@ pipeline {
 
 
                     steps {
+                        /**
+                         * Extract Environment Variables
+                         */
                         extractVersions(version:env.CURRENT_VERSION)
+
+                        /**
+                         * Update Aggregator Versions
+                         */
                         sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f sunshower-env/pom.xml'
+                        sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f sunshower-env/parent/pom.xml'
+
+                        /**
+                         * Configure Git
+                         */
                         sh "git config user.name '$GITHUB_USR'"
                         sh "git config user.email '${GITHUB_USR}@sunshower.io'"
+
+                        /**
+                         * Deploy parent and env
+                         */
                         sh """
                             mvn clean install deploy \
                             -f sunshower-env \
                             -s sunshower-env/settings/settings.xml
                         """
-//                        sh "git checkout -b master"
-//                        sh "git tag -a v${env.NEXT_VERSION} -m 'Releasing ${env.NEXT_VERSION} [skip-build]'"
+
+                        sh """
+                            mvn clean install deploy \
+                            -f sunshower-env/parent/pom.xml \
+                            -s sunshower-env/settings/settings.xml
+                        """
+
+                        /**
+                         * Tag build
+                         */
+                        sh "git tag -a v${env.NEXT_VERSION} -m 'Releasing ${env.NEXT_VERSION} [skip-build]'"
+
+                        /**
+                         * Update remote
+                         */
                         sh "git remote set-url origin https://${GITHUB_USR}:${GITHUB_PSW}@github.com/sunshower-io/sunshower-devops"
-//                        sh "git push origin v${env.NEXT_VERSION}"
+
+                        /**
+                         * Push tag
+                         */
+                        sh "git push origin v${env.NEXT_VERSION}"
+
+                        /**
+                         * Update to snapshot versions
+                         */
                         sh 'mvn versions:set -DnewVersion=$NEXT_SNAPSHOT -f sunshower-env/pom.xml'
+                        sh 'mvn versions:set -DnewVersion=$NEXT_SNAPSHOT -f sunshower-env/parent/pom.xml'
+
+                        /**
+                         * Rebuild and deploy snapshots
+                         */
+
                         sh """
                             mvn clean install deploy \
                             -f sunshower-env \
                             -s sunshower-env/settings/settings.xml
                         """
+
+                        sh """
+                            mvn clean install deploy \
+                            -f sunshower-env/parent \
+                            -s sunshower-env/settings/settings.xml
+                        """
+
+                        /**
+                         * Commit snapshots back to master and skip build
+                         */
                         sh "git commit -am 'Releasing ${env.NEXT_VERSION} [skip-build]'"
                         sh "git push -u origin HEAD:master"
 
