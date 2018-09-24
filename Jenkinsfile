@@ -35,11 +35,8 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
-                        sh 'export VERSION_ROOT=$(. ./scripts/set-version.sh && current_version sunshower-env/pom.xml)'
-                        sh 'export NEXT_VERSION=$(./scripts/set-version.sh && increment_version $VERSION_ROOT).Final'
-                        sh 'export CURRENT_SNAPSHOT=$(VERSION_ROOT)-SNAPSHOT'
-                        sh 'echo "ROOT: $(VERSION_ROOT) $(NEXT_VERSION) $(CURRENT_SNAPSHOT)"'
-//                        sh 'mvn versions:set -DnewVersion=$NEXT_VERSION'
+                        extractVersions file: 'sunshower-env/pom.xml'
+                        sh 'mvn versions:set -DnewVersion=$NEXT_VERSION'
 //                        sh 'mvn clean'
 //                        sh """
 //                        mvn -f sunshower-env/pom.xml \
