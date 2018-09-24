@@ -35,11 +35,19 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
-                        sh """
-                        mvn -f sunshower-env/pom.xml \
-                        release:update-versions \
-                        -DautoVersionSubmodules=true
-                        """
+                        sh './scripts/set-version.sh'
+
+                        sh 'export VERSION_ROOT=$(current_version sunshower-env/pom.xml)'
+                        sh 'export NEXT_VERSION=$(increment_version $VERSION_ROOT).Final'
+                        sh 'export CURRENT_SNAPSHOT=$VERSION_ROOT-SNAPSHOT'
+                        sh 'echo ROOT: $VERSION_ROOT $NEXT_VERSION $CURRENT_SNAPSHOT'
+//                        sh 'mvn versions:set -DnewVersion=$NEXT_VERSION'
+//                        sh 'mvn clean'
+//                        sh """
+//                        mvn -f sunshower-env/pom.xml \
+//                        release:update-versions \
+//                        -DautoVersionSubmodules=true
+//                        """
                     }
                 }
             }

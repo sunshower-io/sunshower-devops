@@ -13,6 +13,13 @@ increment_version() {
 }
 
 
+current_version() {
+    echo $(mvn -f $1 -q -N org.codehaus.mojo:exec-maven-plugin:1.3.1:exec \
+            -Dexec.executable='echo' \
+            -Dexec.args='${project.version}' | cut -f2 -d '-')
+}
+
+
 
 parse_version() {
 
