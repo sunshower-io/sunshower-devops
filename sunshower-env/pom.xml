@@ -64,8 +64,9 @@
             <id>sunshower-oss-repo</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
+        
         <repository>
-            <id>sunshower-releases</id>
+            <id>sunshower-snapshots</id>
             <url>http://artifacts.sunshower.io/repository/sunshower-snapshots/</url>
             <releases>
                 <enabled>false</enabled>
