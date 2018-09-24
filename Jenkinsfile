@@ -14,22 +14,21 @@ pipeline {
                 skipRelease action: 'check', forceAbort: false
             }
         }
-        stage('Build And Deploy POMs') {
+        stage('POMs') {
 
             when {
                 expression {
                     return !env.SKIP_BUILD
                 }
             }
-
-            steps {
-                sh "echo $MVN_REPO_PSW"
-
-                sh """
-                    mvn clean install deploy \
-                    -f sunshower-env \
-                    -s sunshower-env/settings/settings.xml
-                """
+            stage('Build and Deploy POMs') {
+                steps {
+                    sh """
+                        mvn clean install deploy \
+                        -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
+                    """
+                }
             }
         }
     }
