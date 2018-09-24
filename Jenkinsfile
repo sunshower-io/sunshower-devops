@@ -33,11 +33,13 @@ pipeline {
 
             stages {
                 stage('Build and Deploy Release POMs') {
-                    sh """
+                    steps {
+                        sh """
                         mvn release:prepare \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml
                     """
+                    }
                 }
             }
         }
