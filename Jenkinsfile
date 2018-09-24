@@ -49,8 +49,8 @@ pipeline {
                         /**
                          * Update Aggregator Versions
                          */
-                        sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f sunshower-env/pom.xml'
-                        sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f sunshower-env/parent/pom.xml'
+                        sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f sunshower-env/pom.xml -P sunshower'
+                        sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f sunshower-env/parent/pom.xml -P sunshower'
 
                         /**
                          * Configure Git
@@ -64,13 +64,13 @@ pipeline {
                         sh """
                             mvn clean install deploy \
                             -f sunshower-env \
-                            -s sunshower-env/settings/settings.xml
+                            -s sunshower-env/settings/settings.xml -P sunshower
                         """
 
                         sh """
                             mvn clean install deploy \
                             -f sunshower-env/parent/pom.xml \
-                            -s sunshower-env/settings/settings.xml
+                            -s sunshower-env/settings/settings.xml -P sunshower
                         """
 
                         /**
@@ -101,13 +101,13 @@ pipeline {
                         sh """
                             mvn clean install deploy \
                             -f sunshower-env \
-                            -s sunshower-env/settings/settings.xml
+                            -s sunshower-env/settings/settings.xml -P sunshower
                         """
 
                         sh """
                             mvn clean install deploy \
                             -f sunshower-env/parent \
-                            -s sunshower-env/settings/settings.xml
+                            -s sunshower-env/settings/settings.xml -P sunshower
                         """
 
                         /**
