@@ -15,10 +15,5 @@
   <packaging>pom</packaging>
   <name>Sunshower Hypervisor Abstraction Layer Dependencies</name>
 
-  <scm>
-    <url>https://github.com/sunshower-io/sunshower.io</url>
-    <tag>HEAD</tag>
-  </scm>
-
 
 </project>
