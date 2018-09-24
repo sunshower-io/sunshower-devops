@@ -63,7 +63,7 @@ pipeline {
                          */
                         sh """
                             mvn clean install deploy \
-                            -f sunshower-env \
+                            -f sunshower-env/pom.xml \
                             -s sunshower-env/settings/settings.xml -P sunshower
                         """
 
