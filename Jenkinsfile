@@ -35,7 +35,7 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
-                        extractVersions file: "./sunshower-env/pom.xml"
+                        extractVersions file: readFile("./sunshower-env/pom.xml")
                         sh 'mvn versions:set -DnewVersion=$NEXT_VERSION'
 //                        sh 'mvn clean'
 //                        sh """
