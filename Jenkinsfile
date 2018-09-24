@@ -35,6 +35,7 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
+                        sh "rm -rf ~/.ssh/known_hosts"
                         sh "git tag -d env-aggregator-1.0.8"
                         sh "git config user.name '${GITHUB_USR}'"
                         sh "git config user.email '${GITHUB_USR}@sunshower.io'"
