@@ -4,7 +4,7 @@
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
-    <version>1.0.9-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Sunshower Environment Aggregator</name>
@@ -64,7 +64,7 @@
             <id>sunshower-oss-repo</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
-        
+
         <repository>
             <id>sunshower-snapshots</id>
             <url>http://artifacts.sunshower.io/repository/sunshower-snapshots/</url>
