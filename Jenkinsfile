@@ -38,7 +38,8 @@ pipeline {
                         mvn release:prepare \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml \
-                        -PdependencyLocationsEnabled=false
+                        -PdependencyLocationsEnabled=false \
+                        --batch-mode
                     """
                     }
                 }
