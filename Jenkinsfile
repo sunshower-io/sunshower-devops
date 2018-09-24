@@ -12,6 +12,7 @@ pipeline {
         stage('Check Commit Message for Skip Condition') {
             steps {
                 skipRelease action: 'check', forceAbort: false
+                echo "$env.SKIP_BUILD : $env : $SKIP_BUILD"
             }
         }
         stage('POMs') {
