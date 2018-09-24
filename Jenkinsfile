@@ -18,9 +18,10 @@ pipeline {
 
             when {
                 expression {
-                    return !env.SKIP_BUILD
+                    return !SKIP_BUILD
                 }
             }
+
             stages {
                 stage('Build and Deploy Snapshot POMs') {
                     steps {
