@@ -27,7 +27,7 @@ pipeline {
         }
         stage('POMs') {
             environment {
-                CURRENT_VERSION = readMavenPom(file:'sunshower-env/pom.xml')
+                CURRENT_VERSION = readMavenPom(file:'sunshower-env/pom.xml').version
 
             }
             when {
