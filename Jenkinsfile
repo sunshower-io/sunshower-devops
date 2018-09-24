@@ -35,20 +35,10 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
-                        sh "find / -name known_hosts -type f | xargs rm -f"
-                        sh "rm -rf ~/.ssh/known_hosts"
-                        sh "git tag -d env-aggregator-1.0.8"
-                        sh "git config user.name '${GITHUB_USR}'"
-                        sh "git config user.email '${GITHUB_USR}@sunshower.io'"
-                        sh """mvn clean install release:prepare \
-                        -f sunshower-env \
-                        -s sunshower-env/settings/settings.xml \
-                        -DdependencyLocationsEnabled=false \
-                        --batch-mode \
-                        -DSCM_USER=${GITHUB_USR} \
-                        -DSCM_PASSWORD=${GITHUB_PSW} \
-                        -e
-                    """
+                        sh "git remote add origin https://${SCM_USER}:${SCM_PASSWORD}@github.com/sunshower-io/sunshower-devops"
+                        sh """
+                        mvn release:update-versions -DautoVersionSubmodules=true
+                        """
                     }
                 }
             }
