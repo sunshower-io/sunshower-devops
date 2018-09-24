@@ -4,7 +4,7 @@
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.0.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Sunshower Environment Aggregator</name>
