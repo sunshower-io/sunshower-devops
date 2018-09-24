@@ -51,7 +51,6 @@ pipeline {
 //                        sh "git checkout -b master"
 //                        sh "git tag -a v${env.NEXT_VERSION} -m 'Releasing ${env.NEXT_VERSION} [skip-build]'"
                         sh "git remote set-url origin https://${GITHUB_USR}:${GITHUB_PSW}@github.com/sunshower-io/sunshower-devops"
-                        sh 'git pull origin master'
 //                        sh "git push origin v${env.NEXT_VERSION}"
                         sh 'mvn versions:set -DnewVersion=$NEXT_SNAPSHOT -f sunshower-env/pom.xml'
                         sh """
@@ -60,6 +59,7 @@ pipeline {
                             -s sunshower-env/settings/settings.xml
                         """
                         sh "git commit -am 'Releasing ${env.NEXT_VERSION} [skip-build]'"
+                        sh 'git pull origin master'
                         sh "git push origin master"
 
                     }
