@@ -35,7 +35,7 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
-                        sh "git remote add origin https://${SCM_USER}:${SCM_PASSWORD}@github.com/sunshower-io/sunshower-devops"
+                        sh "git remote add origin https://${GITHUB_USER}:${GITHUB_PASSWORD}@github.com/sunshower-io/sunshower-devops"
                         sh """
                         mvn release:update-versions -DautoVersionSubmodules=true
                         """
