@@ -27,12 +27,10 @@ pipeline {
         }
         stage('POMs') {
             environment {
-                CURRENT_VERSION = readMavenPom(file:'sunshower-env/pom.xml').getVersion()
+                CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
             }
             when {
-                when {
-                    branch 'master'
-                }
+                branch 'master'
                 expression {
                     env.SKIP_BUILD == "false"
                 }
@@ -46,7 +44,7 @@ pipeline {
                         /**
                          * Extract Environment Variables
                          */
-                        extractVersions(version:env.CURRENT_VERSION)
+                        extractVersions(version: env.CURRENT_VERSION)
 
                         /**
                          * Update Aggregator Versions
