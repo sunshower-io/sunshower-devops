@@ -16,8 +16,8 @@
     </properties>
     <scm>
         <url>https://github.com/sunshower-io</url>
-        <connection>scm:git:https://github.com/sunshower-io/sunshower-devops</connection>
-        <developerConnection>scm:git:https://github.com/sunshower-io/sunshower-devops</developerConnection>
+        <connection>scm:git:https://${SCM_USER}:${SCM_PASSWORD}@github.com/sunshower-io/sunshower-devops</connection>
+        <developerConnection>scm:git:https://${SCM_USER}:${SCM_PASSWORD}@github.com/sunshower-io/sunshower-devops</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

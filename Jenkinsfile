@@ -41,8 +41,10 @@ pipeline {
                         sh """mvn clean install release:prepare \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml \
-                        -PdependencyLocationsEnabled=false \
-                        --batch-mode
+                        -DdependencyLocationsEnabled=false \
+                        --batch-mode \
+                        -DSCM_USER=${GITHUB_USR} \
+                        -DSCM_PASSWORD=${GITHUB_PSW}
                     """
                     }
                 }
