@@ -14,8 +14,17 @@ pipeline {
                 skipRelease action: 'check', forceAbort: false
             }
         }
-        stage('POMs') {
 
+        stage('Build and Deploy POM Snapshots') {
+            steps {
+                sh """
+                        mvn clean install deploy \
+                        -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
+                    """
+            }
+        }
+        stage('POMs') {
             when {
                 expression {
                     env.SKIP_BUILD == "false"
@@ -23,14 +32,12 @@ pipeline {
             }
 
             stages {
-                stage('Build and Deploy Snapshot POMs') {
-                    steps {
-                        sh """
-                        mvn clean install deploy \
+                stage('Build and Deploy Release POMs') {
+                    sh """
+                        mvn release:prepare \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml
                     """
-                    }
                 }
             }
         }
