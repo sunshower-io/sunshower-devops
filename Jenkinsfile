@@ -35,7 +35,7 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
-                        sh '. ./scripts/set-version.sh'
+                        sh 'export CURRENT_VERSION=$(. ./scripts/set-version.sh && current_version sunshower-env/pom.xml)'
 
                         sh 'export VERSION_ROOT=$(current_version sunshower-env/pom.xml)'
                         sh 'export NEXT_VERSION=$(increment_version $VERSION_ROOT).Final'
