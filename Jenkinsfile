@@ -45,7 +45,8 @@ pipeline {
                         -DdependencyLocationsEnabled=false \
                         --batch-mode \
                         -DSCM_USER=${GITHUB_USR} \
-                        -DSCM_PASSWORD=${GITHUB_PSW}
+                        -DSCM_PASSWORD=${GITHUB_PSW} \
+                        -e
                     """
                     }
                 }
