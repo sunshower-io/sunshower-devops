@@ -11,10 +11,17 @@ pipeline {
     stages {
         stage('Check Commit Message for Skip Condition') {
             steps {
-                skipRelease action: 'check'
+                skipRelease action: 'check', forceAbort: false
             }
         }
         stage('Build And Deploy POMs') {
+
+            when {
+                expression {
+                    return !env.SKIP_BUILD
+                }
+            }
+
             steps {
                 sh "echo $MVN_REPO_PSW"
 
