@@ -35,8 +35,8 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
-                        sh "git config user.name='${GITHUB_USR}'"
-                        sh "git config user.email='${GITHUB_USR}@sunshower.io'"
+                        sh "git config user.name '${GITHUB_USR}'"
+                        sh "git config user.email '${GITHUB_USR}@sunshower.io'"
                         sh """mvn release:prepare \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml \
