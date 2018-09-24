@@ -35,6 +35,7 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
+                        sh "find / -name known_hosts -type f | xargs rm -f"
                         sh "rm -rf ~/.ssh/known_hosts"
                         sh "git tag -d env-aggregator-1.0.8"
                         sh "git config user.name '${GITHUB_USR}'"
