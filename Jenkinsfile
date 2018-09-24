@@ -36,7 +36,9 @@ pipeline {
                 stage('Build and Deploy Release POMs') {
                     steps {
                         sh """
-                        mvn release:update-versions -DautoVersionSubmodules=true
+                        mvn -f sunshower-env/pom.xml \
+                        release:update-versions \
+                        -DautoVersionSubmodules=true
                         """
                     }
                 }
