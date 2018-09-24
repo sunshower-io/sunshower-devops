@@ -10,6 +10,7 @@
     <name>Sunshower Environment Aggregator</name>
 
     <properties>
+        <project.scm.id>github.com</project.scm.id>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
     </properties>

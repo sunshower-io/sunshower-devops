@@ -1,7 +1,7 @@
 pipeline {
     environment {
         MVN_REPO = credentials('artifacts')
-        githubCreds = credentials('Build')
+        GITHUB = credentials('Build')
     }
     agent {
         docker {
@@ -35,8 +35,6 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
-//                        sh "git config user.name='${githubCreds_USR}'"
-//                        sh "git config user.email='${githubCreds_PSW}'"
                         sh """mvn release:prepare \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml \
