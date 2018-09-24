@@ -19,7 +19,7 @@ pipeline {
         stage('Build and Deploy POM Snapshots') {
             steps {
                 sh "got: "
-                sh "ls -la ${pwd()}"
+                sh "echo CWD: '${pwd()}'"
                 sh """
                         mvn clean install deploy \
                         -f sunshower-env \
