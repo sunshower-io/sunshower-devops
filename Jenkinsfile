@@ -62,7 +62,7 @@ pipeline {
                         """
                         sh "git checkout -b master"
                         sh "git commit -am 'Releasing ${env.NEXT_VERSION} [skip-build]'"
-                        sh "git push -u origin master"
+                        sh "git push -u origin HEAD:master"
 
                     }
                 }
