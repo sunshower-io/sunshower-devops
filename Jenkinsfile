@@ -60,6 +60,7 @@ pipeline {
                             -s sunshower-env/settings/settings.xml
                         """
                         sh "git commit -am 'Releasing ${env.NEXT_VERSION} [skip-build]'"
+                        sh "git push origin master"
 
                     }
                 }
