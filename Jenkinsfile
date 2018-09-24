@@ -35,6 +35,7 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
+                        sh "ls -la $WORKSPACE"
                         extractVersions file: "${WORKSPACE}/sunshower-env/pom.xml"
                         sh 'mvn versions:set -DnewVersion=$NEXT_VERSION'
 //                        sh 'mvn clean'
