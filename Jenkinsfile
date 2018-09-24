@@ -18,7 +18,7 @@ pipeline {
 
             when {
                 expression {
-                    !env.SKIP_BUILD
+                    !SKIP_BUILD
                 }
             }
 
