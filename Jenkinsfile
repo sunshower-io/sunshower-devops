@@ -37,7 +37,7 @@ pipeline {
                     steps {
                         sh "git config user.name '${GITHUB_USR}'"
                         sh "git config user.email '${GITHUB_USR}@sunshower.io'"
-                        sh """mvn release:prepare \
+                        sh """mvn clean install release:prepare \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml \
                         -PdependencyLocationsEnabled=false \
