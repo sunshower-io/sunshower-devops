@@ -26,6 +26,10 @@ pipeline {
             }
         }
         stage('POMs') {
+            environment {
+                CURRENT_VERSION = readMavenPom('sunshower-env/pom.xml')
+
+            }
             when {
                 expression {
                     env.SKIP_BUILD == "false"
@@ -34,8 +38,11 @@ pipeline {
 
             stages {
                 stage('Build and Deploy Release POMs') {
+
+
                     steps {
-                        extractVersions file: readFile("./sunshower-env/pom.xml")
+                        extractVersions(version:env.CURRENT_VERSION)
+
                         sh 'mvn versions:set -DnewVersion=$NEXT_VERSION'
 //                        sh 'mvn clean'
 //                        sh """
