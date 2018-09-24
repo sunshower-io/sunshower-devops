@@ -21,13 +21,15 @@ pipeline {
                     return !env.SKIP_BUILD
                 }
             }
-            stage('Build and Deploy POMs') {
-                steps {
-                    sh """
+            stages {
+                stage('Build and Deploy Snapshot POMs') {
+                    steps {
+                        sh """
                         mvn clean install deploy \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml
                     """
+                    }
                 }
             }
         }
