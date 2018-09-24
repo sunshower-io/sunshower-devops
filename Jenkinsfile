@@ -18,6 +18,8 @@ pipeline {
 
         stage('Build and Deploy POM Snapshots') {
             steps {
+                sh "got: "
+                sh "ls -la $WORKSPACE"
                 sh """
                         mvn clean install deploy \
                         -f sunshower-env \
@@ -35,7 +37,6 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
-                        sh "ls -la $WORKSPACE"
                         extractVersions file: "${WORKSPACE}/sunshower-env/pom.xml"
                         sh 'mvn versions:set -DnewVersion=$NEXT_VERSION'
 //                        sh 'mvn clean'
