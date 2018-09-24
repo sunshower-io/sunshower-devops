@@ -43,6 +43,8 @@ pipeline {
                     steps {
                         extractVersions(version:env.CURRENT_VERSION)
                         sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f sunshower-env/pom.xml'
+                        sh "git config user.name '$GITHUB_USR'"
+                        sh "git config user.email '${GITHUB_USR}@sunshower.io'"
                         sh """
                             mvn clean install deploy \
                             -f sunshower-env \
