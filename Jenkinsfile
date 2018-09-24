@@ -35,6 +35,7 @@ pipeline {
             stages {
                 stage('Build and Deploy Release POMs') {
                     steps {
+                        sh "git tag -d env-aggregator-1.0.8"
                         sh "git config user.name '${GITHUB_USR}'"
                         sh "git config user.email '${GITHUB_USR}@sunshower.io'"
                         sh """mvn clean install release:prepare \
