@@ -17,7 +17,8 @@
 
     <scm>
         <url>https://github.com/sunshower-io/sunshower.io</url>
-    </scm>
+      <tag>env-aggregator-1.0.7</tag>
+  </scm>
 
 
     <properties>
