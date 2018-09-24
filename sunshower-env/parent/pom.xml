@@ -3,18 +3,18 @@
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Sunshower Parent Pom</name>
 
     <scm>
         <url>https://github.com/sunshower-io/sunshower.io</url>
-      <tag>env-aggregator-1.0.7</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <properties>
-        <env.version>1.0.7</env.version>
+        <env.version>1.0.8-SNAPSHOT</env.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
     </properties>
 
