@@ -33,15 +33,14 @@ RUN mkdir -p /opt/build/tools/maven
 RUN wget http://www-us.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.zip \
 -O /opt/build/tools/maven.zip
 RUN unzip -d /opt/build/tools/maven /opt/build/tools/maven.zip
-ENV MAVEN_HOME=/opt/build/tools/maven/apache-maven-$MAVEN_VERSION/bin
+ENV M2_HOME=/opt/build/tools/maven/apache-maven-$MAVEN_VERSION
 COPY ./scripts/run-bash.sh /run-bash.sh
 COPY ./scripts /scripts
 RUN chmod +x /run-bash.sh
-ENV M2_HOME=$MAVEN_HOME
+ENV MAVEN_HOME=$M2_HOME/bin
 
-COPY sunshower-env/settings/settings.xml $M2_HOME/settings.xml
-
-
+COPY sunshower-env/settings/settings.xml $M2_HOME/conf/settings.xml
+RUN ls -la $M2_HOME
 
 # Configure path
 ENV PATH=$BASE_PATH:$GRADLE_HOME:$MAVEN_HOME
