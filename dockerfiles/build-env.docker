@@ -1,4 +1,5 @@
 FROM sunshower/sunshower-base:1.0.0
+USER root
 ENV BRANCH_SPEC "1.0.0/master"
 ENV GPG_ASC ""
 ENV GPG_PASSPHRASE ""

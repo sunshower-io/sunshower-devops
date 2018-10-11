@@ -7,7 +7,7 @@ RUN apt-get install -y git-core wget
 
 # Environment Variables
 ENV PROJECT_NAME workspace
-ENV GRADLE_VERSION 4.3.1
+ENV GRADLE_VERSION 4.9
 ENV MAVEN_VERSION 3.5.4
 ENV BASE_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
@@ -33,14 +33,14 @@ RUN mkdir -p /opt/build/tools/maven
 RUN wget http://www-us.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.zip \
 -O /opt/build/tools/maven.zip
 RUN unzip -d /opt/build/tools/maven /opt/build/tools/maven.zip
-ENV MAVEN_HOME=/opt/build/tools/maven/apache-maven-$MAVEN_VERSION/bin
+ENV M2_HOME=/opt/build/tools/maven/apache-maven-$MAVEN_VERSION
 COPY ./scripts/run-bash.sh /run-bash.sh
 COPY ./scripts /scripts
 RUN chmod +x /run-bash.sh
+ENV MAVEN_HOME=$M2_HOME/bin
 
-COPY sunshower-env/settings/settings.xml /root/.m2/settings.xml
-
-
+COPY sunshower-env/settings/settings.xml $M2_HOME/conf/settings.xml
+RUN ls -la $M2_HOME
 
 # Configure path
 ENV PATH=$BASE_PATH:$GRADLE_HOME:$MAVEN_HOME
