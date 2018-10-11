@@ -37,8 +37,9 @@ ENV MAVEN_HOME=/opt/build/tools/maven/apache-maven-$MAVEN_VERSION/bin
 COPY ./scripts/run-bash.sh /run-bash.sh
 COPY ./scripts /scripts
 RUN chmod +x /run-bash.sh
+ENV M2_HOME=$MAVEN_HOME
 
-COPY sunshower-env/settings/settings.xml /root/.m2/settings.xml
+COPY sunshower-env/settings/settings.xml $M2_HOME/settings.xml
 
 
 
