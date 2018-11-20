@@ -56,6 +56,28 @@
                         <enabled>false</enabled>
                     </snapshots>
                 </repository>
+
+
+                <repository>
+                    <id>gridgain-releases</id>
+                    <url>http://www.gridgainsystems.com/nexus/content/repositories/external</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>gridgain-snapshots</id>
+                    <url>http://www.gridgainsystems.com/nexus/content/repositories/external-beta</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
                 <repository>
                     <id>sunshower-oss-repo</id>
                     <url>https://oss.sonatype.org/content/repositories/snapshots</url>

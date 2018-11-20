@@ -23,7 +23,7 @@
 
     <properties>
         <flyway.version>5.0.5</flyway.version>
-        <spring.version>5.0.2.RELEASE</spring.version>
+        <spring.version>5.1.2.RELEASE</spring.version>
         <yaml.version>1.18</yaml.version>
         <moxy.version>2.7.1</moxy.version>
         <jaxrs-api.version>2.1</jaxrs-api.version>
@@ -48,7 +48,7 @@
         <hessian.version>4.0.51</hessian.version>
         <cache-api.version>1.1.0</cache-api.version>
         <reactive-streams.version>1.0.2</reactive-streams.version>
-        <spring-security.version>5.0.0.RELEASE</spring-security.version>
+        <spring-security.version>5.1.1.RELEASE</spring-security.version>
         <google-guava.version>24.1-jre</google-guava.version>
     </properties>
 

@@ -65,6 +65,17 @@
     <repositories>
 
         <repository>
+            <id>GridGain External Repository</id>
+            <url>http://www.gridgainsystems.com/nexus/content/repositories/external</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>sunshower-snapshots</id>
             <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
             <snapshots>
