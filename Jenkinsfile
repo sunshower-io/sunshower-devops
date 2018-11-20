@@ -73,10 +73,12 @@ pipeline {
                             -s sunshower-env/settings/settings.xml -P sunshower
                         """
 
+                        sh "git tag -d v${env.NEXT_VERSION}"
                         /**
                          * Tag build
                          */
                         sh "git tag -a v${env.NEXT_VERSION} -m 'Releasing ${env.NEXT_VERSION} [skip-build]'"
+
 
                         /**
                          * Update remote
