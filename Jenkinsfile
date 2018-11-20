@@ -78,6 +78,7 @@ pipeline {
                          */
                         sh "git tag -a v${env.NEXT_VERSION} -m 'Releasing ${env.NEXT_VERSION} [skip-build]'"
 
+
                         /**
                          * Update remote
                          */
