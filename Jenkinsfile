@@ -76,7 +76,7 @@ pipeline {
                         /**
                          * Tag build
                          */
-                        sh "git tag -a v${env.NEXT_VERSION} -m 'Releasing ${env.NEXT_VERSION} [skip-build]'"
+                        sh "git tag -af v${env.NEXT_VERSION} -m 'Releasing ${env.NEXT_VERSION} [skip-build]'"
 
 
                         /**
