@@ -81,7 +81,7 @@ pipeline {
                         /**
                          * Update remote
                          */
-                        sh "git remote set-url --add origin https://${GITHUB_USR}:${GITHUB_PSW}@github.com/sunshower-io/sunshower-devops"
+//                        sh "git remote set-url --add origin https://${GITHUB_USR}:${GITHUB_PSW}@github.com/sunshower-io/sunshower-devops"
 
                         /**
                          * Push tag
