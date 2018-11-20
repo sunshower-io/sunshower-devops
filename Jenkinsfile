@@ -18,7 +18,6 @@ pipeline {
 
         stage('Build and Deploy POM Snapshots') {
             steps {
-                sh "git tag -d v1.0.10.Final"
                 sh """
                         mvn clean install deploy \
                         -f sunshower-env \
