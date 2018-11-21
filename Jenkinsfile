@@ -126,6 +126,9 @@ pipeline {
     post {
         always {
             skipRelease action: 'postProcess'
+        }
+
+        always {
             sendEmails
         }
     }
