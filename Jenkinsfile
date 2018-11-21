@@ -126,7 +126,7 @@ pipeline {
     post {
         always {
             skipRelease action: 'postProcess'
-            sendEmails()
+            sendEmails(build: currentBuild, rootUrl: "$JENKINS_URL")
         }
 
     }
