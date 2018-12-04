@@ -3,14 +3,14 @@
 
   <groupId>io.sunshower.env</groupId>
   <artifactId>test-dependencies</artifactId>
-  <version>1.0.12-SNAPSHOT</version>
+  <version>1.0.13-SNAPSHOT</version>
   <name>Sunshower Test Dependencies</name>
 
   <parent>
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
     <relativePath>../pom.xml</relativePath>
-    <version>1.0.12-SNAPSHOT</version>
+    <version>1.0.13-SNAPSHOT</version>
   </parent>
   <packaging>pom</packaging>
 
