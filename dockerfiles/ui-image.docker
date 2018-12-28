@@ -11,8 +11,13 @@ ENV SUNSHOWER_HOME=/home/sunshower/sunshower/
 
 RUN apt-get update -qq && apt-get install -y build-essential apt-utils
 RUN apt-get install -y ruby ruby-all-dev
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs npm
+
+RUN apt-get install -y curl
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get install -y nodejs
+
+
 RUN gem install sass
 RUN npm install typings -g
 RUN npm install gulp -g
@@ -25,7 +30,3 @@ RUN npm install -g increase-memory-limit
 
 
 RUN mkdir /root/.sunshower
-COPY web/src/test/resources/local/sunshower.yml /home/sunshower/sunshower/sunshower.yml
-RUN find . -name logging.properties | xargs rm
-COPY . /home/sunshower/$PROJECT_NAME
-WORKDIR /home/sunshower/$PROJECT_NAME
