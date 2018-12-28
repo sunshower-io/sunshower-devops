@@ -24,7 +24,21 @@ pipeline {
                         -s sunshower-env/settings/settings.xml
                     """
             }
+
         }
+
+        stage('Build Docker Files') {
+            environment {
+                CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
+            }
+            steps {
+                extractVersions(version: env.CURRENT_VERSION)
+                sh "docker build -t sunshower-base sunshower/sunshower-base:$env.CURRENT_VERSION -f dockerfiles/base-image.docker ."
+                sh "docker tag sunshower-base sunshower/sunshower-base:$env.CURRENT_VERSION"
+                sh "docker push sunshower/sunshower-base:env.$env.CURRENT_VERSION"
+            }
+        }
+
         stage('POMs') {
             environment {
                 CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
@@ -37,14 +51,6 @@ pipeline {
             }
 
             stages {
-                stage('Build Docker Files') {
-                    steps {
-                        extractVersions(version: env.CURRENT_VERSION)
-                        sh "docker build -t sunshower-base sunshower/sunshower-base:$NEXT_VERSION -f dockerfiles/base-image.docker ."
-                        sh "docker tag sunshower-base sunshower/sunshower-base:$NEXT_VERSION"
-                        sh "docker push sunshower/sunshower-base:NEXT_VERSION"
-                    }
-                }
                 stage('Build and Deploy Release POMs') {
 
 
