@@ -11,8 +11,15 @@ ENV SUNSHOWER_HOME=/home/sunshower/sunshower/
 
 RUN apt-get update -qq && apt-get install -y build-essential apt-utils
 RUN apt-get install -y ruby ruby-all-dev
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs npm
+
+RUN apt-get install -y curl
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get install -y nodejs
+
+
+RUN mkdir /.npm
+RUN chown -R 1000:1000 /.npm
 RUN gem install sass
 RUN npm install typings -g
 RUN npm install gulp -g
@@ -21,11 +28,12 @@ RUN echo "Github Auth Token:"
 RUN echo  $JSPM_GITHUB_AUTH_TOKEN
 RUN jspm config registries.github.auth $JSPM_GITHUB_AUTH_TOKEN
 RUN mkdir -p /home/sunshower/$PROJECT_NAME
+RUN chown -R 1000:1000 /home/sunshower/
+RUN touch /.npmrc
+RUN chown 1000:1000 /.npmrc
+RUN mkdir /.jspm
+RUN chown -R 1000:1000 /.jspm
 RUN npm install -g increase-memory-limit
-
+RUN npm install -g npm-login-noninteractive
 
 RUN mkdir /root/.sunshower
-COPY web/src/test/resources/local/sunshower.yml /home/sunshower/sunshower/sunshower.yml
-RUN find . -name logging.properties | xargs rm
-COPY . /home/sunshower/$PROJECT_NAME
-WORKDIR /home/sunshower/$PROJECT_NAME
