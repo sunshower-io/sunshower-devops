@@ -35,5 +35,8 @@ RUN mkdir /.jspm
 RUN chown -R 1000:1000 /.jspm
 RUN npm install -g increase-memory-limit
 RUN npm install -g npm-login-noninteractive
+RUN echo $M2_HOME
+COPY sunshower-env/settings/settings.xml $M2_HOME/conf/settings.xml
+RUN cat $M2_HOME/conf/settings.xml
 
 RUN mkdir /root/.sunshower

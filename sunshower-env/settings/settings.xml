@@ -27,6 +27,9 @@
             <passphrase>${env.GITHUB_PSW}</passphrase>
         </server>
     </servers>
+    <activeProfiles>
+        <activeProfile>sunshower</activeProfile>
+    </activeProfiles>
 
     <profiles>
 
