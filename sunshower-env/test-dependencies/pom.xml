@@ -23,7 +23,7 @@
     <junit-platform.version>1.4.0</junit-platform.version>
     <junit.version>5.4.0</junit.version>
     <hamcrest-core.version>2.1-rc3</hamcrest-core.version>
-    <mockito-core.version>2.23.4</mockito-core.version>
+    <mockito-core.version>2.25.0</mockito-core.version>
     <powermock-api-mockito2.version>1.7.3</powermock-api-mockito2.version>
     <mockito-jupiter.version>2.25.0</mockito-jupiter.version>
   </properties>

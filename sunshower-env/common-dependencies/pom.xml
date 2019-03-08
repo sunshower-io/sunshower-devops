@@ -30,7 +30,7 @@
         <jaxrs-api.version>2.1</jaxrs-api.version>
         <javax-inject.version>1</javax-inject.version>
         <paypal-resteasy.version>2.3.4-RELEASE</paypal-resteasy.version>
-        <byte-buddy.version>1.6.14</byte-buddy.version>
+        <byte-buddy.version>1.9.7</byte-buddy.version>
         <resteasy.version>3.5.0.Final</resteasy.version>
         <aspectj.version>1.8.9</aspectj.version>
         <cfg4j.version>4.4.0</cfg4j.version>
