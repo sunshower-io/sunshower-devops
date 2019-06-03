@@ -1,4 +1,4 @@
-FROM sunshower/sunshower-base:1.0.0
+FROM sunshower/sunshower-base:2
 USER root
 ENV BRANCH_SPEC "1.0.0/master"
 ENV GPG_ASC ""

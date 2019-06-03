@@ -1,197 +1,336 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.sunshower.env</groupId>
-  <artifactId>persist-dependencies</artifactId>
-  <version>1.0.17-SNAPSHOT</version>
-  <packaging>pom</packaging>
-
-  <parent>
     <groupId>io.sunshower.env</groupId>
-    <artifactId>env-aggregator</artifactId>
-    <relativePath>../pom.xml</relativePath>
+    <artifactId>persist-dependencies</artifactId>
     <version>1.0.17-SNAPSHOT</version>
-  </parent>
+    <packaging>pom</packaging>
 
-  <name>Sunshower Persistence Dependencies</name>
+    <parent>
+        <groupId>io.sunshower.env</groupId>
+        <artifactId>env-aggregator</artifactId>
+        <relativePath>../pom.xml</relativePath>
+        <version>1.0.17-SNAPSHOT</version>
+    </parent>
 
-  <scm>
-    <url>https://github.com/sunshower-io/sunshower.io</url>
-    <tag>HEAD</tag>
-  </scm>
+    <name>Sunshower Persistence Dependencies</name>
 
-  <properties>
-    <ignite-hibernate-51.version>2.5.2</ignite-hibernate-51.version>
-    <javax-el-api.version>3.0.0</javax-el-api.version>
-    <hikari-cp.version>2.7.6</hikari-cp.version>
-    <jpa-api.version>1.0.0.Final</jpa-api.version>
-    <!--<hibernate.version>5.2.11.Final</hibernate.version>-->
-    <hibernate.version>5.1.10.Final</hibernate.version>
-    <validation-api.version>2.0.0.Final</validation-api.version>
-    <javax-el-glassfish.version>3.0.0</javax-el-glassfish.version>
-    <hibernate-search-orm.version>5.5.8.Final</hibernate-search-orm.version>
-    <hibernate-validator.version>6.0.6.Final</hibernate-validator.version>
-    <ignite.version>2.7.0</ignite.version>
-    <postgres.version>42.1.4</postgres.version>
-    <ignite-hibernate.version>2.7.0</ignite-hibernate.version>
-    <lucene-codecs.version>5.3.2</lucene-codecs.version>
-    <!--<lucene-codecs.version>4.10.4</lucene-codecs.version>-->
-    <lucene-backward-codecs.version>5.5.2</lucene-backward-codecs.version>
-    <h2.version>1.4.193</h2.version>
-    <hibernate-commons-annotations.version>5.0.1.Final</hibernate-commons-annotations.version>
-    <javassist.version>3.22.0-GA</javassist.version>
-    <jipijapa-hibernate5.version>11.0.0.Final</jipijapa-hibernate5.version>
-    <spring.version>5.1.2.RELEASE</spring.version>
-  </properties>
+    <scm>
+        <url>https://github.com/sunshower-io/sunshower.io</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
 
 
-  <dependencyManagement>
-    <dependencies>
+        <!--
+          Infinispan Dependencies
+        -->
 
-      <dependency>
-        <groupId>org.javassist</groupId>
-        <artifactId>javassist</artifactId>
-        <version>${javassist.version}</version>
-      </dependency>
+        <infinispan.version>9.4.14.Final</infinispan.version>
 
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-entitymanager</artifactId>
-        <version>${hibernate.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.wildfly</groupId>
-        <artifactId>jipijapa-hibernate5</artifactId>
-        <version>${jipijapa-hibernate5.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.hibernate.common</groupId>
-        <artifactId>hibernate-commons-annotations</artifactId>
-        <version>${hibernate-commons-annotations.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-core</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>${postgres.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.lucene</groupId>
-        <artifactId>lucene-codecs</artifactId>
-        <version>${lucene-codecs.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.lucene</groupId>
-        <artifactId>lucene-backward-codecs</artifactId>
-        <version>${lucene-backward-codecs.version}</version>
-      </dependency>
-
-      <!--<dependency>-->
-      <!--<groupId>org.apache.lucene</groupId>-->
-      <!--<artifactId>lucene-core</artifactId>-->
-      <!--<version>${lucene-backward-codecs.version}</version>-->
-      <!--</dependency>-->
-
-      <dependency>
-        <groupId>org.apache.ignite</groupId>
-        <artifactId>ignite-hibernate-core</artifactId>
-        <version>${ignite-hibernate.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.ignite</groupId>
-        <artifactId>ignite-hibernate_5.1</artifactId>
-        <version>${ignite-hibernate-51.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.ignite</groupId>
-        <artifactId>ignite-indexing</artifactId>
-        <version>${ignite.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.ignite</groupId>
-        <artifactId>ignite-spring</artifactId>
-        <version>${ignite.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.ignite</groupId>
-        <artifactId>ignite-core</artifactId>
-        <version>${ignite.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-search-orm</artifactId>
-        <version>${hibernate-search-orm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>javax.el</groupId>
-        <artifactId>javax.el-api</artifactId>
-        <version>${javax-el-api.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.glassfish</groupId>
-        <artifactId>javax.el</artifactId>
-        <version>${javax-el-glassfish.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.hibernate.validator</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>${hibernate-validator.version}</version>
-      </dependency>
+        <!--
+          End Infinispan Dependencies
+        -->
 
 
-      <dependency>
-        <groupId>javax.validation</groupId>
-        <artifactId>validation-api</artifactId>
-        <version>${validation-api.version}</version>
-      </dependency>
+        <!--
+          Ignite Dependencies
+            Current state: Kernel module disabled due to lack of progress on Hibernate
+        -->
+
+        <ignite.version>2.5.2</ignite.version>
+        <ignite-hibernate.version>2.5.2</ignite-hibernate.version>
+        <ignite-hibernate-51.version>2.5.2</ignite-hibernate-51.version>
+
+        <!--
+          End Ignite Dependencies
+        -->
 
 
-      <dependency>
-        <groupId>com.zaxxer</groupId>
-        <artifactId>HikariCP</artifactId>
-        <version>${hikari-cp.version}</version>
-      </dependency>
+        <!--
+          JDK Dependencies
+        -->
+        <jpa-api.version>1.0.0.Final</jpa-api.version>
+        <javax-el-api.version>3.0.0</javax-el-api.version>
+        <validation-api.version>2.0.0.Final</validation-api.version>
 
-      <dependency>
-        <groupId>com.h2database</groupId>
-        <artifactId>h2</artifactId>
-        <version>${h2.version}</version>
-        <scope>test</scope>
-      </dependency>
+        <!--
+          End JDK Dependencies
+        -->
+
+        <!--
+          Hibernate Dependencies
+        -->
+        <hibernate.version>5.3.10.Final</hibernate.version>
+        <lucene-codecs.version>5.3.2</lucene-codecs.version>
+        <lucene-backward-codecs.version>5.5.2</lucene-backward-codecs.version>
+        <hibernate-validator.version>6.0.16.Final</hibernate-validator.version>
+        <jipijapa-hibernate5.version>11.0.0.Final</jipijapa-hibernate5.version>
+        <hibernate-search-orm.version>5.10.5.Final</hibernate-search-orm.version>
+        <hibernate-commons-annotations.version>5.0.1.Final</hibernate-commons-annotations.version>
+        <!--
+          End Hibernate Dependencies
+        -->
+
+        <!--
+          Misc Dependencies
+        -->
+        <h2.version>1.4.199</h2.version>
+        <postgres.version>42.1.4</postgres.version>
+        <hikari-cp.version>3.3.1</hikari-cp.version>
+        <spring.version>5.1.5.RELEASE</spring.version>
+        <persistence-api.version>2.2</persistence-api.version>
+        <javassist.version>3.22.0-GA</javassist.version>
+        <javax-el-glassfish.version>3.0.0</javax-el-glassfish.version>
+        <!--
+          End Misc Dependencies
+        -->
+
+        <!--
+            JTA Dependencies
+        -->
+
+        <narayana.version>5.5.30.Final</narayana.version>
+        <jboss-transaction-api.version>7.6.0.Final</jboss-transaction-api.version>
+
+        <!--
+            End JTA Dependencies
+        -->
+
+    </properties>
 
 
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>${hibernate.version}</version>
-      </dependency>
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>javax.persistence-api</artifactId>
+                <version>${persistence-api.version}</version>
+            </dependency>
 
 
-      <dependency>
-        <groupId>org.hibernate.javax.persistence</groupId>
-        <artifactId>hibernate-jpa-2.1-api</artifactId>
-        <version>${jpa-api.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-core</artifactId>
+                <version>${infinispan.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-hibernate-cache-v53</artifactId>
+                <version>${infinispan.version}</version>
+            </dependency>
+
+            <!--
+            Hibernate
+            -->
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.wildfly</groupId>
+                <artifactId>jipijapa-hibernate5</artifactId>
+                <version>${jipijapa-hibernate5.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.common</groupId>
+                <artifactId>hibernate-commons-annotations</artifactId>
+                <version>${hibernate-commons-annotations.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-search-orm</artifactId>
+                <version>${hibernate-search-orm.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.2-api</artifactId>
+                <version>${jpa-api.version}</version>
+            </dependency>
+
+
+            <!--
+            End Hibernate
+            -->
+
+
+            <!--
+            JTA Dependencies
+            -->
+
+            <dependency>
+                <groupId>org.jboss.narayana.jts</groupId>
+                <artifactId>narayana-jts-integration</artifactId>
+                <version>${narayana.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.narayana.jta</groupId>
+                <artifactId>narayana-jta</artifactId>
+                <version>${narayana.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.narayana.jta</groupId>
+                <artifactId>jta</artifactId>
+                <version>${narayana.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.narayana.jta</groupId>
+                <artifactId>jdbc</artifactId>
+                <version>${narayana.version}</version>
+            </dependency>
+
+            <!--
+            End JTA Dependencies
+            -->
+
+
+            <!--
+            Misc Dependencies
+            -->
+
+            <dependency>
+                <groupId>org.jboss</groupId>
+                <artifactId>jboss-transaction-spi</artifactId>
+                <version>${jboss-transaction-api.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgres.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-codecs</artifactId>
+                <version>${lucene-codecs.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-backward-codecs</artifactId>
+                <version>${lucene-backward-codecs.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${javax-el-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${javax-el-glassfish.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${hikari-cp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+
+            <!--
+            End Misc Dependencies
+            -->
+
+            <!--
+            Ignite Dependencies
+            -->
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-hibernate-core</artifactId>
+                <version>${ignite-hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-hibernate_5.1</artifactId>
+                <version>${ignite-hibernate-51.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-indexing</artifactId>
+                <version>${ignite.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-spring</artifactId>
+                <version>${ignite.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-core</artifactId>
+                <version>${ignite.version}</version>
+            </dependency>
+
+            <!--
+            End Ignite Dependencies
+            -->
+
+        </dependencies>
+    </dependencyManagement>
 
 
 </project>

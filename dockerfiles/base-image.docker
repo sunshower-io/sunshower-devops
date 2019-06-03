@@ -1,14 +1,15 @@
-FROM openjdk:8u141-jdk
+FROM azul/zulu-openjdk-debian:12.0.1
 
 RUN apt-get update
 RUN apt-get install -y git-core wget
+RUN apt-get install unzip curl -y
 
 
 
 # Environment Variables
 ENV PROJECT_NAME workspace
-ENV GRADLE_VERSION 4.9
-ENV MAVEN_VERSION 3.5.4
+ENV GRADLE_VERSION 5.4
+ENV MAVEN_VERSION 3.6.1
 ENV BASE_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Install Gradle
@@ -17,14 +18,6 @@ RUN mkdir -p /opt/build/tools/gradle
 RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip -O /opt/build/tools/gradle.zip
 RUN unzip -d /opt/build/tools/gradle /opt/build/tools/gradle.zip
 ENV GRADLE_HOME=/opt/build/tools/gradle/gradle-$GRADLE_VERSION/bin
-
-RUN cd /tmp/ && \
-    curl -LO "http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip" -H 'Cookie: oraclelicense=accept-securebackup-cookie' && \
-    unzip jce_policy-8.zip && \
-    rm jce_policy-8.zip && \
-    yes | cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security
-
-#yes |cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/java/default/jre/lib/security/
 
 
 # Install Maven
