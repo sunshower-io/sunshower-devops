@@ -5,12 +5,12 @@
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
     <relativePath>../pom.xml</relativePath>
-    <version>1.0.18-SNAPSHOT</version>
+    <version>1.0.19-SNAPSHOT</version>
   </parent>
 
   <groupId>io.sunshower.env</groupId>
   <artifactId>hal-dependencies</artifactId>
-  <version>1.0.18-SNAPSHOT</version>
+  <version>1.0.19-SNAPSHOT</version>
 
   <packaging>pom</packaging>
   <name>Sunshower Hypervisor Abstraction Layer Dependencies</name>
