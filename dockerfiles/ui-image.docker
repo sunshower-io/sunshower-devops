@@ -1,4 +1,4 @@
-FROM sunshower/sunshower-base:1.0.0
+FROM sunshower/sunshower-base:2.0.0
 ENV BRANCH_SPEC "1.0.0/master"
 ENV PROJECT_NAME=sunshower
 ENV GITHUB_TOKEN=""
