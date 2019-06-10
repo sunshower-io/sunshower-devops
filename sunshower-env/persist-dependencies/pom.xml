@@ -24,6 +24,8 @@
     <properties>
 
 
+
+
         <!--
           Infinispan Dependencies
         -->
@@ -81,6 +83,7 @@
         <postgres.version>42.1.4</postgres.version>
         <hikari-cp.version>3.3.1</hikari-cp.version>
         <spring.version>5.1.5.RELEASE</spring.version>
+        <spring-data.version>2.1.8.RELEASE</spring-data.version>
         <persistence-api.version>2.2</persistence-api.version>
         <javassist.version>3.22.0-GA</javassist.version>
         <javax-el-glassfish.version>3.0.0</javax-el-glassfish.version>
@@ -104,6 +107,12 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${spring-data.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>javax.persistence</groupId>
