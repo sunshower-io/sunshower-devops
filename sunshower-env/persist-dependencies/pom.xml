@@ -4,14 +4,14 @@
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>persist-dependencies</artifactId>
-    <version>1.0.19-SNAPSHOT</version>
+    <version>1.0.20-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>io.sunshower.env</groupId>
         <artifactId>env-aggregator</artifactId>
         <relativePath>../pom.xml</relativePath>
-        <version>1.0.19-SNAPSHOT</version>
+        <version>1.0.20-SNAPSHOT</version>
     </parent>
 
     <name>Sunshower Persistence Dependencies</name>
