@@ -42,7 +42,7 @@
             Current state: Kernel module disabled due to lack of progress on Hibernate
         -->
 
-        <ignite.version>2.5.2</ignite.version>
+        <ignite.version>2.8.1</ignite.version>
         <ignite-hibernate.version>2.5.2</ignite-hibernate.version>
         <ignite-hibernate-51.version>2.5.2</ignite-hibernate-51.version>
 
