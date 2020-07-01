@@ -34,7 +34,7 @@
         <resteasy.version>3.6.3.Final</resteasy.version>
         <aspectj.version>1.8.9</aspectj.version>
         <cfg4j.version>4.4.0</cfg4j.version>
-        <log4j-core.version>2.10.0</log4j-core.version>
+        <log4j-core.version>2.13.3</log4j-core.version>
         <slf4j-log4j12.version>1.7.25</slf4j-log4j12.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <aopalliance.version>1.0</aopalliance.version>
