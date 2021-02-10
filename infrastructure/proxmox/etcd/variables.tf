@@ -1,14 +1,15 @@
-
 variable "etcd_machines" {
   default = []
-  type = list(
-  object({
-    name = string
-    ip = string
-    host = string
-    cpu = number
-    disk = string
-    memory = number
-    sockets = number
+  type = list(object({
+    ssh_port = number
+    ssh_host = string
   }))
 }
+
+variable "connection_info" {
+  type = object({
+    username = string
+    password = string
+  })
+}
+

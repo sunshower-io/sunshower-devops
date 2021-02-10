@@ -59,12 +59,13 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   use the clone disk as the boot disk
   */
   bootdisk = "scsi0"
+  disk_gb = var.virtual_machines[count.index].disk
 
-  disk {
-    type = "scsi"
-    storage = "virtual-machines"
-    size = var.virtual_machines[count.index].disk
-  }
+//  disk {
+//    type = "scsi"
+//    storage = "virtual-machines"
+//    size = var.virtual_machines[count.index].disk
+//  }
 
   full_clone = false
   clone = "debian-base"
@@ -164,7 +165,7 @@ resource "null_resource" "set_hostname" {
 }
 
 
-resource "windns" "etcd_dns_configurations" {
+resource "windns" "dns_entries" {
   count = length(proxmox_vm_qemu.virtual_machines)
   zone_name = var.deployment_domain
   record_type = "A"
