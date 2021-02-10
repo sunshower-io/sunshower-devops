@@ -41,25 +41,30 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   agent = 1
 
   /**
-  number of cores--could be made configurable
+  number of cores
   */
-  cores = 2
+  cores = var.virtual_machines[count.index].cpu
 
   /**
   number of physical sockets
   */
-  sockets = 1
+  sockets = var.virtual_machines[count.index].sockets
 
   /**
   Memory in MB
   */
-  memory = 2048
+  memory = var.virtual_machines[count.index].memory
 
   /**
   use the clone disk as the boot disk
   */
   bootdisk = "scsi0"
 
+  disk {
+    type = "scsi"
+    storage = "virtual-machines"
+    size = var.virtual_machines[count.index].disk
+  }
 
   full_clone = false
   clone = "debian-base"

@@ -105,7 +105,7 @@ variable "virtual_machines" {
     ip = string
     host = string
     cpu = number
-    disk = number
+    disk = string
     memory = number
     sockets = number
   }))
