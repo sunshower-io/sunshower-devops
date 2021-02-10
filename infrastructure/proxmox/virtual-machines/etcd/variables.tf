@@ -94,6 +94,9 @@ variable "root_password" {
 }
 
 
+/**
+  the machines to install etcd on
+*/
 variable "etcd_machines" {
   type = list(
   object({
@@ -101,4 +104,18 @@ variable "etcd_machines" {
     ip = string
     host = string
   }))
+}
+
+
+/**
+DNS server config
+*/
+
+variable "dns_server_configuration" {
+  type = object({
+    ssl = bool
+    host = string
+    username = string
+    password = string
+  })
 }
