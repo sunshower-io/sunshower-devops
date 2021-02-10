@@ -28,8 +28,8 @@ provider "windns" {
 }
 
 
-resource "proxmox_vm_qemu" "etcd_machines" {
-  count = length(var.etcd_machines)
+resource "proxmox_vm_qemu" "virtual_machines" {
+  count = length(var.virtual_machines)
 
   /**
   VM configuration
@@ -68,8 +68,8 @@ resource "proxmox_vm_qemu" "etcd_machines" {
   pool = "kubernetes-infrastructure"
 
   searchdomain = var.deployment_domain
-  target_node = var.etcd_machines[count.index].host
-  name = "${var.etcd_machines[count.index].name}.${var.deployment_domain}"
+  target_node = var.virtual_machines[count.index].host
+  name = "${var.virtual_machines[count.index].name}.${var.deployment_domain}"
 
 
 
@@ -83,14 +83,14 @@ resource "proxmox_vm_qemu" "etcd_machines" {
   these values in order to get the self.ssh_host value populated
   */
   os_type = "cloud-init"
-  ipconfig0 = "ip=${var.etcd_machines[count.index].ip}/24,gw=192.168.1.1"
+  ipconfig0 = "ip=${var.virtual_machines[count.index].ip}/24,gw=192.168.1.1"
 
   /**
   the network configuration to use
   */
   os_network_config = <<EOF
   iface vmbr0 inet static
-    address ${var.etcd_machines[count.index].ip}
+    address ${var.virtual_machines[count.index].ip}
     gateway 192.168.1.1
     netmask 255.255.255.0
   EOF
@@ -110,7 +110,7 @@ resource "proxmox_vm_qemu" "etcd_machines" {
         cat <<EOF2 > /etc/network/interfaces
           source /etc/network/interfaces.d/*
           iface vmbr0 inet static
-            address ${var.etcd_machines[count.index].ip}
+            address ${var.virtual_machines[count.index].ip}
             gateway 192.168.1.1
             netmask 255.255.255.0
         EOF2
@@ -124,33 +124,33 @@ resource "proxmox_vm_qemu" "etcd_machines" {
 }
 
 resource "null_resource" "wait_for_reboot" {
-  count = length(proxmox_vm_qemu.etcd_machines)
+  count = length(proxmox_vm_qemu.virtual_machines)
   depends_on = [
     null_resource.set_hostname,
-    proxmox_vm_qemu.etcd_machines]
+    proxmox_vm_qemu.virtual_machines]
 
   provisioner "local-exec" {
-    command = "${path.module}/wait_port ${var.etcd_machines[count.index].name} 22"
+    command = "${path.module}/wait_port ${var.virtual_machines[count.index].name} 22"
   }
 }
 
 
 resource "null_resource" "set_hostname" {
-  count = length(proxmox_vm_qemu.etcd_machines)
+  count = length(proxmox_vm_qemu.virtual_machines)
   depends_on = [
-    proxmox_vm_qemu.etcd_machines]
+    proxmox_vm_qemu.virtual_machines]
 
   connection {
     type = "ssh"
     user = var.root_username
     password = var.root_password
-    host = proxmox_vm_qemu.etcd_machines[count.index].ssh_host
-    port = proxmox_vm_qemu.etcd_machines[count.index].ssh_port
+    host = proxmox_vm_qemu.virtual_machines[count.index].ssh_host
+    port = proxmox_vm_qemu.virtual_machines[count.index].ssh_port
   }
 
   provisioner "remote-exec" {
     inline = [
-      "echo ${var.root_password} | sudo -S -k hostnamectl set-hostname ${var.etcd_machines[count.index].name}.${var.deployment_domain}",
+      "echo ${var.root_password} | sudo -S -k hostnamectl set-hostname ${var.virtual_machines[count.index].name}.${var.deployment_domain}",
       "echo ${var.root_password} | (sleep 2 && sudo -S -k reboot)&"
     ]
   }
@@ -160,11 +160,11 @@ resource "null_resource" "set_hostname" {
 
 
 resource "windns" "etcd_dns_configurations" {
-  count = length(proxmox_vm_qemu.etcd_machines)
+  count = length(proxmox_vm_qemu.virtual_machines)
   zone_name = var.deployment_domain
   record_type = "A"
-  record_name = proxmox_vm_qemu.etcd_machines[count.index].name
-  ipv4address = proxmox_vm_qemu.etcd_machines[count.index].ssh_host
+  record_name = proxmox_vm_qemu.virtual_machines[count.index].name
+  ipv4address = proxmox_vm_qemu.virtual_machines[count.index].ssh_host
 
   //  depends_on = [
   //    null_resource.wait_for_reboot]

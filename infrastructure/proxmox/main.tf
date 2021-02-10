@@ -1,6 +1,6 @@
 
-module "etc_vms" {
-  source = "./virtual-machines/etcd"
+module "etcd_machines" {
+  source = "./virtual-machines"
 
   /**
     cluster configuration
@@ -11,7 +11,7 @@ module "etc_vms" {
   cluster_no_verify_tls = var.cluster_no_verify_tls
 
 
-  etcd_machines = var.etcd_machines
+  virtual_machines = var.etcd_machines
   deployment_domain = var.deployment_domain
 
   /**

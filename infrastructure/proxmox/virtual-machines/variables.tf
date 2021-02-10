@@ -95,9 +95,10 @@ variable "root_password" {
 
 
 /**
-  the machines to install etcd on
+  The virtual machines to create
 */
-variable "etcd_machines" {
+variable "virtual_machines" {
+  default = []
   type = list(
   object({
     name = string
@@ -106,6 +107,15 @@ variable "etcd_machines" {
   }))
 }
 
+variable "etcd_machines" {
+  default = []
+  type = list(
+  object({
+    name = string
+    ip = string
+    host = string
+  }))
+}
 
 /**
 DNS server config
