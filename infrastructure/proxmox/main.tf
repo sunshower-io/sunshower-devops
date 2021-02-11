@@ -3,10 +3,20 @@
 terraform {
   required_version = ">=0.14"
   required_providers {
+    dns = {
+      source = "hashicorp/dns"
+      version = "3.0.1"
+    }
     proxmox = {
       source = "Telmate/proxmox"
       version = "2.6.7"
     }
+  }
+}
+
+provider "dns" {
+  update {
+    server = "192.168.1.2"
   }
 }
 

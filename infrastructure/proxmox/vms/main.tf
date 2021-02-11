@@ -1,6 +1,9 @@
 
 terraform {
   required_providers {
+    dns = {
+      source = "hashicorp/dns"
+    }
     proxmox = {
       source = "Telmate/proxmox"
     }
@@ -21,3 +24,4 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   clone = "debian-base"
   target_node = each.value.host
 }
+

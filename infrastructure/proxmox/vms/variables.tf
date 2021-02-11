@@ -2,6 +2,7 @@ variable "domain" {
   type = string
 }
 
+
 /**
   configuration variable to store Proxmox cluster configuration in
 */
