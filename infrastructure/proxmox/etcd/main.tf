@@ -76,14 +76,17 @@ resource "null_resource" "etcd_configuration" {
     ,
       "sed -i.bak 's/^  //g' /etc/ha.d/authkeys",
       "chmod 600 /etc/ha.d/authkeys",
-      //      <<-EOF
-      //      /tmp/ha-config.sh \
-      //        ${var.load_balancer_members[(count.index + 1) % length(var.leaders)].ssh_host} \
-      //        ${var.k8s_leaders[0].name)[0]} \
-      //        ${split(".", var.leaders[1].name)[0]}
-      //      EOF
-      //    ,
-      //      "sed -i 's/^    //g' /etc/ha.d/ha.cf",
+      <<-EOF
+        /tmp/ha-config.sh \
+          ${var.load_balancer_members[(count.index + 1) % length(var.load_balancer_members)].ssh_host} \
+          ${var.load_balancer_members[0].name} \
+          ${var.load_balancer_members[1].name}
+        EOF
+    ,
+      "sed -i 's/^    //g' /etc/ha.d/ha.cf",
+      "echo '${var.load_balancer_members[0].name} ${var.load_balancer}' >> /etc/ha.d/haresources",
+      "systemctl restart heartbeat",
+      "ip a"
     ]
   }
 

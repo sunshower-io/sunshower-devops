@@ -12,10 +12,10 @@ function write_ha_cfg() {
     keepalive 2
     deadtime 10
     udpport        694
-    bcast  ens18
-    mcast ens18 225.0.0.1 694 1 0
-    ucast ens18 $unicast_ip
-    udp     ens18
+    bcast eth0
+    mcast eth0 225.0.0.1 694 1 0
+    ucast eth0 $unicast_ip
+    udp     eth0
     logfacility     local0
     node    $host1
     node    $host2
