@@ -29,7 +29,16 @@ module "etcd_machines_installation" {
     username = var.root_username
     password = var.root_password
   }
+  etcd_port = var.etcd_port
+  load_balancer = var.load_balancer
+
   etcd_machines = module.etcd_machines_base.virtual_machines
+
+  /**
+    select the first two etcd machines for the load-balancer components
+  */
+  k8s_leaders = var.k8s_leaders
+  load_balancer_members = slice(module.etcd_machines_base.virtual_machines, 0, 2)
 }
 
 

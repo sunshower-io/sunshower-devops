@@ -61,11 +61,11 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   bootdisk = "scsi0"
   disk_gb = var.virtual_machines[count.index].disk
 
-//  disk {
-//    type = "scsi"
-//    storage = "virtual-machines"
-//    size = var.virtual_machines[count.index].disk
-//  }
+  //  disk {
+  //    type = "scsi"
+  //    storage = "virtual-machines"
+  //    size = var.virtual_machines[count.index].disk
+  //  }
 
   full_clone = false
   clone = "debian-base"
@@ -136,7 +136,7 @@ resource "null_resource" "wait_for_reboot" {
     proxmox_vm_qemu.virtual_machines]
 
   provisioner "local-exec" {
-    command = "${path.module}/wait_port ${var.virtual_machines[count.index].name} 22"
+    command = "${path.module}/wait_port ${var.virtual_machines[count.index].name} ${var.deployment_domain} 22"
   }
 }
 
