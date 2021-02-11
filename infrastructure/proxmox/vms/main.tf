@@ -19,6 +19,9 @@ terraform {
 resource "proxmox_vm_qemu" "virtual_machines" {
   for_each = {for vm in var.virtual_machines: vm.name => vm}
 
+  /**
+    enable the QEMU agent on the virtual-machine
+  */
   agent = 1
   name = each.key
   clone = "debian-base"

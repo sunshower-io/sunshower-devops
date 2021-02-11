@@ -29,11 +29,15 @@ variable "virtual_machines" {
     ip = string
     host = string
     name = string
+    clone = string
+    full_clone = bool
+    description = string
     hardware_configuration = object({
       cpu = number
       disk = number
       sockets = number
       memory = number
+      boot_disk = string
     })
   }))
 }

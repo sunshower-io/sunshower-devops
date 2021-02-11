@@ -16,7 +16,7 @@ terraform {
 
 provider "dns" {
   update {
-    server = "192.168.1.2"
+    server = var.dns_server.server
   }
 }
 
@@ -27,6 +27,20 @@ provider "proxmox" {
   pm_tls_insecure = !var.cluster_configuration.verify_tls
 }
 
+
+/**
+  Create DNS entries for virtual machines
+*/
+module "dns_configuration" {
+  for_each = var.cluster_nodes
+  source = "./dns"
+  dns_server = var.dns_server
+  hosts = each.value
+}
+
+/**
+  provision virtual machines
+*/
 module "virtual_machines" {
   for_each = var.cluster_nodes
   source = "./vms"
