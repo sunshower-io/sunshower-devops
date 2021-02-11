@@ -46,6 +46,7 @@ module "virtual_machines" {
   source = "./vms"
   domain = var.domain
   virtual_machines = each.value
+  network_configuration = var.network_configuration
   cluster_configuration = var.cluster_configuration
   virtual_machine_configuration = var.virtual_machine_configuration
 }

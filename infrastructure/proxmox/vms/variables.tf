@@ -3,6 +3,13 @@ variable "domain" {
 }
 
 
+variable "network_configuration" {
+  type = object({
+    gateway = string
+    netmask = string
+    nameservers = list(string)
+  })
+}
 /**
   configuration variable to store Proxmox cluster configuration in
 */
@@ -29,9 +36,15 @@ variable "virtual_machines" {
     ip = string
     host = string
     name = string
+    pool = string
     clone = string
     full_clone = bool
     description = string
+    enable_agent = bool
+
+    os = object({
+      type = string
+    })
     hardware_configuration = object({
       cpu = number
       disk = number
@@ -41,5 +54,6 @@ variable "virtual_machines" {
     })
   }))
 }
+
 
 
