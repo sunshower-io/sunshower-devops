@@ -88,6 +88,7 @@ resource "proxmox_vm_qemu" "virtual_machines" {
     destination = "/tmp/if-config.sh"
   }
 
+
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/if-config.sh",
@@ -97,12 +98,9 @@ resource "proxmox_vm_qemu" "virtual_machines" {
     ]
   }
 
-
-}
-
-resource "null_resource" "wait_for_reboot" {
-  count = length(var.virtual_machines)
   provisioner "local-exec" {
-    command = "${path.module}/scripts/wait-port.sh"
+    command = "${path.module}/scripts/wait-port.sh ${each.value.name} ${var.domain} 22"
   }
+
 }
+
