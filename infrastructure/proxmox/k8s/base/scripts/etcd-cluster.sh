@@ -8,4 +8,5 @@ Restart=always
 EOF
 
 systemctl daemon-reload
+## todo: this isn't working for some reason
 systemctl restart kubelet
