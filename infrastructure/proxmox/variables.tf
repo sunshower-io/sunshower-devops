@@ -1,5 +1,8 @@
 
 
+variable "load_balancer" {
+  type = string
+}
 
 /**
   node-definitions for all members of the cluster

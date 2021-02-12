@@ -1,11 +1,3 @@
-/**
-  Generate a strong random password for the heartbeat daemons.
-  This is included in the outputs
-*/
-resource "random_password" "heartbeat_password" {
-  length = 24
-  special = true
-}
 
 
 /**

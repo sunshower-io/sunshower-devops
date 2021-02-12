@@ -60,6 +60,9 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   /**
     network configuration
   */
+  searchdomain = var.domain
+
+
   ipconfig0 = "ip=${each.value.ip}/24,gw=${local.network.gateway}"
 
   network {

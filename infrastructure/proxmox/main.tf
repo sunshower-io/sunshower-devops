@@ -50,3 +50,12 @@ module "virtual_machines" {
   cluster_configuration = var.cluster_configuration
   virtual_machine_configuration = var.virtual_machine_configuration
 }
+
+
+module "etcd_cluster" {
+  source = "./etcd"
+  load_balancer = var.load_balancer
+  k8s_leaders = var.cluster_nodes["k8s_leaders"]
+  etcd_cluster = module.virtual_machines["etcd_nodes"].virtual_machines
+  virtual_machine_configuration = var.virtual_machine_configuration
+}
