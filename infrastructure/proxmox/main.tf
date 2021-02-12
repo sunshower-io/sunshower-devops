@@ -1,5 +1,3 @@
-
-
 terraform {
   required_version = ">=0.14"
   required_providers {
@@ -56,6 +54,20 @@ module "etcd_cluster" {
   source = "./etcd"
   load_balancer = var.load_balancer
   k8s_leaders = var.cluster_nodes["k8s_leaders"]
-  etcd_cluster = module.virtual_machines["etcd_nodes"].virtual_machines
   virtual_machine_configuration = var.virtual_machine_configuration
+  etcd_cluster = module.virtual_machines["etcd_nodes"].virtual_machines
+}
+
+
+module "k8s_cluster_base" {
+  source = "./k8s/base"
+
+  virtual_machine_configuration = var.virtual_machine_configuration
+  k8s_cluster = concat(
+  values(module.virtual_machines["etcd_nodes"].virtual_machines),
+  values(module.virtual_machines["k8s_leaders"].virtual_machines),
+  values(module.virtual_machines["k8s_workers"].virtual_machines),
+  )
+
+  etcd_cluster = values(module.virtual_machines["etcd_nodes"].virtual_machines)
 }
