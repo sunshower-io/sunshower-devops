@@ -61,6 +61,9 @@ module "etcd_cluster" {
 
 module "k8s_cluster_base" {
   source = "./k8s/base"
+  //  for_each = {for key, vms in module.virtual_machines: key => vms}
+  //
+  //  k8s_cluster =
 
   virtual_machine_configuration = var.virtual_machine_configuration
   k8s_cluster = concat(
