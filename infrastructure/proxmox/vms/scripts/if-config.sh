@@ -12,8 +12,8 @@ function write_file() {
 
   source /etc/network/interfaces.d/*
 
-  iface eth0 inet static
-    address $ip
+  iface ens18 inet static
+    address $ip/24
     gateway $gateway
     network $netmask
     dns-nameservers $dnsservers

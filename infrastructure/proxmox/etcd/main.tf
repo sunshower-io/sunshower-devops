@@ -4,7 +4,8 @@
 
 locals {
   authentication = var.virtual_machine_configuration
-  etcd_nodes = slice(values(var.etcd_cluster), 0, length(values(var.etcd_cluster)) - 1)
+  etcd_cluster_list = values(var.etcd_cluster)
+  etcd_nodes = slice(local.etcd_cluster_list, 0, length(local.etcd_cluster_list) - 1)
 }
 
 /**
@@ -16,11 +17,32 @@ resource "random_password" "heartbeat_password" {
   special = true
 }
 
+resource "null_resource" "firewall_configuration" {
+
+  for_each = {for key, vm in var.etcd_cluster: key => vm}
+
+  connection {
+    type = "ssh"
+
+    user = local.authentication.username
+    password = local.authentication.password
+
+    host = each.value.ssh_host
+    port = each.value.ssh_port
+  }
+
+  provisioner "remote-exec" {
+    script = "${path.module}/scripts/etcd-base.sh"
+  }
+}
 
 resource "null_resource" "base_configuration" {
   //  for_each = {for key, vm in var.etcd_cluster: key => vm}
 
   count = length(local.etcd_nodes)
+
+  depends_on = [
+    null_resource.firewall_configuration]
 
 
   connection {
@@ -31,10 +53,6 @@ resource "null_resource" "base_configuration" {
 
     host = local.etcd_nodes[count.index].ssh_host
     port = local.etcd_nodes[count.index].ssh_port
-  }
-
-  provisioner "remote-exec" {
-    script = "${path.module}/scripts/etcd-base.sh"
   }
 
 

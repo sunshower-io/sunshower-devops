@@ -1,5 +1,6 @@
 locals {
   etcd1 = var.etcd_cluster[0]
+  etcd_joiners = slice(var.etcd_cluster, 1, length(var.etcd_cluster))
   authentication = var.virtual_machine_configuration
   etcd_cluster_ips = [for etcd_node in var.etcd_cluster: etcd_node.ssh_host]
 }
@@ -14,6 +15,10 @@ resource "null_resource" "base_configuration" {
 
     host = var.k8s_cluster[count.index].ssh_host
     port = var.k8s_cluster[count.index].ssh_port
+  }
+
+  provisioner "remote-exec" {
+    script = "${path.module}/scripts/swap-off.sh"
   }
 
   provisioner "remote-exec" {
@@ -63,7 +68,32 @@ resource "null_resource" "etcd_bastion" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/etcd-bastion.sh",
-      "/tmp/etcd-bastion.sh ${join(" ", local.etcd_cluster_ips)}"
+      "/tmp/etcd-bastion.sh ${join(" ", local.etcd_cluster_ips)} '${local.authentication.password}'"
     ]
   }
+}
+
+
+resource "null_resource" "config_other_etcd_cluster_nodes" {
+  count = length(local.etcd_joiners)
+
+  depends_on = [
+    null_resource.etcd_bastion]
+
+  connection {
+    type = "ssh"
+    user = local.authentication.username
+    password = local.authentication.password
+
+    host = local.etcd_joiners[count.index].ssh_host
+    port = local.etcd_joiners[count.index].ssh_port
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "kubeadm init phase etcd local --config=/root/kubeadmcfg.yaml"
+    ]
+  }
+
+
 }

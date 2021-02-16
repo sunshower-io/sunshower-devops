@@ -49,6 +49,3 @@ install_pkg "kubectl"
 
 apt-mark hold kubelet kubeadm kubectl
 
-swapoff -a
-
-sed -i '/ swap / s/^/#/' /etc/fstab

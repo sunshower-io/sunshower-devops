@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+apt-get install sshpass -y
+
 export HOST0=$1
 export HOST1=$2
 export HOST2=$3
@@ -13,7 +15,7 @@ for i in "${!ETCDHOSTS[@]}"; do
 HOST=${ETCDHOSTS[$i]}
 NAME=${NAMES[$i]}
 cat << EOF > /tmp/${HOST}/kubeadmcfg.yaml
-apiVersion: "kubeadm.k8s.io/v1beta1"
+apiVersion: "kubeadm.k8s.io/v1beta2"
 kind: ClusterConfiguration
 etcd:
     local:
@@ -35,10 +37,10 @@ kubeadm init phase certs etcd-ca
 
 function create_certs() {
   local node=$1
-  kubeadm init phase certs etcd-server --config=/tmp/"${node}"/kubeadmcfg.yaml
-  kubeadm init phase certs etcd-peer --config=/tmp/"${node}"/kubeadmcfg.yaml
-  kubeadm init phase certs etcd-healthcheck-client --config=/tmp/"${node}"/kubeadmcfg.yaml
-  kubeadm init phase certs apiserver-etcd-client --config=/tmp/"${node}"/kubeadmcfg.yaml
+  kubeadm init phase certs etcd-server --config="/tmp/${node}/kubeadmcfg.yaml"
+  kubeadm init phase certs etcd-peer --config="/tmp/${node}/kubeadmcfg.yaml"
+  kubeadm init phase certs etcd-healthcheck-client --config="/tmp/${node}/kubeadmcfg.yaml"
+  kubeadm init phase certs apiserver-etcd-client --config="/tmp/${node}/kubeadmcfg.yaml"
   cp -R /etc/kubernetes/pki /tmp/"${node}"/
 }
 
@@ -49,3 +51,20 @@ done
 
 find /tmp/"${HOST2}" -name ca.key -type f -delete
 find /tmp/"${HOST1}" -name ca.key -type f -delete
+
+echo "Copying ID..."
+ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null
+echo "Successfully copied ID..."
+
+for i in "${ETCDHOSTS[@]:1}"; do
+  echo "Copying files..."
+  sshpass -p "$4" ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no "root@$i"
+  scp -r "/tmp/${i}/pki/" "root@${i}:/etc/kubernetes/"
+  scp -r "/tmp/${i}/kubeadmcfg.yaml" "root@${i}:"
+done
+
+echo "Configuring etcd on $(ip route get 1 | cut -d ' ' -f7)"
+
+kubeadm init phase etcd local --config="/tmp/$(ip route get 1 | cut -d ' ' -f7 | xargs)/kubeadmcfg.yaml"
+
+echo "successfully configured etcd on $(ip route get 1 | cut -d ' ' -f7)"

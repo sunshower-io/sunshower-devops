@@ -11,19 +11,21 @@ EOF
 
 sudo sysctl --system
 
-sudo apt-get install -y haproxy heartbeat
-
-# Firewall config
-
-until [ "$(apt-get install firewalld -y)" ]; do
-  echo "Apt failed--retrying"
+echo "Installing HAProxy and heartbeat"
+while ! apt-get install -y haproxy heartbeat
+do
+  echo "Retrying haproxy, heartbeat installation"
   sleep 5
 done
+
+sudo apt-get install -y haproxy heartbeat
+
+ Firewall config
+
 
 systemctl enable heartbeat
 
 # iptables 1.8.2 fails to reload rules without individual calls
-sed -i 's/IndividualCalls=no/IndividualCalls=yes/g' /etc/firewalld/firewalld.conf
 firewall-cmd --permanent --add-port=2376/tcp
 firewall-cmd --permanent --add-port=2379/tcp
 firewall-cmd --permanent --add-port=2380/tcp
