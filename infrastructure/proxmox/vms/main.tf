@@ -14,6 +14,8 @@ locals {
   node_cfg = var.virtual_machine_configuration
   nameservers = join(" ", var.network_configuration.nameservers)
 }
+
+
 /**
   create all virtual machines in the cluster
 
@@ -63,11 +65,12 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   searchdomain = var.domain
 
 //  ipconfig0 = "ip=${each.value.ip}/24,gw=${local.network.gateway}"
-//
-//  network {
-//    model = "virtio"
-//    bridge = "vmbr0"
-//  }
+  ipconfig0 = "ip=dhcp"
+
+  network {
+    model = "virtio"
+    bridge = "vmbr0"
+  }
 
   bootdisk = each.value.hardware_configuration.boot_disk
 
@@ -76,32 +79,13 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   */
 
   cores = each.value.hardware_configuration.cpu
-  disk_gb = each.value.hardware_configuration.disk
   memory = each.value.hardware_configuration.memory
   sockets = each.value.hardware_configuration.sockets
 
-  define_connection_info = true
-  os_network_config = <<-EOT
-    iface ens18 inet static
-      address ${each.value.ip}/24
-      gateway ${local.network.gateway}
-      network ${local.network.netmask}
-      dns-nameservers ${local.nameservers}
-  EOT
-
-
-//  os_network_config =  <<-EOT
-//        iface vmbr0 inet static
-//        address 192.168.1.7
-//        gateway 192.168.1.1
-//        netmask 255.255.255.0
-//  EOT
-
   connection {
     type = "ssh"
-    port = 22
-    host = each.value.ip
-//    host = self.ssh_host
+    port = self.ssh_port
+    host = self.ssh_host
     user = local.node_cfg.username
     password = local.node_cfg.password
   }
@@ -116,9 +100,8 @@ resource "proxmox_vm_qemu" "virtual_machines" {
     inline = [
       "chmod +x /tmp/if-config.sh",
       "/tmp/if-config.sh ${each.value.ip} ${local.network.gateway} ${local.network.netmask} '${local.nameservers}'",
-      "service networking restart",
-      "echo ${var.cluster_configuration.password} | sudo -S -k hostnamectl set-hostname ${each.value.name}.${var.domain}",
-      "echo ${var.cluster_configuration.password} | (sleep 2 && sudo -S -k reboot)&"
+      "sudo -S -k hostnamectl set-hostname ${each.value.name}.${var.domain}",
+      "shutdown -r +1"
     ]
   }
 
@@ -127,8 +110,12 @@ resource "proxmox_vm_qemu" "virtual_machines" {
     command = "${path.module}/scripts/wait-port.sh ${each.value.name} ${var.domain} 22"
   }
 
-  provisioner "remote-exec" {
-    script = "${path.module}/scripts/base-dependencies.sh"
-  }
+
 }
 
+//resource "null_resource" "vm_network_configuation" {
+//  depends_on = [
+//    proxmox_vm_qemu.virtual_machines]
+//  for_each = {for vm in proxmox_vm_qemu.virtual_machines: "${vm.name}.${var.domain}" => vm}
+//
+//}

@@ -19,6 +19,7 @@ variable "cluster_configuration" {
     username = string
     password = string
     verify_tls = bool
+    hosts = map(string)
   })
 }
 
