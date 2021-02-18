@@ -27,7 +27,7 @@ resource "null_resource" "firewall_configuration" {
     user = local.authentication.username
     password = local.authentication.password
 
-    host = each.value.ssh_host
+    host = each.value.name
     port = each.value.ssh_port
   }
 
@@ -51,7 +51,7 @@ resource "null_resource" "base_configuration" {
     user = local.authentication.username
     password = local.authentication.password
 
-    host = local.etcd_nodes[count.index].ssh_host
+    host = local.etcd_nodes[count.index].name
     port = local.etcd_nodes[count.index].ssh_port
   }
 
@@ -116,7 +116,7 @@ resource "null_resource" "base_configuration" {
     inline = [
       <<-EOF
         /tmp/ha-config.sh \
-          ${local.etcd_nodes[(count.index + 1) % length(local.etcd_nodes)].ssh_host} \
+          ${local.etcd_nodes[(count.index + 1) % length(local.etcd_nodes)].desc} \
           ${local.etcd_nodes[0].name} \
           ${local.etcd_nodes[1].name}
         EOF

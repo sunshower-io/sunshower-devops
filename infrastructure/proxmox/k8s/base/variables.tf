@@ -1,6 +1,7 @@
 variable "k8s_cluster" {
   type = list(object({
     name = string
+    desc = string
     ssh_port = string
     ssh_host = string
   }))
@@ -9,6 +10,7 @@ variable "k8s_cluster" {
 variable "etcd_cluster" {
   type = list(object({
     name = string
+    desc = string
     ssh_port = string
     ssh_host = string
   }))

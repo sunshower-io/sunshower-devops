@@ -2,7 +2,7 @@ locals {
   etcd1 = var.etcd_cluster[0]
   etcd_joiners = slice(var.etcd_cluster, 1, length(var.etcd_cluster))
   authentication = var.virtual_machine_configuration
-  etcd_cluster_ips = [for etcd_node in var.etcd_cluster: etcd_node.ssh_host]
+  etcd_cluster_ips = [for etcd_node in var.etcd_cluster: etcd_node.desc]
 }
 
 resource "null_resource" "base_configuration" {
@@ -13,7 +13,7 @@ resource "null_resource" "base_configuration" {
     user = local.authentication.username
     password = local.authentication.password
 
-    host = var.k8s_cluster[count.index].ssh_host
+    host = var.k8s_cluster[count.index].desc
     port = var.k8s_cluster[count.index].ssh_port
   }
 
@@ -38,7 +38,7 @@ resource "null_resource" "etcd_configuration" {
     user = local.authentication.username
     password = local.authentication.password
 
-    host = var.etcd_cluster[count.index].ssh_host
+    host = var.etcd_cluster[count.index].desc
     port = var.etcd_cluster[count.index].ssh_port
   }
 
@@ -56,7 +56,7 @@ resource "null_resource" "etcd_bastion" {
     user = local.authentication.username
     password = local.authentication.password
 
-    host = local.etcd1.ssh_host
+    host = local.etcd1.name
     port = local.etcd1.ssh_port
   }
 
@@ -85,7 +85,7 @@ resource "null_resource" "config_other_etcd_cluster_nodes" {
     user = local.authentication.username
     password = local.authentication.password
 
-    host = local.etcd_joiners[count.index].ssh_host
+    host = local.etcd_joiners[count.index].name
     port = local.etcd_joiners[count.index].ssh_port
   }
 

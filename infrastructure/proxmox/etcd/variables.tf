@@ -2,6 +2,10 @@ variable "etcd_port" {
   type = number
   default = 6443
 }
+variable "domain" {
+  type = string
+  default = ""
+}
 
 variable "load_balancer" {
   type = string
@@ -16,6 +20,7 @@ variable "virtual_machine_configuration" {
 variable "etcd_cluster" {
   type = map(object({
     name = string
+    desc = string
     ssh_port = string
     ssh_host = string
   }))

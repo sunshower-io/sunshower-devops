@@ -13,7 +13,7 @@ function write_ha_proxy_cfg() {
 #  local leader_1=$2
 #  local leader_2=$3
 
-  echo "HA PROXY Configuration: load-balancer: $loadbalancer, leader-: $leader_1_ip, leader 2: $leader_2_ip"
+  echo "HA PROXY Configuration: load-balancer: $loadbalancer, leader 1: $leader_1_ip, leader 2: $leader_2_ip"
 
 
   mv /etc/haproxy/haproxy.cfg{,.back}

@@ -94,6 +94,7 @@ resource "proxmox_vm_qemu" "virtual_machines" {
     source = "${path.module}/scripts/if-config.sh"
     destination = "/tmp/if-config.sh"
   }
+  desc = each.value.ip
 
 
   provisioner "remote-exec" {
@@ -113,9 +114,3 @@ resource "proxmox_vm_qemu" "virtual_machines" {
 
 }
 
-//resource "null_resource" "vm_network_configuation" {
-//  depends_on = [
-//    proxmox_vm_qemu.virtual_machines]
-//  for_each = {for vm in proxmox_vm_qemu.virtual_machines: "${vm.name}.${var.domain}" => vm}
-//
-//}
