@@ -42,20 +42,26 @@ kubeadm init phase certs etcd-ca
 
 function create_certs() {
   local node=$1
+  local idx=$2
   echo "generating certs for $node"
   kubeadm init phase certs etcd-server --config="/tmp/${node}/kubeadmcfg.yaml"
   kubeadm init phase certs etcd-peer --config="/tmp/${node}/kubeadmcfg.yaml"
   kubeadm init phase certs etcd-healthcheck-client --config="/tmp/${node}/kubeadmcfg.yaml"
   kubeadm init phase certs apiserver-etcd-client --config="/tmp/${node}/kubeadmcfg.yaml"
-  cp -R /etc/kubernetes/pki /tmp/"${node}"/
+
+  if [ "$idx" -ne 0 ]; then
+    cp -R /etc/kubernetes/pki /tmp/"${node}"/
+    find /etc/kubernetes/pki -not -name ca.crt -not -name ca.key -type f -delete
+  fi
 
   echo "completed generating certs for $node"
 }
 
-for i in "${!ETCDHOSTS[@]}"; do
-  HOST=${ETCDHOSTS[$i]}
-  create_certs "$HOST"
+for (( idx=${#ETCDHOSTS[@]}-1 ; idx>=0 ; idx-- )) ; do
+  HOST=${ETCDHOSTS[$idx]}
+  create_certs "$HOST" "$idx"
 done
+
 
 find /tmp/"${HOST2}" -name ca.key -type f -delete
 find /tmp/"${HOST1}" -name ca.key -type f -delete
