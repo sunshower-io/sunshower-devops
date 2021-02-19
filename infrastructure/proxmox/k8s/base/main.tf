@@ -1,5 +1,6 @@
 locals {
   etcd1 = var.etcd_cluster[0]
+  leader_1 = var.k8s_leaders[0]
   etcd_joiners = slice(var.etcd_cluster, 1, length(var.etcd_cluster))
   authentication = var.virtual_machine_configuration
   etcd_cluster_ips = [for etcd_node in var.etcd_cluster: etcd_node.desc]
@@ -24,14 +25,17 @@ resource "null_resource" "base_configuration" {
   provisioner "remote-exec" {
     script = "${path.module}/scripts/k8s-base.sh"
   }
+
+  provisioner "remote-exec" {
+    script = "${path.module}/scripts/docker-daemon.sh"
+  }
 }
 
-
-resource "null_resource" "etcd_configuration" {
-  depends_on = [
-    null_resource.base_configuration]
+resource "null_resource" "etcd_nodes" {
 
   count = length(var.etcd_cluster)
+  depends_on = [
+    null_resource.base_configuration]
 
   connection {
     type = "ssh"
@@ -45,11 +49,14 @@ resource "null_resource" "etcd_configuration" {
   provisioner "remote-exec" {
     script = "${path.module}/scripts/etcd-cluster.sh"
   }
+
 }
+
 
 resource "null_resource" "etcd_bastion" {
   depends_on = [
-    null_resource.etcd_configuration]
+    null_resource.etcd_nodes,
+    null_resource.base_configuration]
 
   connection {
     type = "ssh"
@@ -65,10 +72,17 @@ resource "null_resource" "etcd_bastion" {
     destination = "/tmp/etcd-bastion.sh"
   }
 
+  provisioner "file" {
+    source = "${path.module}/scripts/k8s-leader.sh"
+    destination = "/tmp/k8s-leader.sh"
+  }
+
   provisioner "remote-exec" {
     inline = [
+      "chmod +x /tmp/k8s-leader.sh",
       "chmod +x /tmp/etcd-bastion.sh",
-      "/tmp/etcd-bastion.sh ${join(" ", local.etcd_cluster_ips)} '${local.authentication.password}'"
+      "/tmp/etcd-bastion.sh '${local.authentication.password}' ${join(" ", local.etcd_cluster_ips)}",
+      "/tmp/k8s-leader.sh provision_leader_certs ${local.leader_1.desc} '${local.authentication.password}'"
     ]
   }
 }
@@ -92,6 +106,33 @@ resource "null_resource" "config_other_etcd_cluster_nodes" {
   provisioner "remote-exec" {
     inline = [
       "kubeadm init phase etcd local --config=/root/kubeadmcfg.yaml"
+    ]
+  }
+
+}
+
+resource "null_resource" "k8s_leader_1" {
+  depends_on = [
+    null_resource.config_other_etcd_cluster_nodes]
+
+  connection {
+    type = "ssh"
+    user = local.authentication.username
+    password = local.authentication.password
+
+    host = local.leader_1.name
+    port = local.leader_1.ssh_port
+  }
+
+  provisioner "file" {
+    source = "${path.module}/scripts/k8s-leader.sh"
+    destination = "/tmp/k8s-leader.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/k8s-leader.sh",
+      "/tmp/k8s-leader.sh create_leader_cfg ${var.load_balancer} ${var.etcd_port} ${join(" ", local.etcd_cluster_ips)}"
     ]
   }
 

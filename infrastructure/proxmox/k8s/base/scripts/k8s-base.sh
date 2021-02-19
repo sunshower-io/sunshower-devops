@@ -30,7 +30,11 @@ apt-add-repository \
   stable"
 
 apt-get update
-install_pkg "docker-ce"
+
+apt-get -y install \
+  docker-ce=5:19.03.15~3-0~debian-buster \
+  docker-ce-cli=5:19.03.15~3-0~debian-buster \
+  containerd.io
 
 docker -v
 
@@ -45,6 +49,8 @@ apt-get update
 install_pkg "kubelet"
 install_pkg "kubeadm"
 install_pkg "kubectl"
+install_pkg "sshpass"
+
 #apt-get install -y kubelet kubeadm kubectl
 
 apt-mark hold kubelet kubeadm kubectl

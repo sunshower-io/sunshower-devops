@@ -1,4 +1,8 @@
 
+variable "etcd_port" {
+  type = number
+  default = 6443
+}
 
 variable "load_balancer" {
   type = string

@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-apt-get install sshpass -y
 
-export HOST0=$1
-export HOST1=$2
-export HOST2=$3
+export HOST0=$2
+export HOST1=$3
+export HOST2=$4
 
 echo "installing etcd.  Targets:"
 printf "\t %s" "$HOST0"
@@ -66,13 +65,13 @@ done
 find /tmp/"${HOST2}" -name ca.key -type f -delete
 find /tmp/"${HOST1}" -name ca.key -type f -delete
 
-echo "Copying ID..."
+echo "generating ID..."
 ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null
-echo "Successfully copied ID..."
+echo "Successfully generated ID"
 
 for i in "${ETCDHOSTS[@]:1}"; do
   echo "Copying files to $i"
-  sshpass -p "$4" ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no "root@$i"
+  sshpass -p "$1" ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no "root@$i"
   scp -r "/tmp/${i}/pki/" "root@${i}:/etc/kubernetes/"
   scp -r "/tmp/${i}/kubeadmcfg.yaml" "root@${i}:"
 done

@@ -70,6 +70,8 @@ module "k8s_cluster_base" {
   //
   //  k8s_cluster =
 
+  etcd_port = var.etcd_port
+  load_balancer = var.load_balancer
   virtual_machine_configuration = var.virtual_machine_configuration
   k8s_cluster = concat(
   values(module.virtual_machines["etcd_nodes"].virtual_machines),
@@ -77,5 +79,6 @@ module "k8s_cluster_base" {
   values(module.virtual_machines["k8s_workers"].virtual_machines),
   )
 
+  k8s_leaders = values(module.virtual_machines["k8s_leaders"].virtual_machines)
   etcd_cluster = values(module.virtual_machines["etcd_nodes"].virtual_machines)
 }

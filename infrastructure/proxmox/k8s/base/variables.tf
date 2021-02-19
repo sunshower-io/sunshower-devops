@@ -1,6 +1,18 @@
 variable "k8s_cluster" {
   type = list(object({
     name = string
+    # due to ugly hack, contains IP
+    desc = string
+    ssh_port = string
+    ssh_host = string
+  }))
+}
+
+
+variable "k8s_leaders" {
+  type = list(object({
+    name = string
+    # due to ugly hack, contains IP
     desc = string
     ssh_port = string
     ssh_host = string
@@ -21,4 +33,13 @@ variable "virtual_machine_configuration" {
     username = string
     password = string
   })
+}
+
+variable "load_balancer" {
+  type = string
+}
+
+variable "etcd_port" {
+  type = number
+  default = 2379
 }

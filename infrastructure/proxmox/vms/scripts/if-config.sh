@@ -25,3 +25,4 @@ EOF
 
 write_file "$1" "$2" "$3" "$4"
 sed -i.bak 's/^  //g' /etc/network/interfaces
+
