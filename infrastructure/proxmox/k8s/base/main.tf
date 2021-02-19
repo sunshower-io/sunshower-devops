@@ -31,6 +31,28 @@ resource "null_resource" "base_configuration" {
   }
 }
 
+resource "null_resource" "k8s_leader_base" {
+  depends_on = [
+    null_resource.base_configuration]
+
+  count = length(var.k8s_leaders)
+
+  connection {
+    type = "ssh"
+    user = local.authentication.username
+    password = local.authentication.password
+
+    host = var.k8s_leaders[count.index].desc
+    port = var.k8s_leaders[count.index].ssh_port
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p /etc/kubernetes/pki/etcd"
+    ]
+  }
+}
+
 resource "null_resource" "etcd_nodes" {
 
   count = length(var.etcd_cluster)
@@ -136,5 +158,61 @@ resource "null_resource" "k8s_leader_1" {
     ]
   }
 
+}
 
+resource "null_resource" "download_configs" {
+
+  depends_on = [
+    null_resource.k8s_leader_1,
+    null_resource.k8s_leader_base]
+
+  provisioner "local-exec" {
+      command = "${path.module}/scripts/download-configs.sh '${local.authentication.password}' ${local.leader_1.name}"
+  }
+
+}
+
+resource "null_resource" "copy_k8s_configs" {
+
+  depends_on = [
+    null_resource.download_configs]
+
+  for_each = {for vm in slice(var.k8s_leaders, 1, length(var.k8s_leaders)): vm.name => vm}
+
+  connection {
+    type = "ssh"
+    user = local.authentication.username
+    password = local.authentication.password
+
+    host = local.leader_1.name
+    port = local.leader_1.ssh_port
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "/tmp/k8s-leader.sh configure_second_leader ${each.value.name} ${local.authentication.username} ${local.authentication.password}"
+    ]
+  }
+}
+
+resource "null_resource" "k8s_leaders_join_cluster" {
+  depends_on = [
+    null_resource.copy_k8s_configs]
+  for_each = {for vm in slice(var.k8s_leaders, 1, length(var.k8s_leaders)): vm.name => vm}
+
+  connection {
+    type = "ssh"
+    user = local.authentication.username
+    password = local.authentication.password
+
+    host = each.value.name
+    port = each.value.ssh_port
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/join-leader.sh",
+      "sh /tmp/join-leader.sh"
+    ]
+  }
 }

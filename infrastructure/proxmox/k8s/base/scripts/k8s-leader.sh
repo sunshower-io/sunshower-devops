@@ -37,6 +37,10 @@ function create_leader_cfg() {
   local etcd_port=$2
   local load_balancer_ip=$1
 
+  echo "Generating PK..."
+  ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null
+  echo "Successfully generated PK"
+
   echo "Generating leader config: $load_balancer_ip at ($etcd1, $etcd2, $etcd3):$etcd_port"
 
   # ports aren't configurable right now.  Will fix in later versions (maybe)
@@ -62,7 +66,7 @@ EOF
 
   copy_certificates
   echo "Initiating kubeadm on $(uname -a)"
-  until kubeadm init --config /root/kubeadm-config.yaml -v=5
+  until kubeadm init --config /root/kubeadm-config.yaml --upload-certs -v=5
   do
     echo "Init failed--retrying in 5 seconds..."
     sleep 5
@@ -75,10 +79,45 @@ EOF
   echo "Successfully installed Weave CNI"
 
 
-  echo "retrieving join command..."
+  echo "retrieving follower join command..."
   kubeadm token create --print-join-command > /tmp/join.sh
   echo "Successfully wrote join info to /tmp/join.sh"
 
+  echo "retrieving leader join command..."
+  echo "$(kubeadm token create --print-join-command) --control-plane" > /tmp/join-leader.sh
+  echo "successfully retrieved leader join command"
+
+
+  echo "Waiting for leader to become ready"
+  until kubectl --kubeconfig /etc/kubernetes/admin.conf get nodes | grep -m 1 "Ready";
+  do
+    echo "Leader is not ready yet--will retry in 5 seconds"
+    sleep 5
+  done
+
+  echo "Leader is ready"
+
+
+}
+
+# call ./k8s-leader.sh configure_second_leader k8s-leader-2.sunshower.cloud <username> <password>
+function configure_second_leader() {
+  local leader_2=$1
+  local leader_2_pw=$3
+  local leader_2_username=$2
+  sshpass -p "$leader_2_pw" ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no "$leader_2_username@$leader_2"
+  sshpass -p "$leader_2_pw" scp -r "/etc/kubernetes/admin.conf" "$leader_2_username@$leader_2:/etc/kubernetes/"
+  sshpass -p "$leader_2_pw" scp -r "/tmp/join-leader.sh" "$leader_2_username@$leader_2:/tmp/"
+
+
+
+  sshpass -p "$leader_2_pw" scp /etc/kubernetes/pki/ca.* "$leader_2_username@$leader_2:/etc/kubernetes/pki/"
+  sshpass -p "$leader_2_pw" scp /etc/kubernetes/pki/sa.*  "$leader_2_username@$leader_2:/etc/kubernetes/pki/"
+  sshpass -p "$leader_2_pw" scp /etc/kubernetes/pki/front-proxy-ca.key "$leader_2_username@$leader_2:/etc/kubernetes/pki/"
+  sshpass -p "$leader_2_pw" scp /etc/kubernetes/pki/front-proxy-ca.crt "$leader_2_username@$leader_2:/etc/kubernetes/pki/"
+  sshpass -p "$leader_2_pw" scp /etc/kubernetes/pki/etcd/ca.crt "$leader_2_username@$leader_2:/etc/kubernetes/pki/etcd/"
+  sshpass -p "$leader_2_pw" scp /etc/kubernetes/pki/apiserver-etcd-client.crt "$leader_2_username@$leader_2:/etc/kubernetes/pki/"
+  sshpass -p "$leader_2_pw" scp /etc/kubernetes/pki/apiserver-etcd-client.key "$leader_2_username@$leader_2:/etc/kubernetes/pki/"
 
 }
 
