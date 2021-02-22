@@ -8,6 +8,11 @@ variable "load_balancer" {
   type = string
 }
 
+variable "api_server" {
+  type = string
+  default = "api"
+}
+
 /**
   node-definitions for all members of the cluster
 */

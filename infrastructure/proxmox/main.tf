@@ -34,6 +34,9 @@ module "dns_configuration" {
   source = "./dns"
   dns_server = var.dns_server
   hosts = each.value
+  api_dns = var.api_server
+  api_domain = var.domain
+  api_ip = var.load_balancer
 }
 
 /**
@@ -71,7 +74,8 @@ module "k8s_cluster_base" {
   //  k8s_cluster =
 
   etcd_port = var.etcd_port
-  load_balancer = var.load_balancer
+  load_balancer = "${var.api_dns}.${var.domain}"
+//  load_balancer = var.load_balancer
   virtual_machine_configuration = var.virtual_machine_configuration
   k8s_cluster = concat(
   values(module.virtual_machines["etcd_nodes"].virtual_machines),

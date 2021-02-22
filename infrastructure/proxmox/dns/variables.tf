@@ -1,4 +1,16 @@
 
+variable "api_domain" {
+  type = string
+}
+
+variable "api_ip" {
+  type = string
+}
+
+variable "api_dns" {
+  type = string
+}
+
 variable "dns_server" {
   type = object({
     zone = string

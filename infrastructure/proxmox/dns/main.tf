@@ -16,3 +16,12 @@ resource "dns_a_record_set" "virtual_machine_dns" {
     each.value.ip
   ]
 }
+
+
+resource "dns_a_record_set" "api_server_dns" {
+  addresses = [
+    var.api_ip
+  ]
+  zone = var.dns_server.zone
+  name = var.api_dns
+}
