@@ -83,6 +83,7 @@ module "k8s_cluster_base" {
   values(module.virtual_machines["k8s_workers"].virtual_machines),
   )
 
+  k8s_workers = values(module.virtual_machines["k8s_workers"].virtual_machines)
   k8s_leaders = values(module.virtual_machines["k8s_leaders"].virtual_machines)
   etcd_cluster = values(module.virtual_machines["etcd_nodes"].virtual_machines)
 }

@@ -9,6 +9,16 @@ variable "k8s_cluster" {
 }
 
 
+variable "k8s_workers" {
+  type = list(object({
+    name = string
+    # due to ugly hack, contains IP
+    desc = string
+    ssh_port = string
+    ssh_host = string
+  }))
+}
+
 variable "k8s_leaders" {
   type = list(object({
     name = string

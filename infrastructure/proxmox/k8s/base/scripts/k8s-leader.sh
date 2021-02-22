@@ -100,6 +100,16 @@ EOF
 
 }
 
+function configure_worker() {
+  local ip=$1
+  local username=$2
+  local password=$3
+  echo "Configuring worker: $ip"
+  sshpass -p "$password" ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no "$username@$ip"
+  sshpass -p "$password" scp -r "/tmp/join.sh" "$username@$ip:/tmp/"
+  echo "Successfully configured: $ip"
+}
+
 # call ./k8s-leader.sh configure_second_leader k8s-leader-2.sunshower.cloud <username> <password>
 function configure_second_leader() {
   local leader_2=$1

@@ -195,6 +195,30 @@ resource "null_resource" "copy_k8s_configs" {
   }
 }
 
+
+resource "null_resource" "copy_k8s_worker_configs" {
+
+  depends_on = [
+    null_resource.download_configs]
+
+  for_each = {for vm in var.k8s_workers: vm.name => vm}
+
+  connection {
+    type = "ssh"
+    user = local.authentication.username
+    password = local.authentication.password
+
+    host = local.leader_1.name
+    port = local.leader_1.ssh_port
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "/tmp/k8s-leader.sh configure_worker ${each.value.name} ${local.authentication.username} ${local.authentication.password}"
+    ]
+  }
+}
+
 resource "null_resource" "k8s_leaders_join_cluster" {
   depends_on = [
     null_resource.copy_k8s_configs]
@@ -213,6 +237,29 @@ resource "null_resource" "k8s_leaders_join_cluster" {
     inline = [
       "chmod +x /tmp/join-leader.sh",
       "sh /tmp/join-leader.sh"
+    ]
+  }
+}
+
+resource "null_resource" "k8s_workers_join_cluster" {
+  depends_on = [
+    null_resource.copy_k8s_configs]
+
+  for_each = {for vm in var.k8s_workers: vm.name => vm}
+
+  connection {
+    type = "ssh"
+    user = local.authentication.username
+    password = local.authentication.password
+
+    host = each.value.name
+    port = each.value.ssh_port
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/join.sh",
+      "sh /tmp/join.sh"
     ]
   }
 }
