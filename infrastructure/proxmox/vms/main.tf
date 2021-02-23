@@ -102,7 +102,10 @@ resource "proxmox_vm_qemu" "virtual_machines" {
       "chmod +x /tmp/if-config.sh",
       "/tmp/if-config.sh ${each.value.ip} ${local.network.gateway} ${local.network.netmask} '${local.nameservers}'",
       "sudo -S -k hostnamectl set-hostname ${each.value.name}.${var.domain}",
-      "shutdown -r +1"
+      "echo 'shutdown -r now | at now + 1 sec'"
+//      "sudo shutdown -r $(date --date \"now + 1 seconds\" \"+%H:%M\")"
+//      "bash -c 'sleep 2; shutdown -r now'&"
+//      "shutdown -r +1"
     ]
   }
 

@@ -7,6 +7,9 @@ terraform {
 }
 
 
+/**
+  provision DNS entries for each host in the `hosts` list
+*/
 resource "dns_a_record_set" "virtual_machine_dns" {
   for_each = {for vm in var.hosts: vm.name => vm}
 
@@ -18,6 +21,9 @@ resource "dns_a_record_set" "virtual_machine_dns" {
 }
 
 
+/**
+  provision the DNS A-record for the API server
+*/
 resource "dns_a_record_set" "api_server_dns" {
   addresses = [
     var.api_ip
