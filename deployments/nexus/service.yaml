@@ -3,11 +3,12 @@ kind: Service
 metadata:
   name: nexus-service
   namespace: devops-tools
+  annotations:
+    metallb.universe.tf/address-pool: default
 spec:
   selector:
     app: nexus-server
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 8081
       targetPort: 8081
-      nodePort: 32000

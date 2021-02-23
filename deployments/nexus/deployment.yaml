@@ -1,10 +1,15 @@
-apiVersion: extensions/v1beta1
+
+
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nexus
   namespace: devops-tools
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: nexus-server
   template:
     metadata:
       labels:
