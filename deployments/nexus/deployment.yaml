@@ -88,7 +88,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nexus
+  name: nexus-server
   namespace: devops-tools
 spec:
   replicas: 1
