@@ -15,6 +15,8 @@ function check_dir() {
     mkdir -p /etc/ceph
   fi
 }
+
+
 function generate_ceph_conf() {
   check_dir
   local host=$1
@@ -35,7 +37,7 @@ function install_keyring() {
   check_dir
   echo "Installing ceph keyring..."
   local key=$1
-cat <<-EOF /etc/ceph/ceph.keyring
+cat <<-EOF > /etc/ceph/ceph.keyring
 [client.fs]
         key = $key
 EOF
