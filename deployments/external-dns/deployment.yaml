@@ -5,6 +5,53 @@ metadata:
   labels:
     name: external-dns
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: external-dns
+  namespace: external-dns
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - services
+      - endpoints
+      - pods
+      - nodes
+    verbs:
+      - get
+      - watch
+      - list
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: external-dns
+  namespace: external-dns
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: external-dns-viewer
+  namespace: external-dns
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: external-dns
+subjects:
+  - kind: ServiceAccount
+    name: external-dns
+    namespace: external-dns
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,6 +66,7 @@ spec:
       labels:
         app: external-dns
     spec:
+      serviceAccountName: external-dns
       containers:
         - name: external-dns
           image: k8s.gcr.io/external-dns/external-dns:v0.7.6
@@ -31,7 +79,7 @@ spec:
             - --rfc2136-port=53
             - --rfc2136-zone=sunshower.cloud
             - --rfc2136-tsig-axfr
-            - --rfc2136-insecure
             - --source=ingress
             - --source=service
+            - --rfc2136-insecure
             - --domain-filter=sunshower.cloud
