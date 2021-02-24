@@ -80,6 +80,5 @@ spec:
             - --rfc2136-zone=sunshower.cloud
             - --rfc2136-tsig-axfr
             - --source=ingress
-            - --source=service
             - --rfc2136-insecure
             - --domain-filter=sunshower.cloud
