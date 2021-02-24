@@ -12,16 +12,33 @@ data:
   key: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
 #  key: AQBsjC1gNnRMERAAdwiCUsIIw9L/ZW2ylqNntQ==
 ---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: dynamic
+  annotations:
+    storageclass.beta.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/rbd
+parameters:
+  monitors: 192.168.1.4:6789
+  adminId: admin
+  adminSecretName: ceph-secret
+  adminSecretNamespace: devops-tools
+  pool: rbd
+  userId: admin
+  userSecretName: ceph-secret
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: artifacts
   namespace: devops-tools
 spec:
+  storageClassName: dynamic
   capacity:
     storage: 150Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   rbd:
     monitors:
       - 192.168.1.4:6789
@@ -40,10 +57,10 @@ metadata:
   namespace: devops-tools
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 150Gi
+      storage: 50Gi
 ---
 apiVersion: v1
 kind: Service
@@ -83,13 +100,16 @@ spec:
       labels:
         app: nexus-server
     spec:
+      securityContext:
+        fsGroup: 0
+        runAsUser: 0
       containers:
         - name: nexus
           image: sonatype/nexus3:latest
           resources:
             limits:
-              memory: "4Gi"
-              cpu: "1000m"
+              memory: "8Gi"
+              cpu: "4000m"
             requests:
               memory: "2Gi"
               cpu: "500m"
