@@ -100,12 +100,14 @@ spec:
       labels:
         app: nexus-server
     spec:
+      imagePullSecrets:
+        - name: regcred
       securityContext:
         fsGroup: 0
         runAsUser: 0
       containers:
         - name: nexus
-          image: sonatype/nexus3:latest
+          image: quay.io/travelaudience/docker-nexus:3.29.2
           resources:
             limits:
               memory: "8Gi"
