@@ -107,7 +107,7 @@ spec:
         runAsUser: 0
       containers:
         - name: nexus
-          image: quay.io/travelaudience/docker-nexus:3.29.2
+          image: sonatype/nexus3
           resources:
             limits:
               memory: "8Gi"
