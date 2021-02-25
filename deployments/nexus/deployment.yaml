@@ -1,9 +1,94 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devops-tools
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ceph-secret
+  namespace: devops-tools
+data:
+  key: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
+#  key: AQBsjC1gNnRMERAAdwiCUsIIw9L/ZW2ylqNntQ==
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: dynamic
+  annotations:
+    storageclass.beta.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/rbd
+parameters:
+  monitors: 192.168.1.4:6789
+  adminId: admin
+  adminSecretName: ceph-secret
+  adminSecretNamespace: devops-tools
+  pool: rbd
+  userId: admin
+  userSecretName: ceph-secret
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: artifacts
+  namespace: devops-tools
+spec:
+  storageClassName: dynamic
+  capacity:
+    storage: 150Gi
+  accessModes:
+    - ReadWriteOnce
+  rbd:
+    monitors:
+      - 192.168.1.4:6789
+    pool: rbd
+    image: devops
+    user: admin
+    secretRef:
+      name: ceph-secret
+    fsType: ext4
+    readOnly: false
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: artifacts-claim
+  namespace: devops-tools
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexus-service
+  namespace: devops-tools
+  annotations:
+    metallb.universe.tf/address-pool: default
+    external-dns.alpha.kubernetes.io/hostname: artifacts.sunshower.cloud
+spec:
+  selector:
+    app: nexus-server
+  type: LoadBalancer
+  ports:
+    - port: 80
+      name: http
+      protocol: TCP
+      targetPort: 8081
+    - port: 5000
+      name: docker
+      protocol: TCP
+      targetPort: 5000
 
-
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nexus
+  name: nexus-server
   namespace: devops-tools
 spec:
   replicas: 1
@@ -15,13 +100,18 @@ spec:
       labels:
         app: nexus-server
     spec:
+      imagePullSecrets:
+        - name: regcred
+      securityContext:
+        fsGroup: 0
+        runAsUser: 0
       containers:
         - name: nexus
-          image: sonatype/nexus3:latest
+          image: sonatype/nexus3
           resources:
             limits:
-              memory: "4Gi"
-              cpu: "1000m"
+              memory: "8Gi"
+              cpu: "4000m"
             requests:
               memory: "2Gi"
               cpu: "500m"
@@ -32,4 +122,6 @@ spec:
               mountPath: /nexus-data
       volumes:
         - name: nexus-data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: artifacts-claim
+#          emptyDir: {}
