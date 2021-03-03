@@ -94,7 +94,7 @@
 
                 <repository>
                     <id>sunshower-cache</id>
-                        <url>http://artifacts.sunshower.io/repository/sunshower-cache/</url>
+                        <url>http://artifacts.sunshower.cloud/repository/sunshower-cache/</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
