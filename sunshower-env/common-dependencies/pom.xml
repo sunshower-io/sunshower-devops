@@ -2,23 +2,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common-dependencies</artifactId>
-    <version>1.0.20-SNAPSHOT</version>
+    <version>1.0.20</version>
     <packaging>pom</packaging>
 
 
     <parent>
         <groupId>io.sunshower.env</groupId>
         <artifactId>env-aggregator</artifactId>
-        <version>1.0.20-SNAPSHOT</version>
+        <version>1.0.20</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <name>Sunshower Common Dependencies</name>
 
     <scm>
+        <tag>v1.0.20.Final</tag>
         <url>https://github.com/sunshower-io/sunshower.io</url>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
 
 
     <properties>
@@ -252,7 +252,6 @@
             </dependency>
 
 
-
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
@@ -313,7 +312,6 @@
                 <artifactId>javax.ws.rs-api</artifactId>
                 <version>${jaxrs-api.version}</version>
             </dependency>
-
 
 
             <dependency>

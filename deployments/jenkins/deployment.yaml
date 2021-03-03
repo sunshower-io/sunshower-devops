@@ -1,17 +1,20 @@
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: artifacts
+  name: build
+  namespace: devops-tools
 spec:
+  storageClassName: dynamic
   capacity:
-    storage: 150Gi
+    storage: 10Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   rbd:
     monitors:
-      - athena.sunshower.cloud:6789
-    pool: virtual-machines
-    image: myvol
+      - 192.168.1.4:6789
+    pool: rbd
+    image: build
     user: admin
     secretRef:
       name: ceph-secret
@@ -21,10 +24,12 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: artifacts-claim
+  name: build-claim
+  namespace: devops-tools
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 150Gi
+      storage: 10Gi
+---

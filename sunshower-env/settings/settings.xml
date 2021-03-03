@@ -41,7 +41,7 @@
             <repositories>
                 <repository>
                     <id>sunshower-snapshots</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
                     <releases>
                         <enabled>false</enabled>
                     </releases>
@@ -51,7 +51,7 @@
                 </repository>
                 <repository>
                     <id>sunshower-releases</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-releases</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-releases</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
@@ -94,7 +94,7 @@
 
                 <repository>
                     <id>sunshower-cache</id>
-                        <url>http://artifacts.sunshower.io/repository/sunshower-cache/</url>
+                        <url>http://artifacts.sunshower.cloud/repository/sunshower-cache/</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>

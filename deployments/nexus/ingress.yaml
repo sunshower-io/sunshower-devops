@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: registry-ingress
+  namespace: devops-tools
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    metallb.universe.tf/address-pool: default
+    kubernetes.io/ingress.class: nginx
+
+#    external-dns.alpha.kubernetes.io/hostname: registry.sunshower.cloud
+spec:
+  rules:
+    - host: registry.sunshower.cloud
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nexus-server
+                port:
+                  name: docker-http

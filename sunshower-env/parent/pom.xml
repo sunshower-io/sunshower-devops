@@ -1,21 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.20-SNAPSHOT</version>
+    <version>1.0.20</version>
     <packaging>pom</packaging>
 
     <name>Sunshower Parent Pom</name>
 
     <scm>
         <url>https://github.com/sunshower-io/sunshower.io</url>
-        <tag>HEAD</tag>
+        <tag>v1.0.20.Final</tag>
     </scm>
 
     <properties>
-        <env.version>${project.version}</env.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
     </properties>
@@ -23,11 +21,11 @@
     <distributionManagement>
         <repository>
             <id>sunshower-releases</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
         </repository>
         <snapshotRepository>
             <id>sunshower-snapshots</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -53,11 +51,11 @@
             <distributionManagement>
                 <repository>
                     <id>sunshower-releases</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
                 </repository>
                 <snapshotRepository>
                     <id>sunshower-snapshots</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
                 </snapshotRepository>
             </distributionManagement>
         </profile>
@@ -77,7 +75,7 @@
         </repository>
         <repository>
             <id>sunshower-snapshots</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -88,7 +86,7 @@
 
         <repository>
             <id>sunshower-releases</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -139,7 +137,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>hal-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -148,7 +146,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>common-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -157,7 +155,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>persist-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -165,7 +163,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>service-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -174,7 +172,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>test-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

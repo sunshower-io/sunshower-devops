@@ -4,12 +4,12 @@
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
     <relativePath>../pom.xml</relativePath>
-    <version>1.0.20-SNAPSHOT</version>
+    <version>1.0.20</version>
   </parent>
 
   <groupId>io.sunshower.env</groupId>
   <artifactId>service-dependencies</artifactId>
-  <version>1.0.20-SNAPSHOT</version>
+  <version>1.0.20</version>
   <packaging>pom</packaging>
 
   <properties>
@@ -20,7 +20,7 @@
 
   <scm>
     <url>https://github.com/sunshower-io/sunshower.io</url>
-    <tag>HEAD</tag>
+    <tag>v1.0.20.Final</tag>
   </scm>
   <dependencyManagement>
     <dependencies>

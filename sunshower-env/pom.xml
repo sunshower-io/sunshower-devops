@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
-    <version>1.0.20-SNAPSHOT</version>
+    <version>1.0.20</version>
     <packaging>pom</packaging>
 
     <name>Sunshower Environment Aggregator</name>
@@ -18,13 +17,18 @@
     <distributionManagement>
         <repository>
             <id>sunshower-releases</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
         </repository>
         <snapshotRepository>
             <id>sunshower-snapshots</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+    <scm>
+        <connection>scm:git:git@github.com:sunshower-io/sunshower-devops</connection>
+        <developerConnection>scm:git:git@github.com:sunshower-io/sunshower-devops</developerConnection>
+      <tag>v1.0.20.Final</tag>
+  </scm>
     <profiles>
         <profile>
             <id>open-source</id>
@@ -47,11 +51,11 @@
             <distributionManagement>
                 <repository>
                     <id>sunshower-releases</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
                 </repository>
                 <snapshotRepository>
                     <id>sunshower-snapshots</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
                 </snapshotRepository>
             </distributionManagement>
         </profile>
@@ -67,7 +71,7 @@
 
         <repository>
             <id>sunshower-snapshots</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -78,7 +82,7 @@
 
         <repository>
             <id>sunshower-releases</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

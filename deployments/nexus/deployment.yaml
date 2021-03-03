@@ -79,10 +79,22 @@ spec:
       name: http
       protocol: TCP
       targetPort: 8081
+    - port: 8080
+      name: docker-http
+      protocol: TCP
+      targetPort: 8080
+    - port: 8181
+      name: https
+      protocol: TCP
+      targetPort: 8181
     - port: 5000
-      name: docker
+      name: containers-insecure
       protocol: TCP
       targetPort: 5000
+    - port: 5001
+      name: containers-secure
+      protocol: TCP
+      targetPort: 5001
 
 ---
 apiVersion: apps/v1
