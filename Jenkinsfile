@@ -9,16 +9,16 @@ podTemplate(
                 ),
         ]) {
 
-
     environment {
         MVN_REPO = credentials('artifacts-credentials')
     }
+
     node(POD_LABEL) {
         checkout scm
         stage('Get a Maven project') {
             container('maven') {
                 stage('Build a Maven project') {
-                    sh "ls -la"
+                    sh "env"
                     sh """
                         mvn clean install deploy \
                         -f sunshower-env \
