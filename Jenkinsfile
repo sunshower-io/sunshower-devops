@@ -53,7 +53,9 @@ pipeline {
             steps {
                 container('maven') {
                     sh """
-                        mvn -B release:prepare release:perform
+                        mvn -B release:prepare release:perform \
+                        -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
                     """
                 }
             }
