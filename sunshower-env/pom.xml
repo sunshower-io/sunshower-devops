@@ -3,7 +3,7 @@
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
-    <version>1.0.20</version>
+    <version>1.0.20-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Sunshower Environment Aggregator</name>
@@ -27,7 +27,7 @@
     <scm>
         <connection>scm:git:git@github.com:sunshower-io/sunshower-devops</connection>
         <developerConnection>scm:git:git@github.com:sunshower-io/sunshower-devops</developerConnection>
-      <tag>v1.0.20.Final</tag>
+      <tag>v1.0.20-SNAPSHOT.Final</tag>
   </scm>
     <profiles>
         <profile>

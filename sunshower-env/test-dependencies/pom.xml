@@ -3,20 +3,19 @@
 
   <groupId>io.sunshower.env</groupId>
   <artifactId>test-dependencies</artifactId>
-  <version>1.0.20</version>
+  <version>1.0.20-SNAPSHOT</version>
   <name>Sunshower Test Dependencies</name>
 
   <parent>
     <groupId>io.sunshower.env</groupId>
     <artifactId>env-aggregator</artifactId>
     <relativePath>../pom.xml</relativePath>
-    <version>1.0.20</version>
+    <version>1.0.20-SNAPSHOT</version>
   </parent>
   <packaging>pom</packaging>
 
   <scm>
     <url>https://github.com/sunshower-io/sunshower.io</url>
-    <tag>v1.0.20.Final</tag>
   </scm>
 
   <properties>
