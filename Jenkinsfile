@@ -52,6 +52,7 @@ podTemplate(
                     CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
                 }
                 sh "env"
+                sh "java -version"
             }
         }
     }
