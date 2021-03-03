@@ -50,10 +50,11 @@ podTemplate(
 }
 
 pipeline {
+    agent any
+    environment {
+        CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
+    }
     stages {
-        environment {
-            CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
-        }
         stage("echo!") {
             sh "env"
 
