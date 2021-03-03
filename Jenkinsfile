@@ -50,17 +50,19 @@
 //}
 
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'artifacts.sunshower.cloud:5001/maven:3.6.3-openjdk-16-slim'
+        }
+    }
     environment {
         CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
     }
     stages {
         stage("echo!") {
             steps {
-                container('maven') {
-                    sh "env"
-                    sh "java -version"
-                }
+                sh "env"
+                sh "java -version"
 
             }
 
