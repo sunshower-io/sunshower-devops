@@ -9,12 +9,12 @@ podTemplate(
                 ),
         ]) {
 
-    environment {
-        MVN_REPO = credentials('artifacts-credentials')
-    }
 
     node(POD_LABEL) {
         checkout scm
+        environment {
+            MVN_REPO = credentials('artifacts-credentials')
+        }
         stage('Get a Maven project') {
             container('maven') {
                 stage('Build a Maven project') {
