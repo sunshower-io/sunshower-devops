@@ -9,7 +9,7 @@ spec:
     - ReadWriteMany
   rbd:
     monitors:
-      - athena.sunshower.io:6789
+      - athena.sunshower.cloud:6789
     pool: virtual-machines
     image: myvol
     user: admin

@@ -23,11 +23,11 @@
     <distributionManagement>
         <repository>
             <id>sunshower-releases</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
         </repository>
         <snapshotRepository>
             <id>sunshower-snapshots</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -53,11 +53,11 @@
             <distributionManagement>
                 <repository>
                     <id>sunshower-releases</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
                 </repository>
                 <snapshotRepository>
                     <id>sunshower-snapshots</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
                 </snapshotRepository>
             </distributionManagement>
         </profile>
@@ -77,7 +77,7 @@
         </repository>
         <repository>
             <id>sunshower-snapshots</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -88,7 +88,7 @@
 
         <repository>
             <id>sunshower-releases</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
