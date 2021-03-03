@@ -15,7 +15,6 @@
     </scm>
 
     <properties>
-        <env.version>${project.version}</env.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
     </properties>
