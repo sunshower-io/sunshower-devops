@@ -53,6 +53,7 @@ podTemplate(
                 }
                 sh "env"
                 sh "java -version"
+                sh "echo ${env.CURRENT_VERSION}"
             }
         }
     }
