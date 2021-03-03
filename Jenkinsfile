@@ -33,6 +33,9 @@ pipeline {
         }
 
         stage('release POMs') {
+            when {
+                branch "master"
+            }
             steps {
                 container('maven') {
                     sh """

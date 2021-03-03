@@ -25,6 +25,10 @@
             <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+    <scm>
+        <connection>scm:git:git@github.com:sunshower-io/sunshower-devops</connection>
+        <developerConnection>scm:git:git@github.com:sunshower-io/sunshower-devops</developerConnection>
+    </scm>
     <profiles>
         <profile>
             <id>open-source</id>
