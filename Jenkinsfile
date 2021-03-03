@@ -11,7 +11,7 @@ podTemplate(
 
     node(POD_LABEL) {
         stage('Get a Maven project') {
-            git url: 'https://github.com/sunshower-io/sunshower-base'
+            git url: 'https://github.com/sunshower-io/sunshower-devops'
             container('maven') {
                 stage('Build a Maven project') {
                     sh 'mvn clean install -f sunshower-env'
