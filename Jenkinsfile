@@ -1,12 +1,26 @@
 podTemplate(
         imagePullSecrets: ['regcred'],
         containers: [
+
+                containerTemplate(
+                        name: 'jnlp',
+                        command: 'cat',
+                        ttyEnabled: true,
+                        image: 'artifacts.sunshower.cloud:5001/jenkins/inbound-agent:4.6-1',
+                        args: '${computer.jnlpmac} ${computer.name}'
+                ),
                 containerTemplate(
                         name: 'maven',
                         command: 'cat',
                         ttyEnabled: true,
                         image: 'artifacts.sunshower.cloud:5001/maven:3.6.3-openjdk-16-slim'
                 ),
+        ],
+        volumes: [
+                hostPathVolume(
+                        mountPath: '/var/run/docker.sock',
+                        hostPath: '/var/run/docker.sock'
+                )
         ]) {
 
 
