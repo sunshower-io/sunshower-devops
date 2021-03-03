@@ -39,7 +39,7 @@ pipeline {
             steps {
                 container('maven') {
                     sh """
-                        echo "sup"
+                        mvn -B release:prepare release:perform
                     """
                 }
             }
