@@ -14,12 +14,15 @@ podTemplate(
         stage('checkout repository') {
             checkout scm
         }
-        stage('Get a Maven project') {
+        stage('Publish Bills-of-material') {
             container('maven') {
-                environment {
-                    MVN_REPO = credentials('artifacts-credentials')
-                }
-                stage('Build a Maven project') {
+                withCredentials([[
+                        $class: 'UsernamePasswordMultiBinding',
+                        credentialsId: 'artifacts-credentials',
+                        usernameVariable: 'MVN_REPO_USR',
+                        passwordVariable: 'MVN_REPO_PSW'
+
+                ]]) {
                     sh "env"
                     sh """
                         mvn clean install deploy \
