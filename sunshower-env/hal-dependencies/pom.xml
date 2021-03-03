@@ -8,7 +8,6 @@
     <version>1.0.20-SNAPSHOT</version>
   </parent>
 
-  <groupId>io.sunshower.env</groupId>
   <artifactId>hal-dependencies</artifactId>
   <version>1.0.20-SNAPSHOT</version>
 
