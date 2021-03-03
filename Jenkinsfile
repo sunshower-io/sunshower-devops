@@ -40,11 +40,23 @@ podTemplate(
             }
         }
 
-        stage('Set Maven POM version') {
-            environment {
-                CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
-            }
+//        stage('Set Maven POM version') {
+//            environment {
+//                CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
+//            }
+//            sh "env"
+//        }
+    }
+}
+
+pipeline {
+    stages {
+        environment {
+            CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
+        }
+        stage("echo!") {
             sh "env"
+
         }
     }
 }
