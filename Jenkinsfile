@@ -59,7 +59,7 @@ pipeline {
             steps {
                 container('maven') {
                     sh "env"
-                    sh "java -v"
+                    sh "java -version"
                 }
 
             }
