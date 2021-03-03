@@ -14,6 +14,7 @@ podTemplate(
             git url: 'https://github.com/sunshower-io/sunshower-devops'
             container('maven') {
                 stage('Build a Maven project') {
+                    sh "ls -la"
                     sh 'mvn clean install -f sunshower-env'
                 }
             }
