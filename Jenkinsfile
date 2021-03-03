@@ -14,12 +14,7 @@ podTemplate(
         MVN_REPO = credentials('artifacts-credentials')
     }
     node(POD_LABEL) {
-        stage('check out project') {
-            git(
-                    branch: "**",
-                    url: 'git@github.com:sunshower-io/sunshower-devops'
-            )
-        }
+        checkout scm
         stage('Get a Maven project') {
             container('maven') {
                 stage('Build a Maven project') {
