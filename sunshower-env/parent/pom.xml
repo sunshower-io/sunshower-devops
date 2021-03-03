@@ -138,7 +138,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>hal-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -147,7 +147,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>common-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -156,7 +156,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>persist-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -164,7 +164,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>service-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -173,7 +173,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>test-dependencies</artifactId>
-                <version>${env.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
