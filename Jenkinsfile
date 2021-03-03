@@ -56,7 +56,10 @@ pipeline {
     }
     stages {
         stage("echo!") {
-            sh "env"
+            steps {
+                sh "env"
+
+            }
 
         }
     }
