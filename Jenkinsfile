@@ -57,7 +57,10 @@ pipeline {
     stages {
         stage("echo!") {
             steps {
-                sh "env"
+                container('maven') {
+                    sh "env"
+                    sh "java -v"
+                }
 
             }
 
