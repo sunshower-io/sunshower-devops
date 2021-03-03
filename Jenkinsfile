@@ -33,6 +33,13 @@ pipeline {
         }
 
         stage('release POMs') {
+            steps {
+                container('maven') {
+                    sh """
+                        echo "sup"
+                    """
+                }
+            }
         }
     }
 }
