@@ -18,11 +18,11 @@
     <distributionManagement>
         <repository>
             <id>sunshower-releases</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
         </repository>
         <snapshotRepository>
             <id>sunshower-snapshots</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
     <profiles>
@@ -47,11 +47,11 @@
             <distributionManagement>
                 <repository>
                     <id>sunshower-releases</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
                 </repository>
                 <snapshotRepository>
                     <id>sunshower-snapshots</id>
-                    <url>http://artifacts.sunshower.io/repository/sunshower-snapshots</url>
+                    <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
                 </snapshotRepository>
             </distributionManagement>
         </profile>
@@ -67,7 +67,7 @@
 
         <repository>
             <id>sunshower-snapshots</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-snapshots/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -78,7 +78,7 @@
 
         <repository>
             <id>sunshower-releases</id>
-            <url>http://artifacts.sunshower.io/repository/sunshower-releases/</url>
+            <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
