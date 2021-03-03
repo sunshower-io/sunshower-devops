@@ -7,11 +7,14 @@ pipeline {
     }
 
     stages {
-        steps {
-            container('maven') {
-                sh 'mvn -version'
-                sh 'java -version'
-                sh 'echo HELLO'
+        stage('build env poms') {
+
+            steps {
+                container('maven') {
+                    sh 'mvn -version'
+                    sh 'java -version'
+                    sh 'echo HELLO'
+                }
             }
         }
     }
