@@ -95,7 +95,14 @@ spec:
       name: containers-secure
       protocol: TCP
       targetPort: 5001
-
+    - port: 6000
+      name: ssio-containers-insecure
+      protocol: TCP
+      targetPort: 6000
+    - port: 6001
+      name: ssio-containers-secure
+      protocol: TCP
+      targetPort: 6001
 ---
 apiVersion: apps/v1
 kind: Deployment
