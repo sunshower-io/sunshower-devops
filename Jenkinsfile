@@ -5,27 +5,26 @@ pipeline {
             yamlFile 'deployments/agent/template.yaml'
         }
     }
+    environment {
+        /**
+         * credentials for Artifactory
+         */
+        MVN_REPO = credentials('artifacts-credentials')
+
+
+        /**
+         * github credentials
+         */
+        GITHUB = credentials('github-build-credentials')
+
+        /**
+         * current version
+         */
+        CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
+    }
 
     stages {
 
-        environment {
-
-            /**
-             * credentials for Artifactory
-             */
-            MVN_REPO = credentials('artifacts-credentials')
-
-
-            /**
-             * github credentials
-             */
-            GITHUB = credentials('github-build-credentials')
-
-            /**
-             * current version
-             */
-            CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
-        }
         stage('Checkout') {
             steps {
                 scmSkip(deleteBuild: true, skipPattern: '.*\\[released\\].*')
