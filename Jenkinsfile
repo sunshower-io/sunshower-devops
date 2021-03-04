@@ -8,6 +8,24 @@ pipeline {
 
     stages {
 
+        environment {
+
+            /**
+             * credentials for Artifactory
+             */
+            MVN_REPO = credentials('artifacts-credentials')
+
+
+            /**
+             * github credentials
+             */
+            GITHUB = credentials('github-build-credentials')
+
+            /**
+             * current version
+             */
+            CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
+        }
         stage('Checkout') {
             steps {
                 scmSkip(deleteBuild: true, skipPattern: '.*\\[released\\].*')
@@ -18,24 +36,6 @@ pipeline {
         }
 
         stage('build env poms') {
-            environment {
-
-                /**
-                 * credentials for Artifactory
-                 */
-                MVN_REPO = credentials('artifacts-credentials')
-
-
-                /**
-                 * github credentials
-                 */
-                GITHUB = credentials('github-build-credentials')
-
-                /**
-                 * current version
-                 */
-                CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
-            }
 
             steps {
                 container('maven') {
@@ -68,7 +68,7 @@ pipeline {
                      * Configure GitHub password
                      */
                     sh """
-                        git config --global user.password" ${GITHUB_PSW}"
+                        git config --global user.password" "${GITHUB_PSW}"
                     """
 
                     /**
