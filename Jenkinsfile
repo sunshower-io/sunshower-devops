@@ -59,14 +59,14 @@ pipeline {
                      */
 
                     sh """
-                        git config --global user.name "${env.GITHUB_USR}"
+                        git config --global user.name "${GITHUB_USR}"
                     """
 
                     /**
                      * Configure GitHub password
                      */
                     sh """
-                        git config --global user.password" ${env.GITHUB_PSW}"
+                        git config --global user.password" ${GITHUB_PSW}"
                     """
 
                     /**
