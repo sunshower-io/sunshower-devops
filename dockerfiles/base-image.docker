@@ -41,6 +41,7 @@ RUN ls -la $M2_HOME
 # Configure path
 ENV PATH=$BASE_PATH:$GRADLE_HOME:$MAVEN_HOME
 
+
 ENTRYPOINT /bin/bash
 
 

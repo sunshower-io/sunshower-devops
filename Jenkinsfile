@@ -88,6 +88,10 @@ pipeline {
                         git config --global user.name "${GITHUB_USER_PSW}"
                     """
 
+                    sh """
+                        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+                    """
+
                 }
             }
 
