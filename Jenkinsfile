@@ -51,7 +51,27 @@ pipeline {
                 branch "master"
             }
             steps {
+
                 container('maven') {
+
+                    /**
+                     * Configure GitHub username
+                     */
+
+                    sh """
+                        git config --global user.name "${env.GITHUB_USR}"
+                    """
+
+                    /**
+                     * Configure GitHub password
+                     */
+                    sh """
+                        git config --global user.password"${env.GITHUB_PSW}"
+                    """
+
+                    /**
+                     * perform maven release
+                     */
                     sh """
                         mvn -B release:prepare release:perform \
                         -f sunshower-env \
