@@ -11,6 +11,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 scmSkip(deleteBuild: true, skipPattern: '.*\\[released\\].*')
+
+                sh "env"
             }
 
         }
