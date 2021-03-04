@@ -3,7 +3,7 @@ kind: "Pod"
 spec:
   containers:
     - name: maven
-      image: 'artifacts.sunshower.cloud:5001/maven:3.6.3-openjdk-16-slim'
+      image: 'artifacts.sunshower.cloud:5001/sunshower-base'
       command:
         - cat
       tty: true
