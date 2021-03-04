@@ -6,6 +6,7 @@ RUN apt-get install -y git-core wget
 RUN apt-get install unzip curl -y
 
 
+RUN apt-get install -y git
 
 # Environment Variables
 ENV PROJECT_NAME workspace
