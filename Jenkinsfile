@@ -18,6 +18,11 @@ pipeline {
         GITHUB = credentials('github-build-credentials')
 
         /**
+         * this just contains the build email address and name
+         */
+        GITHUB_USER = credentials("github-build-userinfo")
+
+        /**
          * current version
          */
         CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
@@ -47,14 +52,13 @@ pipeline {
             }
         }
 
-        stage('release POMs') {
+        stage('configure github credentials') {
             when {
                 branch "master"
             }
+
             steps {
-
-                container('maven') {
-
+                container("maven") {
                     /**
                      * Configure GitHub username
                      */
@@ -69,6 +73,34 @@ pipeline {
                     sh """
                         git config --global user.password "${GITHUB_PSW}"
                     """
+
+                    /**
+                     * configure github email address
+                     */
+                    sh """
+                        git config --global user.email "${GITHUB_USER_USR}"
+                    """
+
+                    /**
+                     * configure
+                     */
+                    sh """
+                        git config --global user.name "${GITHUB_USER_PSW}"
+                    """
+
+                }
+            }
+
+        }
+
+        stage('release POMs') {
+            when {
+                branch "master"
+            }
+            steps {
+
+                container('maven') {
+
 
                     /**
                      * perform maven release
