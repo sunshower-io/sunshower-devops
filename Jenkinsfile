@@ -66,7 +66,7 @@ pipeline {
                      * Configure GitHub password
                      */
                     sh """
-                        git config --global user.password"${env.GITHUB_PSW}"
+                        git config --global user.password" ${env.GITHUB_PSW}"
                     """
 
                     /**
