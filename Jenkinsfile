@@ -6,6 +6,7 @@ pipeline {
         }
     }
     environment {
+
         /**
          * credentials for Artifactory
          */
@@ -48,6 +49,20 @@ pipeline {
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml
                     """
+                }
+            }
+        }
+
+        stage('compute next release version') {
+            when {
+                branch 'master'
+            }
+            steps {
+                container('maven') {
+                    script {
+                        env.NEXT_VERSION = env.CURRENT_VERSION.substring(0, 5)
+                    }
+                    sh "env"
                 }
             }
         }
