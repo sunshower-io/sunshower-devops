@@ -28,8 +28,8 @@
     <scm>
         <tag>HEAD</tag>
         <url>https://github.com/sunshower-io/${project.scm.tag}</url>
-        <connection>scm:git:https://github.com/sunshower-io/sunshower-devops</connection>
-        <developerConnection>scm:git:https://github.com/sunshower-io/sunshower-devops</developerConnection>
+        <connection>scm:git:git@github.com:sunshower-io/sunshower-devops</connection>
+        <developerConnection>scm:git:git@github.com:sunshower-io/sunshower-devops</developerConnection>
     </scm>
     <profiles>
         <profile>
