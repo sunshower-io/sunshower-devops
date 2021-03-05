@@ -96,6 +96,10 @@ pipeline {
                         ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
                     """
 
+                    sh """
+                       git remote add origin https://github.com/sunshower-io/sunshower-devops 
+                    """
+
                 }
             }
 
