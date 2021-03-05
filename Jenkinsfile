@@ -59,20 +59,6 @@ pipeline {
 
             steps {
                 container("maven") {
-                    /**
-                     * Configure GitHub username
-                     */
-
-                    sh """
-                        git config --global user.name "${GITHUB_USR}"
-                    """
-
-                    /**
-                     * Configure GitHub password
-                     */
-                    sh """
-                        git config --global user.password "${GITHUB_PSW}"
-                    """
 
                     /**
                      * configure github email address
@@ -97,8 +83,10 @@ pipeline {
                     """
 
                     sh """
-                         git remote -v
+                        git remote set-url --push origin https://${GITHUB_PSW}@github.com/sunshower-io/sunshower-devops
                     """
+
+
 
                 }
             }
