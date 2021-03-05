@@ -89,6 +89,10 @@ pipeline {
                     """
 
                     sh """
+                        mkdir -p ~/.ssh
+                    """
+
+                    sh """
                         ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
                     """
 
