@@ -97,7 +97,7 @@ pipeline {
                     """
 
                     sh """
-                       git remote add origin https://github.com/sunshower-io/sunshower-devops 
+                         git remote -v
                     """
 
                 }
