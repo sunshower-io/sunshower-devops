@@ -117,24 +117,8 @@ pipeline {
 
                 container('maven') {
 
+                    sh "env"
 
-                    /**
-                     * prepare maven release
-                     */
-                    sh """
-                        mvn -B release:prepare \
-                        -f sunshower-env \
-                        -s sunshower-env/settings/settings.xml
-                    """
-
-                    /**
-                     * perform maven release
-                     */
-                    sh """
-                        mvn -B release:prepare \
-                        -f sunshower-env \
-                        -s sunshower-env/settings/settings.xml
-                    """
                 }
             }
         }
