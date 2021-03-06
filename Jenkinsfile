@@ -43,7 +43,16 @@ pipeline {
                 container('maven') {
                     sh """
                         mvn clean install deploy \
+                        -P sunshower \
                         -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
+                    """
+
+
+                    sh """
+                        mvn clean install deploy \
+                        -P sunshower \
+                        -f sunshower-env/parent \
                         -s sunshower-env/settings/settings.xml
                     """
                 }
@@ -81,6 +90,13 @@ pipeline {
                      */
                     sh """
                         mvn -f sunshower-env \
+                        -P sunshower \
+                        versions:set -DnewVersion="${env.NEXT_VERSION}" 
+                    """
+
+                    sh """
+                        mvn -f sunshower-env/parent \
+                        -P sunshower \
                         versions:set -DnewVersion="${env.NEXT_VERSION}"
                     """
                     /**
@@ -88,7 +104,16 @@ pipeline {
                      */
                     sh """
                         mvn clean install deploy \
+                        -P sunshower \
                         -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
+                    """
+
+
+                    sh """
+                        mvn clean install deploy \
+                        -P sunshower \
+                        -f sunshower-env/parent \
                         -s sunshower-env/settings/settings.xml
                     """
                 }
@@ -173,14 +198,33 @@ pipeline {
 
                     sh """
                         mvn versions:set \
+                        -P sunshower \
                         -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml \
+                        -DnewVersion="${env.RELEASED_VERSION}"
+                    """
+
+
+                    sh """
+                        mvn versions:set \
+                        -P sunshower \
+                        -f sunshower-env/parent \
                         -s sunshower-env/settings/settings.xml \
                         -DnewVersion="${env.RELEASED_VERSION}"
                     """
 
                     sh """
                         mvn clean install deploy \
+                        -P sunshower \
                         -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
+                    """
+
+
+                    sh """
+                        mvn clean install deploy \
+                        -P sunshower \
+                        -f sunshower-env/parent \
                         -s sunshower-env/settings/settings.xml
                     """
 
@@ -195,7 +239,17 @@ pipeline {
 
                     sh """
                         mvn versions:set \
+                        -P sunshower \
                         -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml \
+                        -DnewVersion="${env.NEXT_VERSION}"
+                    """
+
+
+                    sh """
+                        mvn versions:set \
+                        -P sunshower \
+                        -f sunshower-env/parent \
                         -s sunshower-env/settings/settings.xml \
                         -DnewVersion="${env.NEXT_VERSION}"
                     """
@@ -206,6 +260,12 @@ pipeline {
                         -s sunshower-env/settings/settings.xml
                     """
 
+                    sh """
+                        mvn clean install deploy \
+                        -P sunshower \
+                        -f sunshower-env/parent \
+                        -s sunshower-env/settings/settings.xml
+                    """
 
                     sh """
                         git commit -am "[released] ${env.TAG_NAME} -> ${env.RELEASED_VERSION}"
