@@ -179,19 +179,20 @@ pipeline {
                     """
 
                     sh """
-                        git tag "${env.TAG_NAME}" -m "[released] Tagging: ${env.TAG_NAME}"
+                        git tag "v${env.RELEASED_VERSION}" \
+                        -m "[released] Tagging: ${env.RELEASED_VERSION} (from ${env.TAG_NAME})"
                     """
 
                     sh """
-                        git push origin ${env.TAG_NAME} 
+                        git push origin "v${env.RELEASED_VERSION}"
                     """
 
                     sh """
-                        git commit -am "[released] ${env.TAG_NAME}"
+                        git commit -am "[released] ${env.TAG_NAME} -> ${env.RELEASED_VERSION}"
                     """
 
                     sh """
-                        git push origin master
+                        git push -u origin master
                     """
                 }
             }
