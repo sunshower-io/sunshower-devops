@@ -214,7 +214,7 @@ pipeline {
                     """
 
                     sh """
-                        git fetch origin master
+                        git pull --rebase origin master
                     """
 
                     sh """
