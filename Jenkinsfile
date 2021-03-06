@@ -179,11 +179,11 @@ pipeline {
                     """
 
                     sh """
-                        git tag "${env.TAG_NAME}"
+                        git tag "${env.TAG_NAME}" -m "[released] Tagging: ${env.TAG_NAME}"
                     """
 
                     sh """
-                        git push --follow-tags
+                        git push origin ${env.TAG_NAME} 
                     """
 
                     sh """
