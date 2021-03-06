@@ -3,14 +3,14 @@
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>persist-dependencies</artifactId>
-    <version>1.0.21.Final</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>io.sunshower.env</groupId>
         <artifactId>env-aggregator</artifactId>
         <relativePath>../pom.xml</relativePath>
-        <version>1.0.21.Final</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <name>Sunshower Persistence Dependencies</name>

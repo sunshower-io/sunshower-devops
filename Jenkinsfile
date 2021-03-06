@@ -96,7 +96,7 @@ pipeline {
         stage("release component") {
             when {
                 expression {
-                    env.GIT_BRANCH.startsWith("release/")
+                    env.GIT_BRANCH == "release/${env.CURRENT_VERSION}"
                 }
             }
 
