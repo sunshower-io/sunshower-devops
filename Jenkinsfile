@@ -81,7 +81,7 @@ pipeline {
                      */
                     sh """
                         mvn -f sunshower-env \
-                        -DnewVersion="${env.NEXT_VERSION}"
+                        versions:set -DnewVersion="${env.NEXT_VERSION}"
                     """
 
                     /**
