@@ -1,4 +1,3 @@
-
 pipeline {
     agent {
         kubernetes {
@@ -34,8 +33,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 scmSkip(deleteBuild: true, skipPattern: '.*\\[released\\].*')
-
-                sh "env"
             }
 
         }
@@ -83,70 +80,120 @@ pipeline {
                         mvn -f sunshower-env \
                         versions:set -DnewVersion="${env.NEXT_VERSION}"
                     """
-
                     /**
                      * deploy
                      */
                     sh """
-                        mvn clean install deploy -f sunshower-env
+                        mvn clean install deploy \
+                        -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
                     """
                 }
             }
         }
 
-//        stage('configure github credentials') {
-//            when {
-//                branch "master"
-//            }
-//
-//            steps {
-//                container("maven") {
-//
-//                    /**
-//                     * configure github email address
-//                     */
-//                    sh """
-//                        git config --global user.email "${GITHUB_USER_USR}"
-//                    """
-//
-//                    /**
-//                     * configure
-//                     */
-//                    sh """
-//                        git config --global user.name "${GITHUB_USER_PSW}"
-//                    """
-//
-//                    sh """
-//                        mkdir -p ~/.ssh
-//                    """
-//
-//                    sh """
-//                        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-//                    """
-//
-//                    sh """
-//                        git remote set-url --push origin https://${GITHUB_PSW}@github.com/sunshower-io/sunshower-devops
-//                    """
-//
-//
-//
-//                }
-//            }
-//
-//        }
-//
-//        stage('release POMs') {
-//            when {
-//                branch "master"
-//            }
-//            steps {
-//
-//                container('maven') {
-//
-//                    sh "env"
-//
-//                }
-//            }
-//        }
+
+        stage("release component") {
+            when {
+                expression {
+                    env.GIT_BRANCH.startsWith("release/")
+                }
+            }
+
+            steps {
+                container('maven') {
+
+                    script {
+                        /**
+                         * strip the leading "release/" prefix
+                         */
+                        env.TAG_NAME = env.GIT_BRANCH - "release/"
+
+                        /**
+                         * compute the next versions:
+                         *
+                         * RELEASED_VERSION is the version that we're
+                         * 1. building
+                         * 2. deploying
+                         * 3. tagging
+                         *
+                         * NEXT_VERSION is the version that main will be incremented to
+                         *
+                         * So, if CURRENT_VERSION = 1.0.0-SNAPSHOT,
+                         * then RELEASED_VERSION = 1.0.0.Final
+                         * and NEXT_VERSION = 1.0.1-SNAPSHOT
+                         */
+                        version = env.CURRENT_VERSION
+
+
+                        segs = (version - '-SNAPSHOT')
+                                .split('\\.')
+                                .collect { i ->
+                                    i as int
+                                }
+
+                        releasedVersion = (segs[0..-2] << ++segs[-1]).join('.')
+                        nextVersion = releasedVersion + "-SNAPSHOT"
+
+                        env.RELEASED_VERSION = "${releasedVersion}.Final"
+                    }
+
+
+                    /**
+                     * configure github email address
+                     */
+                    sh """
+                        git config --global user.email "${GITHUB_USER_USR}"
+                    """
+
+                    /**
+                     * configure
+                     */
+                    sh """
+                        git config --global user.name "${GITHUB_USER_PSW}"
+                    """
+
+                    sh """
+                        mkdir -p ~/.ssh
+                    """
+
+                    sh """
+                        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+                    """
+
+                    sh """
+                        git remote set-url --push origin https://${GITHUB_PSW}@github.com/sunshower-io/sunshower-devops
+                    """
+
+                    sh """
+                        mvn versions:set \
+                        -DnewVersion="${env.RELEASED_VERSION}"
+                    """
+
+                    sh """
+                        mvn clean install deploy \
+                        -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
+                    """
+
+                    sh """
+                        git tag "${env.TAG_NAME}"
+                    """
+
+                    sh """
+                        git push --follow-tags
+                    """
+
+                    sh """
+                        git commit -am "[released] ${env.TAG_NAME}"
+                    """
+
+                    sh """
+                        git push origin master
+                    """
+                }
+            }
+
+        }
     }
 }
