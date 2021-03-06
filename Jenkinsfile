@@ -187,9 +187,15 @@ pipeline {
                         git push origin "v${env.RELEASED_VERSION}"
                     """
 
+
                     sh """
                         git commit -am "[released] ${env.TAG_NAME} -> ${env.RELEASED_VERSION}"
                     """
+
+                    sh """
+                        git checkout -b master
+                    """
+
 
                     sh """
                         git push -u origin master
