@@ -67,6 +67,9 @@ pipeline {
                 branch 'master'
             }
             steps {
+                scmSkip(deleteBuild: true, skipPattern: '(?s)(?!.*\\[released\\].*)^.*$\n')
+
+
                 container('maven') {
                     script {
                         segs = (env.CURRENT_VERSION - '-SNAPSHOT').split('\\.')
@@ -210,6 +213,9 @@ pipeline {
                         git checkout -b master
                     """
 
+                    sh """
+                        git fetch origin master
+                    """
 
                     sh """
                         git push -u origin master
