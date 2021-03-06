@@ -60,7 +60,8 @@ pipeline {
             steps {
                 container('maven') {
                     script {
-                        env.NEXT_VERSION = env.CURRENT_VERSION.substring(0, 5)
+                        idx = env.CURRENT_VERSION.lastIndexOf("-SNAPSHOT")
+                        env.RELEASED_VERSION = env.CURRENT_VERSION.substring(0, idx)
                     }
                     sh "env"
                 }
