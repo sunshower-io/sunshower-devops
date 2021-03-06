@@ -167,6 +167,8 @@ pipeline {
 
                     sh """
                         mvn versions:set \
+                        -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml \
                         -DnewVersion="${env.RELEASED_VERSION}"
                     """
 
