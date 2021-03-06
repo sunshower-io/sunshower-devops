@@ -32,7 +32,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                scmSkip(deleteBuild: true, skipPattern: '^\\[released\\].*')
+                scmSkip(deleteBuild: true, skipPattern: '(?s)(?!.*\\[released\\].*)^.*$\n')
             }
 
         }
