@@ -13,6 +13,7 @@
     </scm>
 
     <properties>
+        <env.version>1.0.1</env.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
     </properties>
@@ -136,7 +137,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>hal-dependencies</artifactId>
-                <version>${project.version}</version>
+                <version>${env.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -145,7 +146,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>common-dependencies</artifactId>
-                <version>${project.version}</version>
+                <version>${env.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -154,7 +155,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>persist-dependencies</artifactId>
-                <version>${project.version}</version>
+                <version>${env.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -162,7 +163,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>service-dependencies</artifactId>
-                <version>${project.version}</version>
+                <version>${env.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -171,7 +172,7 @@
             <dependency>
                 <groupId>io.sunshower.env</groupId>
                 <artifactId>test-dependencies</artifactId>
-                <version>${project.version}</version>
+                <version>${env.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
