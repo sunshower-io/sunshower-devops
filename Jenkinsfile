@@ -51,7 +51,7 @@ pipeline {
         }
 
         /**
-         * we could probably eventually handle this via plugin, but the process is:
+         * we could probably eventually handle this via plugin, but the process is
          *
          * Upon merge to master:
          *
