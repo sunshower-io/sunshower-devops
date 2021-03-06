@@ -135,6 +135,7 @@ pipeline {
                         releasedVersion = (segs[0..-2] << ++segs[-1]).join('.')
                         nextVersion = releasedVersion + "-SNAPSHOT"
 
+                        env.NEXT_VERSION = nextVersion
                         env.RELEASED_VERSION = "${releasedVersion}.Final"
                     }
 
@@ -185,6 +186,19 @@ pipeline {
 
                     sh """
                         git push origin "v${env.RELEASED_VERSION}"
+                    """
+
+                    sh """
+                        mvn versions:set \
+                        -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml \
+                        -DnewVersion="${env.NEXT_VERSION}"
+                    """
+
+                    sh """
+                        mvn clean install deploy \
+                        -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
                     """
 
 
