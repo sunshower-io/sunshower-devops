@@ -67,7 +67,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                scmSkip(deleteBuild: true, skipPattern: '(?s)(?!.*\\[released\\].*)^.*$\n')
+                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
 
 
                 container('maven') {
