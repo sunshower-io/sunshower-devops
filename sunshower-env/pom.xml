@@ -25,6 +25,9 @@
             <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+
+
+
     <scm>
         <tag>HEAD</tag>
         <url>https://github.com/sunshower-io/${project.scm.tag}</url>
