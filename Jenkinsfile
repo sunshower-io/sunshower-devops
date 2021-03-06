@@ -73,7 +73,7 @@ pipeline {
                 container('maven') {
                     script {
 
-                        segs = (env.CURRENT_VERSION - '-SNAPSHOT').split('\\.').map(i -> Integer.parseInt(i))
+                        segs = (env.CURRENT_VERSION - '-SNAPSHOT').split('\\.').map{i -> Integer.parseInt(i)}
                         nextVersionPrefix = (segs[0..-2] << ++segs[-1]).join('.')
                         nextVersion = nextVersionPrefix + "-SNAPSHOT"
 
