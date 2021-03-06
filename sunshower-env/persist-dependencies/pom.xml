@@ -29,7 +29,7 @@
           Infinispan Dependencies
         -->
 
-        <infinispan.version>9.4.14.Final</infinispan.version>
+        <infinispan.version>10.1.1.Final</infinispan.version>
 
         <!--
           End Infinispan Dependencies
