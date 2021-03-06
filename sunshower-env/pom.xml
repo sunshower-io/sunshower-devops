@@ -65,8 +65,6 @@
             </distributionManagement>
         </profile>
     </profiles>
-
-
     <repositories>
         <repository>
             <id>sunshower-oss-repo</id>
