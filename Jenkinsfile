@@ -65,79 +65,88 @@ pipeline {
          * 5. Upon failure, fail
          * 6. Push next snapshot to master
          */
-        stage('compute next release version') {
+        stage('deploy master snapshot') {
             when {
                 branch 'master'
             }
             steps {
                 container('maven') {
                     script {
-
-                        segs = (env.CURRENT_VERSION - '-SNAPSHOT').split('\\.').collect{i -> i as int}
-                        nextVersionPrefix = (segs[0..-2] << ++segs[-1]).join('.')
-                        nextVersion = nextVersionPrefix + "-SNAPSHOT"
-
-                        env.nextVersion = nextVersion
-                        env.NEXT_VERSION_PREFIX = nextVersionPrefix
+                        segs = (env.CURRENT_VERSION - '-SNAPSHOT').split('\\.')
+                        env.NEXT_VERSION = "${segs.join('.')}-${env.BUILD_NUMBER}-SNAPSHOT"
                     }
-                    sh "env"
-                }
-            }
-        }
-
-        stage('configure github credentials') {
-            when {
-                branch "master"
-            }
-
-            steps {
-                container("maven") {
 
                     /**
-                     * configure github email address
+                     * increment versions
                      */
                     sh """
-                        git config --global user.email "${GITHUB_USER_USR}"
+                        mvn -f sunshower-env \
+                        -DnewVersion="${env.NEXT_VERSION}"
                     """
 
                     /**
-                     * configure
+                     * deploy
                      */
                     sh """
-                        git config --global user.name "${GITHUB_USER_PSW}"
+                        mvn clean install deploy -f sunshower-env
                     """
-
-                    sh """
-                        mkdir -p ~/.ssh
-                    """
-
-                    sh """
-                        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-                    """
-
-                    sh """
-                        git remote set-url --push origin https://${GITHUB_PSW}@github.com/sunshower-io/sunshower-devops
-                    """
-
-
-
-                }
-            }
-
-        }
-
-        stage('release POMs') {
-            when {
-                branch "master"
-            }
-            steps {
-
-                container('maven') {
-
-                    sh "env"
-
                 }
             }
         }
+
+//        stage('configure github credentials') {
+//            when {
+//                branch "master"
+//            }
+//
+//            steps {
+//                container("maven") {
+//
+//                    /**
+//                     * configure github email address
+//                     */
+//                    sh """
+//                        git config --global user.email "${GITHUB_USER_USR}"
+//                    """
+//
+//                    /**
+//                     * configure
+//                     */
+//                    sh """
+//                        git config --global user.name "${GITHUB_USER_PSW}"
+//                    """
+//
+//                    sh """
+//                        mkdir -p ~/.ssh
+//                    """
+//
+//                    sh """
+//                        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+//                    """
+//
+//                    sh """
+//                        git remote set-url --push origin https://${GITHUB_PSW}@github.com/sunshower-io/sunshower-devops
+//                    """
+//
+//
+//
+//                }
+//            }
+//
+//        }
+//
+//        stage('release POMs') {
+//            when {
+//                branch "master"
+//            }
+//            steps {
+//
+//                container('maven') {
+//
+//                    sh "env"
+//
+//                }
+//            }
+//        }
     }
 }
