@@ -53,6 +53,18 @@ pipeline {
             }
         }
 
+        /**
+         * we could probably eventually handle this via plugin, but the process is:
+         *
+         * Upon merge to master:
+         *
+         * 1. Increment the version number
+         * 2. Update the version-number in the POM files
+         * 3. Rebuild the Maven/Gradle projects
+         * 4. Upon success, increment to next snapshot
+         * 5. Upon failure, fail
+         * 6. Push next snapshot to master
+         */
         stage('compute next release version') {
             when {
                 branch 'master'
@@ -60,8 +72,13 @@ pipeline {
             steps {
                 container('maven') {
                     script {
-                        idx = env.CURRENT_VERSION.lastIndexOf("-SNAPSHOT")
-                        env.RELEASED_VERSION = env.CURRENT_VERSION.substring(0, idx)
+
+                        segs = (env.CURRENT_VERSION - '-SNAPSHOT').split('\\.')
+                        nextVersionPrefix = (segs[0..-2] << ++segs[-1]).join('.')
+                        nextVersion = nextVersionPrefix + "-SNAPSHOT"
+
+                        env.nextVersion = nextVersion
+                        env.NEXT_VERSION_PREFIX = nextVersionPrefix
                     }
                     sh "env"
                 }
