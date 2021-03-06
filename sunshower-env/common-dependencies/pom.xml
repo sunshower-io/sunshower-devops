@@ -49,7 +49,7 @@
         <cache-api.version>1.1.0</cache-api.version>
         <reactive-streams.version>1.0.2</reactive-streams.version>
         <spring-security.version>5.1.5.RELEASE</spring-security.version>
-        <google-guava.version>24.1-jre</google-guava.version>
+        <google-guava.version>24.1.1-jre</google-guava.version>
         <jaxb-api.version>2.3.0</jaxb-api.version>
     </properties>
 
