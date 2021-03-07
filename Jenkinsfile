@@ -44,6 +44,7 @@ pipeline {
                     sh "env"
                     sh """
                         mvn clean install deploy \
+                        -P sunshower \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml
                     """
@@ -51,6 +52,7 @@ pipeline {
 
                     sh """
                         mvn clean install deploy \
+                        -P sunshower \
                         -f sunshower-env/parent \
                         -s sunshower-env/settings/settings.xml
                     """
