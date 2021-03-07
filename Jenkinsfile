@@ -95,6 +95,22 @@ pipeline {
                     """
 
                     sh """
+                        mvn versions:set-property \
+                        -Dproperty=env.version \
+                        -DnewVersion=${env.NEXT_VERSION} \
+                        -f sunshower-env \
+                        -P sunshower
+                    """
+
+                    sh """
+                        mvn versions:set-property \
+                        -Dproperty=env.version \
+                        -DnewVersion=${env.NEXT_VERSION} \
+                        -f sunshower-env/parent \
+                        -P sunshower
+                    """
+
+                    sh """
                         mvn -f sunshower-env/parent \
                         -P sunshower \
                         versions:set -DnewVersion="${env.NEXT_VERSION}"
@@ -204,6 +220,22 @@ pipeline {
                         -DnewVersion="${env.RELEASED_VERSION}"
                     """
 
+                    sh """
+                        mvn versions:set-property \
+                        -Dproperty=env.version \
+                        -DnewVersion=${env.RELEASED_VERSION} \
+                        -f sunshower-env/parent \
+                        -P sunshower
+                    """
+
+
+                    sh """
+                        mvn versions:set-property \
+                        -Dproperty=env.version \
+                        -DnewVersion=${env.RELEASED_VERSION} \
+                        -f sunshower-env \
+                        -P sunshower
+                    """
 
                     sh """
                         mvn versions:set \
@@ -245,6 +277,22 @@ pipeline {
                         -DnewVersion="${env.NEXT_VERSION}"
                     """
 
+                    sh """
+                        mvn versions:set-property \
+                        -Dproperty=env.version \
+                        -DnewVersion=${env.NEXT_VERSION} \
+                        -f sunshower-env \
+                        -P sunshower
+                    """
+
+
+                    sh """
+                        mvn versions:set-property \
+                        -Dproperty=env.version \
+                        -DnewVersion=${env.NEXT_VERSION} \
+                        -f sunshower-env/parent \
+                        -P sunshower
+                    """
 
                     sh """
                         mvn versions:set \
