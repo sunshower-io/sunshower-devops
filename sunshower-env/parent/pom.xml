@@ -3,7 +3,7 @@
 
     <groupId>io.sunshower.env</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Sunshower Parent Pom</name>
@@ -13,7 +13,7 @@
     </scm>
 
     <properties>
-        <env.version>1.0.1-SNAPSHOT</env.version>
+        <env.version>1.0.2-SNAPSHOT</env.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
     </properties>
