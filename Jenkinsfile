@@ -91,7 +91,7 @@ pipeline {
                     sh """
                         mvn -f sunshower-env \
                         -P sunshower \
-                        -s sunshower-env/settings/setting.xml
+                        -s sunshower-env/settings/settings.xml
                         versions:set -DnewVersion="${env.NEXT_VERSION}" 
                     """
 
@@ -99,7 +99,7 @@ pipeline {
                         mvn versions:set-property \
                         -Dproperty=env.version \
                         -DnewVersion=${env.NEXT_VERSION} \
-                        -s sunshower-env/settings/setting.xml \
+                        -s sunshower-env/settings/settings.xml \
                         -f sunshower-env \
                         -P sunshower
                     """
@@ -109,14 +109,14 @@ pipeline {
                         -Dproperty=env.version \
                         -DnewVersion=${env.NEXT_VERSION} \
                         -f sunshower-env/parent \
-                        -s sunshower-env/settings/setting.xml \
+                        -s sunshower-env/settings/settings.xml \
                         -P sunshower
                     """
 
                     sh """
                         mvn -f sunshower-env/parent \
                         -P sunshower \
-                        -s sunshower-env/settings/setting.xml \
+                        -s sunshower-env/settings/settings.xml \
                         versions:set -DnewVersion="${env.NEXT_VERSION}"
                     """
                     /**
@@ -229,7 +229,7 @@ pipeline {
                         -Dproperty=env.version \
                         -DnewVersion=${env.RELEASED_VERSION} \
                         -f sunshower-env/parent \
-                        -s sunshower-env/settings/setting.xml \
+                        -s sunshower-env/settings/settings.xml \
                         -P sunshower
                     """
 
@@ -239,7 +239,7 @@ pipeline {
                         -Dproperty=env.version \
                         -DnewVersion=${env.RELEASED_VERSION} \
                         -f sunshower-env \
-                        -s sunshower-env/settings/setting.xml \
+                        -s sunshower-env/settings/settings.xml \
                         -P sunshower
                     """
 
@@ -288,7 +288,7 @@ pipeline {
                         -Dproperty=env.version \
                         -DnewVersion=${env.NEXT_VERSION} \
                         -f sunshower-env \
-                        -s sunshower-env/settings/setting.xml \
+                        -s sunshower-env/settings/settings.xml \
                         -P sunshower
                     """
 
@@ -298,7 +298,7 @@ pipeline {
                         -Dproperty=env.version \
                         -DnewVersion=${env.NEXT_VERSION} \
                         -f sunshower-env/parent \
-                        -s sunshower-env/settings/setting.xml \
+                        -s sunshower-env/settings/settings.xml \
                         -P sunshower
                     """
 
