@@ -41,6 +41,7 @@ pipeline {
 
             steps {
                 container('maven') {
+                    sh "env"
                     sh """
                         mvn clean install deploy \
                         -f sunshower-env \
