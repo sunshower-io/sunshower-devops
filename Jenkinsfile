@@ -229,8 +229,7 @@ pipeline {
                         -Dproperty=env.version \
                         -DnewVersion=${env.RELEASED_VERSION} \
                         -f sunshower-env/parent \
-                        -s sunshower-env/settings/settings.xml \
-                        -P sunshower
+                        -s sunshower-env/settings/settings.xml
                     """
 
 
