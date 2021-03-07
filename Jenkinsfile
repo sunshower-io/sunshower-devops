@@ -30,12 +30,12 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-//                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
-            }
-
-        }
+//        stage('Checkout') {
+//            steps {
+////                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
+//            }
+//
+//        }
 
         stage('build env poms') {
 
