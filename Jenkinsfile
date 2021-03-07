@@ -91,7 +91,7 @@ pipeline {
                     sh """
                         mvn -f sunshower-env \
                         -P sunshower \
-                        -s sunshower-env/settings/settings.xml
+                        -s sunshower-env/settings/settings.xml \
                         versions:set -DnewVersion="${env.NEXT_VERSION}" 
                     """
 
