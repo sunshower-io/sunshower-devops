@@ -10,7 +10,7 @@
         <groupId>io.sunshower.env</groupId>
         <artifactId>env-aggregator</artifactId>
         <version>1.0.2-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath/>
     </parent>
 
     <name>Sunshower Common Dependencies</name>
