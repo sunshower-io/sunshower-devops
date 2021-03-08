@@ -14,7 +14,6 @@
 
     <properties>
         <env.version>1.0.2-SNAPSHOT</env.version>
-        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
     </properties>
 
@@ -30,19 +29,6 @@
     </distributionManagement>
 
     <profiles>
-        <profile>
-            <id>open-source</id>
-            <distributionManagement>
-                <repository>
-                    <id>sunshower-oss-repo</id>
-                    <url>https://oss.sonatype.org/content/repositories/releases</url>
-                </repository>
-                <snapshotRepository>
-                    <id>sunshower-oss-repo</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
         <profile>
             <id>sunshower</id>
             <activation>
@@ -151,22 +137,11 @@
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>${maven-release-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${maven-source-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
 
 
