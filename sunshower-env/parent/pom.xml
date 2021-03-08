@@ -13,7 +13,7 @@
     </scm>
 
     <properties>
-        <env.version>1.0.2-38-SNAPSHOT</env.version>
+        <env.version>1.0.2-SNAPSHOT</env.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
     </properties>
@@ -63,17 +63,6 @@
     <repositories>
 
         <repository>
-            <id>GridGain External Repository</id>
-            <url>http://www.gridgainsystems.com/nexus/content/repositories/external</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>sunshower-snapshots</id>
             <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
             <snapshots>
@@ -93,39 +82,6 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-        </repository>
-        <repository>
-            <id>sunshower-oss-repo</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>spring-release</id>
-            <url>https://repo.spring.io/libs-release</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <layout>default</layout>
-            <id>spring-snapshots</id>
-            <url>https://repo.spring.io/libs-snapshot</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
         </repository>
     </repositories>
 
