@@ -11,18 +11,14 @@
         </server>
         <server>
             <id>sunshower-releases</id>
-            <username>josiah</username>
-            <password>p1llar5-0f-autumn</password>
-            <!--            <username>${env.MVN_REPO_USR}</username>-->
-            <!--            <password>${env.MVN_REPO_PSW}</password>-->
+            <username>${env.MVN_REPO_USR}</username>
+            <password>${env.MVN_REPO_PSW}</password>
         </server>
 
         <server>
             <id>sunshower-snapshots</id>
-            <username>josiah</username>
-            <password>p1llar5-0f-autumn</password>
-            <!--            <username>${env.MVN_REPO_USR}</username>-->
-            <!--            <password>${env.MVN_REPO_PSW}</password>-->
+            <username>${env.MVN_REPO_USR}</username>
+            <password>${env.MVN_REPO_PSW}</password>
         </server>
 
         <server>
@@ -31,68 +27,68 @@
             <passphrase>${env.GITHUB_PSW}</passphrase>
         </server>
     </servers>
-<!--    <activeProfiles>-->
-<!--        <activeProfile>sunshower</activeProfile>-->
-<!--    </activeProfiles>-->
+    <!--    <activeProfiles>-->
+    <!--        <activeProfile>sunshower</activeProfile>-->
+    <!--    </activeProfiles>-->
 
-<!--    <profiles>-->
+    <!--    <profiles>-->
 
-<!--        <profile>-->
-<!--            <id>sunshower</id>-->
-<!--            <activation>-->
-<!--                <activeByDefault>true</activeByDefault>-->
-<!--            </activation>-->
-<!--            <repositories>-->
-<!--                <repository>-->
-<!--                    <id>sunshower-snapshots</id>-->
-<!--                    <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>-->
-<!--                    <releases>-->
-<!--                        <enabled>false</enabled>-->
-<!--                    </releases>-->
-<!--                    <snapshots>-->
-<!--                        <enabled>true</enabled>-->
-<!--                    </snapshots>-->
-<!--                </repository>-->
-<!--                <repository>-->
-<!--                    <id>sunshower-releases</id>-->
-<!--                    <url>http://artifacts.sunshower.cloud/repository/sunshower-releases</url>-->
-<!--                    <releases>-->
-<!--                        <enabled>true</enabled>-->
-<!--                    </releases>-->
-<!--                    <snapshots>-->
-<!--                        <enabled>false</enabled>-->
-<!--                    </snapshots>-->
-<!--                </repository>-->
+    <!--        <profile>-->
+    <!--            <id>sunshower</id>-->
+    <!--            <activation>-->
+    <!--                <activeByDefault>true</activeByDefault>-->
+    <!--            </activation>-->
+    <!--            <repositories>-->
+    <!--                <repository>-->
+    <!--                    <id>sunshower-snapshots</id>-->
+    <!--                    <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>-->
+    <!--                    <releases>-->
+    <!--                        <enabled>false</enabled>-->
+    <!--                    </releases>-->
+    <!--                    <snapshots>-->
+    <!--                        <enabled>true</enabled>-->
+    <!--                    </snapshots>-->
+    <!--                </repository>-->
+    <!--                <repository>-->
+    <!--                    <id>sunshower-releases</id>-->
+    <!--                    <url>http://artifacts.sunshower.cloud/repository/sunshower-releases</url>-->
+    <!--                    <releases>-->
+    <!--                        <enabled>true</enabled>-->
+    <!--                    </releases>-->
+    <!--                    <snapshots>-->
+    <!--                        <enabled>false</enabled>-->
+    <!--                    </snapshots>-->
+    <!--                </repository>-->
 
 
-<!--                <repository>-->
-<!--                    <id>gridgain-releases</id>-->
-<!--                    <url>http://www.gridgainsystems.com/nexus/content/repositories/external</url>-->
-<!--                </repository>-->
-<!--                <repository>-->
-<!--                    <id>gridgain-snapshots</id>-->
-<!--                    <url>http://www.gridgainsystems.com/nexus/content/repositories/external-beta</url>-->
-<!--                </repository>-->
-<!--                <repository>-->
-<!--                    <id>sunshower-oss-repo</id>-->
-<!--                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
-<!--                </repository>-->
+    <!--                <repository>-->
+    <!--                    <id>gridgain-releases</id>-->
+    <!--                    <url>http://www.gridgainsystems.com/nexus/content/repositories/external</url>-->
+    <!--                </repository>-->
+    <!--                <repository>-->
+    <!--                    <id>gridgain-snapshots</id>-->
+    <!--                    <url>http://www.gridgainsystems.com/nexus/content/repositories/external-beta</url>-->
+    <!--                </repository>-->
+    <!--                <repository>-->
+    <!--                    <id>sunshower-oss-repo</id>-->
+    <!--                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+    <!--                </repository>-->
 
-<!--                <repository>-->
-<!--                    <id>sunshower-cache</id>-->
-<!--                    <url>http://artifacts.sunshower.cloud/repository/sunshower-cache/</url>-->
-<!--                </repository>-->
+    <!--                <repository>-->
+    <!--                    <id>sunshower-cache</id>-->
+    <!--                    <url>http://artifacts.sunshower.cloud/repository/sunshower-cache/</url>-->
+    <!--                </repository>-->
 
-<!--                <repository>-->
-<!--                    <id>spring-snapshot</id>-->
-<!--                    <url>https://repo.spring.io/libs-snapshot</url>-->
-<!--                </repository>-->
-<!--                <repository>-->
-<!--                    <id>spring-release</id>-->
-<!--                    <url>https://repo.spring.io/libs-release</url>-->
-<!--                </repository>-->
-<!--            </repositories>-->
-<!--        </profile>-->
-<!--    </profiles>-->
+    <!--                <repository>-->
+    <!--                    <id>spring-snapshot</id>-->
+    <!--                    <url>https://repo.spring.io/libs-snapshot</url>-->
+    <!--                </repository>-->
+    <!--                <repository>-->
+    <!--                    <id>spring-release</id>-->
+    <!--                    <url>https://repo.spring.io/libs-release</url>-->
+    <!--                </repository>-->
+    <!--            </repositories>-->
+    <!--        </profile>-->
+    <!--    </profiles>-->
 
 </settings>
