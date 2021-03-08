@@ -98,32 +98,32 @@ pipeline {
                         -f sunshower-env/parent \
                         -s sunshower-env/settings/settings.xml
                     """
-//                    /**
-//                     * increment versions
-//                     */
-//                    sh """
-//                        mvn -f sunshower-env \
-//                        -s sunshower-env/settings/settings.xml \
-//                        versions:set -DnewVersion="${env.NEXT_VERSION}"
-//                    """
-//
-//
-//                    /**
-//                     * deploy
-//                     */
-//                    sh """
-//                        mvn clean install deploy \
-//                        -f sunshower-env \
-//                        -s sunshower-env/settings/settings.xml
-//                    """
-//
-//                    sh """
-//                        mvn versions:set-property \
-//                        -Dproperty=env.version \
-//                        -DnewVersion=${env.NEXT_VERSION} \
-//                        -s sunshower-env/settings/settings.xml \
-//                        -f sunshower-env
-//                    """
+                    /**
+                     * increment versions
+                     */
+                    sh """
+                        mvn -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml \
+                        versions:set -DnewVersion="${env.NEXT_VERSION}"
+                    """
+
+
+                    /**
+                     * deploy
+                     */
+                    sh """
+                        mvn clean install deploy \
+                        -f sunshower-env \
+                        -s sunshower-env/settings/settings.xml
+                    """
+
+                    sh """
+                        mvn versions:set-property \
+                        -Dproperty=env.version \
+                        -DnewVersion=${env.NEXT_VERSION} \
+                        -s sunshower-env/settings/settings.xml \
+                        -f sunshower-env
+                    """
 
 
                 }
