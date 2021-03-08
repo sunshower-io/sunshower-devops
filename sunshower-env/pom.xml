@@ -36,19 +36,6 @@
     </scm>
     <profiles>
         <profile>
-            <id>open-source</id>
-            <distributionManagement>
-                <repository>
-                    <id>sunshower-oss-repo</id>
-                    <url>https://oss.sonatype.org/content/repositories/releases</url>
-                </repository>
-                <snapshotRepository>
-                    <id>sunshower-oss-repo</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
-        <profile>
             <id>sunshower</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -66,11 +53,6 @@
         </profile>
     </profiles>
     <repositories>
-        <repository>
-            <id>sunshower-oss-repo</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </repository>
-
         <repository>
             <id>sunshower-snapshots</id>
             <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots/</url>
@@ -93,44 +75,16 @@
             </snapshots>
         </repository>
 
-        <repository>
-            <id>spring-milestones</id>
-            <name>spring-milestones</name>
-            <url>https://repo.spring.io/libs-milestone-local</url>
-        </repository>
-        <repository>
-            <id>spring-release</id>
-            <url>https://repo.spring.io/libs-release</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <layout>default</layout>
-            <id>spring-snapshots</id>
-            <url>https://repo.spring.io/libs-snapshot</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
     </repositories>
 
 
     <modules>
         <module>parent</module>
-<!--        <module>hal-dependencies</module>-->
-<!--        <module>test-dependencies</module>-->
-<!--        <module>common-dependencies</module>-->
-<!--        <module>service-dependencies</module>-->
-<!--        <module>persist-dependencies</module>-->
+        <module>hal-dependencies</module>
+        <module>test-dependencies</module>
+        <module>common-dependencies</module>
+        <module>service-dependencies</module>
+        <module>persist-dependencies</module>
     </modules>
 
     <build>

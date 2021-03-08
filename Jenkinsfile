@@ -30,12 +30,12 @@ pipeline {
 
     stages {
 
-//        stage('Checkout') {
-//            steps {
-////                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
-//            }
-//
-//        }
+        stage('Checkout') {
+            steps {
+                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
+            }
+
+        }
 
         stage('build env poms') {
 
@@ -77,7 +77,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-//                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
+                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
 
 
                 container('maven') {
@@ -144,7 +144,7 @@ pipeline {
             }
 
             steps {
-//                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
+                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
 
                 container('maven') {
 
@@ -324,7 +324,6 @@ pipeline {
                     """
                 }
             }
-
         }
     }
 }
