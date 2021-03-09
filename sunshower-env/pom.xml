@@ -34,45 +34,15 @@
         <connection>scm:git:https://${env.GITHUB_PSW}@github.com/sunshower-io/sunshower-devops</connection>
         <developerConnection>scm:git:https://${env.GITHUB_PSW}@github.com/sunshower-io/sunshower-devops</developerConnection>
     </scm>
-    <profiles>
-        <profile>
-            <id>sunshower</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <distributionManagement>
-                <repository>
-                    <id>sunshower-releases</id>
-                    <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
-                </repository>
-                <snapshotRepository>
-                    <id>sunshower-snapshots</id>
-                    <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
-    </profiles>
     <repositories>
         <repository>
             <id>sunshower-snapshots</id>
             <url>http://artifacts.sunshower.cloud/repository/sunshower-snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
         </repository>
 
         <repository>
             <id>sunshower-releases</id>
             <url>http://artifacts.sunshower.cloud/repository/sunshower-releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
         </repository>
 
     </repositories>
