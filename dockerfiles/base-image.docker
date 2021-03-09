@@ -1,5 +1,5 @@
 #FROM azul/zulu-openjdk-debian:12.0.1
-FROM openjdk:16-buster
+FROM openjdk:15-buster
 
 RUN apt-get update
 RUN apt-get install -y git-core wget
