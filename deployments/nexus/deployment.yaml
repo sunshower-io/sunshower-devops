@@ -10,7 +10,6 @@ metadata:
   namespace: devops-tools
 data:
   key: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
-#  key: AQBsjC1gNnRMERAAdwiCUsIIw9L/ZW2ylqNntQ==
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -20,11 +19,11 @@ metadata:
     storageclass.beta.kubernetes.io/is-default-class: "true"
 provisioner: kubernetes.io/rbd
 parameters:
-  monitors: 192.168.1.4:6789
+  monitors: 192.168.1.4:6789,192.168.1.3:6789
   adminId: admin
   adminSecretName: ceph-secret
   adminSecretNamespace: devops-tools
-  pool: rbd
+  pool: kubernetes
   userId: admin
   userSecretName: ceph-secret
 ---
@@ -36,14 +35,15 @@ metadata:
 spec:
   storageClassName: dynamic
   capacity:
-    storage: 150Gi
+    storage: 100Gi
   accessModes:
     - ReadWriteOnce
   rbd:
     monitors:
       - 192.168.1.4:6789
-    pool: rbd
-    image: devops
+      - 192.168.1.3:6789
+    pool: kubernetes
+    image: artifacts
     user: admin
     secretRef:
       name: ceph-secret
@@ -60,7 +60,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 50Gi
+      storage: 100Gi
 ---
 apiVersion: v1
 kind: Service
@@ -79,30 +79,30 @@ spec:
       name: http
       protocol: TCP
       targetPort: 8081
-    - port: 8080
-      name: docker-http
-      protocol: TCP
-      targetPort: 8080
-    - port: 8181
-      name: https
-      protocol: TCP
-      targetPort: 8181
-    - port: 5000
-      name: containers-insecure
-      protocol: TCP
-      targetPort: 5000
-    - port: 5001
-      name: containers-secure
-      protocol: TCP
-      targetPort: 5001
-    - port: 6000
-      name: ssio-containers-insecure
-      protocol: TCP
-      targetPort: 6000
-    - port: 6001
-      name: ssio-containers-secure
-      protocol: TCP
-      targetPort: 6001
+#    - port: 8080
+#      name: docker-http
+#      protocol: TCP
+#      targetPort: 8080
+#    - port: 8181
+#      name: https
+#      protocol: TCP
+#      targetPort: 8181
+#    - port: 5000
+#      name: containers-insecure
+#      protocol: TCP
+#      targetPort: 5000
+#    - port: 5001
+#      name: containers-secure
+#      protocol: TCP
+#      targetPort: 5001
+#    - port: 6000
+#      name: ssio-containers-insecure
+#      protocol: TCP
+#      targetPort: 6000
+#    - port: 6001
+#      name: ssio-containers-secure
+#      protocol: TCP
+#      targetPort: 6001
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -126,7 +126,7 @@ spec:
         runAsUser: 0
       containers:
         - name: nexus
-          image: sonatype/nexus3
+          image: sonatype/nexus3:latest
           resources:
             limits:
               memory: "8Gi"
