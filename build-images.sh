@@ -2,7 +2,7 @@
 
 docker build -f \
   ./dockerfiles/base-image.docker . \
-  -t artifacts.sunshower.cloud:6000/sunshower-base:latest
+  -t sunshowercloud/sunshower-base:latest
 
 
-docker push artifacts.sunshower.cloud:6000/sunshower-base:latest
+docker push sunshowercloud/sunshower-base:latest

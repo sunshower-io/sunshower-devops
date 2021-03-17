@@ -76,10 +76,12 @@ spec:
     app: nexus-server
   type: LoadBalancer
   ports:
+      # default nexus port
     - port: 80
       name: http
       protocol: TCP
       targetPort: 8081
+      # docker-http
     - port: 8080
       name: docker-http
       protocol: TCP
