@@ -1,30 +1,56 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: artifacts
-spec:
-  capacity:
-    storage: 150Gi
-  accessModes:
-    - ReadWriteMany
-  rbd:
-    monitors:
-      - athena.sunshower.cloud:6789
-    pool: virtual-machines
-    image: myvol
-    user: admin
-    secretRef:
-      name: ceph-secret
-    fsType: ext4
-    readOnly: false
 ---
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: artifacts-claim
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 150Gi
+  name: ceph-csi-config
+data:
+  config.json: |-
+    [
+      {
+        "clusterID": "fb74f791-7a11-49de-9c4c-5d38dcdd2021",
+        "monitors": [
+            "192.168.1.3:6789",
+            "192.168.1.4:6789"
+        ]
+      }
+    ]
+
+
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: csi-rbd-secret
+stringData:
+  userID: admin
+  userKey: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
+
+  adminID: admin
+  adminKey: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
+
+---
+
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: csi-rbd
+provisioner: rbd.csi.ceph.com
+parameters:
+  monitors: 192.168.1.3:6789,192.168.1.4:6789
+  clusterID: fb74f791-7a11-49de-9c4c-5d38dcdd2021
+#  clusterID: ceph
+  pool: kubernetes
+  imageFeatures: layering
+  csi.storage.k8s.io/provisioner-secret-name: csi-rbd-secret
+  csi.storage.k8s.io/provisioner-secret-namespace: default
+  csi.storage.k8s.io/controller-expand-secret-name: csi-rbd-secret
+  csi.storage.k8s.io/controller-expand-secret-namespace: default
+  csi.storage.k8s.io/node-stage-secret-name: csi-rbd-secret
+  csi.storage.k8s.io/node-stage-secret-namespace: default
+#  adminid: admin
+  csi.storage.k8s.io/fstype: ext4
+reclaimPolicy: Delete
+mountOptions:
+  - discard

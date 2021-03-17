@@ -1,40 +1,39 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: devops-tools
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: ceph-secret
-  namespace: devops-tools
-data:
-  key: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
-#  key: AQBsjC1gNnRMERAAdwiCUsIIw9L/ZW2ylqNntQ==
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: dynamic
-  annotations:
-    storageclass.beta.kubernetes.io/is-default-class: "true"
-provisioner: kubernetes.io/rbd
-parameters:
-  monitors: 192.168.1.4:6789
-  adminId: admin
-  adminSecretName: ceph-secret
-  adminSecretNamespace: devops-tools
-  pool: rbd
-  userId: admin
-  userSecretName: ceph-secret
----
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: devops-tools
+#---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: ceph-secret
+#  namespace: devops-tools
+#data:
+#  key: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
+#---
+#apiVersion: storage.k8s.io/v1
+#kind: StorageClass
+#metadata:
+#  name: dynamic
+#  annotations:
+#    storageclass.beta.kubernetes.io/is-default-class: "true"
+#provisioner: kubernetes.io/rbd
+#parameters:
+#  monitors: 192.168.1.4:6789,192.168.1.3:6789
+#  adminId: admin
+#  adminSecretName: ceph-secret
+#  adminSecretNamespace: devops-tools
+#  pool: kubernetes
+#  userId: admin
+#  userSecretName: ceph-secret
+#---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: artifacts
   namespace: devops-tools
 spec:
-  storageClassName: dynamic
+  storageClassName: csi-rbd
   capacity:
     storage: 150Gi
   accessModes:
@@ -42,8 +41,9 @@ spec:
   rbd:
     monitors:
       - 192.168.1.4:6789
-    pool: rbd
-    image: devops
+      - 192.168.1.3:6789
+    pool: kubernetes
+    image: artifacts
     user: admin
     secretRef:
       name: ceph-secret
@@ -56,11 +56,12 @@ metadata:
   name: artifacts-claim
   namespace: devops-tools
 spec:
+  storageClassName: csi-rbd
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 50Gi
+      storage: 150Gi
 ---
 apiVersion: v1
 kind: Service
@@ -75,10 +76,12 @@ spec:
     app: nexus-server
   type: LoadBalancer
   ports:
+      # default nexus port
     - port: 80
       name: http
       protocol: TCP
       targetPort: 8081
+      # docker-http
     - port: 8080
       name: docker-http
       protocol: TCP
@@ -126,7 +129,7 @@ spec:
         runAsUser: 0
       containers:
         - name: nexus
-          image: sonatype/nexus3
+          image: sonatype/nexus3:latest
           resources:
             limits:
               memory: "8Gi"
