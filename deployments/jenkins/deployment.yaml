@@ -5,7 +5,7 @@ metadata:
   name: build
   namespace: devops-tools
 spec:
-  storageClassName: dynamic
+  storageClassName: csi-rbd
   capacity:
     storage: 10Gi
   accessModes:
@@ -28,6 +28,7 @@ metadata:
   name: build-claim
   namespace: devops-tools
 spec:
+  storageClassName: csi-rbd
   accessModes:
     - ReadWriteOnce
   resources:

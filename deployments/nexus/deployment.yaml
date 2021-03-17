@@ -1,41 +1,41 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: devops-tools
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: ceph-secret
-  namespace: devops-tools
-data:
-  key: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: dynamic
-  annotations:
-    storageclass.beta.kubernetes.io/is-default-class: "true"
-provisioner: kubernetes.io/rbd
-parameters:
-  monitors: 192.168.1.4:6789,192.168.1.3:6789
-  adminId: admin
-  adminSecretName: ceph-secret
-  adminSecretNamespace: devops-tools
-  pool: kubernetes
-  userId: admin
-  userSecretName: ceph-secret
----
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: devops-tools
+#---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: ceph-secret
+#  namespace: devops-tools
+#data:
+#  key: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
+#---
+#apiVersion: storage.k8s.io/v1
+#kind: StorageClass
+#metadata:
+#  name: dynamic
+#  annotations:
+#    storageclass.beta.kubernetes.io/is-default-class: "true"
+#provisioner: kubernetes.io/rbd
+#parameters:
+#  monitors: 192.168.1.4:6789,192.168.1.3:6789
+#  adminId: admin
+#  adminSecretName: ceph-secret
+#  adminSecretNamespace: devops-tools
+#  pool: kubernetes
+#  userId: admin
+#  userSecretName: ceph-secret
+#---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: artifacts
   namespace: devops-tools
 spec:
-  storageClassName: dynamic
+  storageClassName: csi-rbd
   capacity:
-    storage: 100Gi
+    storage: 150Gi
   accessModes:
     - ReadWriteOnce
   rbd:
@@ -56,11 +56,12 @@ metadata:
   name: artifacts-claim
   namespace: devops-tools
 spec:
+  storageClassName: csi-rbd
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Gi
+      storage: 150Gi
 ---
 apiVersion: v1
 kind: Service
@@ -79,30 +80,30 @@ spec:
       name: http
       protocol: TCP
       targetPort: 8081
-#    - port: 8080
-#      name: docker-http
-#      protocol: TCP
-#      targetPort: 8080
-#    - port: 8181
-#      name: https
-#      protocol: TCP
-#      targetPort: 8181
-#    - port: 5000
-#      name: containers-insecure
-#      protocol: TCP
-#      targetPort: 5000
-#    - port: 5001
-#      name: containers-secure
-#      protocol: TCP
-#      targetPort: 5001
-#    - port: 6000
-#      name: ssio-containers-insecure
-#      protocol: TCP
-#      targetPort: 6000
-#    - port: 6001
-#      name: ssio-containers-secure
-#      protocol: TCP
-#      targetPort: 6001
+    - port: 8080
+      name: docker-http
+      protocol: TCP
+      targetPort: 8080
+    - port: 8181
+      name: https
+      protocol: TCP
+      targetPort: 8181
+    - port: 5000
+      name: containers-insecure
+      protocol: TCP
+      targetPort: 5000
+    - port: 5001
+      name: containers-secure
+      protocol: TCP
+      targetPort: 5001
+    - port: 6000
+      name: ssio-containers-insecure
+      protocol: TCP
+      targetPort: 6000
+    - port: 6001
+      name: ssio-containers-secure
+      protocol: TCP
+      targetPort: 6001
 ---
 apiVersion: apps/v1
 kind: Deployment

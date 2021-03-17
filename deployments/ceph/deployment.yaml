@@ -24,10 +24,10 @@ metadata:
   name: csi-rbd-secret
 stringData:
   userID: admin
-  userKey: AQBsjC1gNnRMERAAdwiCUsIIw9L/ZW2ylqNntQ==
+  userKey: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
 
   adminID: admin
-  adminKey: AQBsjC1gNnRMERAAdwiCUsIIw9L/ZW2ylqNntQ==
+  adminKey: QVFCc2pDMWdOblJNRVJBQWR3aUNVc0lJdzlML1pXMnlscU5udFE9PQ==
 
 ---
 
