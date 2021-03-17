@@ -4,7 +4,7 @@
 
     <groupId>io.sunshower.devops</groupId>
     <artifactId>devops-bom</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Sunshower Devops Aggregator</name>
