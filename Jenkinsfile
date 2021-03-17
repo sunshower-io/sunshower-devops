@@ -30,12 +30,6 @@ pipeline {
 
     stages {
 
-//        stage('Checkout') {
-//            steps {
-////                scmSkip(deleteBuild: true, skipPattern: '\\[released\\].*')
-//            }
-//
-//        }
 
         stage('build env poms') {
 
@@ -43,7 +37,6 @@ pipeline {
                 container('maven') {
                     sh """
                         mvn clean install deploy \
-                        -P sunshower \
                         -f sunshower-env \
                         -s sunshower-env/settings/settings.xml
                     """
