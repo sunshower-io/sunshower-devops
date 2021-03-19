@@ -15,7 +15,7 @@ spec:
       - 192.168.1.4:6789
       - 192.168.1.3:6789
     pool: kubernetes
-    image: build
+    image: build-volume
     user: admin
     secretRef:
       name: ceph-secret
@@ -34,4 +34,62 @@ spec:
   resources:
     requests:
       storage: 10Gi
+
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+  namespace: devops-tools
+  annotations:
+    metallb.universe.tf/address-pool: default
+    external-dns.alpha.kubernetes.io/hostname: build.sunshower.cloud
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: jenkins
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: devops-tools
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+        runAsGroup: 0
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts-jdk11
+          securityContext:
+            runAsUser: 1000
+
+          resources:
+            limits:
+              cpu: "8000m"
+              memory: "16Gi"
+            requests:
+              cpu: "4000m"
+              memory: "4Gi"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: build-claim
